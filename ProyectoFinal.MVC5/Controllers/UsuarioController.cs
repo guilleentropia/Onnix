@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -59,10 +60,21 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuarioDominio = Mapper.Map<UsuarioViewModel, Usuario>(usuario);
-                _usuarioAppService.Agregar(usuarioDominio);
+                try
+                {
+                    var usuarioDominio = Mapper.Map<UsuarioViewModel, Usuario>(usuario);
+                    _usuarioAppService.Agregar(usuarioDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+
+                }
+                catch(Exception ex)
+                {
+                    return View(ex.Message);
+                }
+                
+                
+                
             }
 
 
@@ -93,10 +105,20 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuarioDominio = Mapper.Map<UsuarioViewModel, Usuario>(usuario);
-                _usuarioAppService.Actualizar(usuarioDominio);
+                try 
+                {
+                    var usuarioDominio = Mapper.Map<UsuarioViewModel, Usuario>(usuario);
+                    _usuarioAppService.Actualizar(usuarioDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+
+                }
+                catch(Exception ex)
+                {
+                    return View(ex.Message);
+                }
+                
+                
             }
             ViewBag.PerfilId = new SelectList(_perfilAppService.ObtenerTodo(), "Id", "Descripcion", usuario.PerfilId);
             ViewBag.EmpleadoId = new SelectList(_empleadoAppService.ObtenerTodo(), "Id", "Nombre", usuario.EmpleadoId);

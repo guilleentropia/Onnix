@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -47,10 +48,17 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var perfilDominio = Mapper.Map<PerfilViewModel, Perfil>(perfil);
-                _perfilAppService.Agregar(perfilDominio);
+                try
+                {
+                    var perfilDominio = Mapper.Map<PerfilViewModel, Perfil>(perfil);
+                    _perfilAppService.Agregar(perfilDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
             return View(perfil);
@@ -72,10 +80,17 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var perfilDominio = Mapper.Map<PerfilViewModel, Perfil>(perfil);
-                _perfilAppService.Actualizar(perfilDominio);
+                try 
+                {
+                    var perfilDominio = Mapper.Map<PerfilViewModel, Perfil>(perfil);
+                    _perfilAppService.Actualizar(perfilDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch(Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
             return View(perfil);

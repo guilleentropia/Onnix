@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -47,10 +48,18 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var tipotransaccionDominio = Mapper.Map<TipoTransaccionViewModel, TipoTransaccion>(tipotransaccion);
-                _tipoTransaccionAppService.Agregar(tipotransaccionDominio);
+                try
+                {
+                    var tipotransaccionDominio = Mapper.Map<TipoTransaccionViewModel, TipoTransaccion>(tipotransaccion);
+                    _tipoTransaccionAppService.Agregar(tipotransaccionDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+               
             }
 
             return View(tipotransaccion);
@@ -72,10 +81,19 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var tipotransaccionDominio = Mapper.Map<TipoTransaccionViewModel, TipoTransaccion>(tipotransaccion);
-                _tipoTransaccionAppService.Actualizar(tipotransaccionDominio);
+                try 
+                {
+                    var tipotransaccionDominio = Mapper.Map<TipoTransaccionViewModel, TipoTransaccion>(tipotransaccion);
+                    _tipoTransaccionAppService.Actualizar(tipotransaccionDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+
+                
             }
 
             return View(tipotransaccion);

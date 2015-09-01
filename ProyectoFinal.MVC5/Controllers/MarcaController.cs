@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -47,10 +48,17 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var marcaDominio = Mapper.Map<MarcaViewModel, Marca>(marca);
-                _marcaAppService.Agregar(marcaDominio);
+                try 
+                {
+                    var marcaDominio = Mapper.Map<MarcaViewModel, Marca>(marca);
+                    _marcaAppService.Agregar(marcaDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
             return View(marca);
@@ -72,10 +80,19 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var marcaDominio = Mapper.Map<MarcaViewModel, Marca>(marca);
-                _marcaAppService.Actualizar(marcaDominio);
 
-                return RedirectToAction("Index");
+                try
+                {
+                    var marcaDominio = Mapper.Map<MarcaViewModel, Marca>(marca);
+                    _marcaAppService.Actualizar(marcaDominio);
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+                
             }
 
             return View(marca);

@@ -6,6 +6,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -31,7 +32,7 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             var productoViewModel = Mapper.Map<IEnumerable<Producto>,
                 IEnumerable<ProductoViewModel>>(_productoAppService.ObtenerTodo());
-            return View(productoViewModel);
+            return View("Index",null,productoViewModel);
         }
 
         // GET: Producto/Details/5
@@ -62,47 +63,54 @@ namespace ProyectoFinal.MVC5.Controllers
 
             if (ModelState.IsValid)
             {
-                
-               if (Request.Files.Count > 0)
-               {
-                   var file = Request.Files[0];
-
-                    if (file !=null && file.ContentLength > 0)
+                try
+                {
+                    if (Request.Files.Count > 0)
                     {
+                        var file = Request.Files[0];
 
-                   // Guardo la foto en un espacio fisico primero en la carpeta /Images
-                   var fileName = Path.GetFileName(file.FileName);
-                   var path = Path.Combine(Server.MapPath("~/Images" + fileName));
-                   file.SaveAs(path);
+                        if (file != null && file.ContentLength > 0)
+                        {
 
-                   using (var binaryReader = new BinaryReader(file.InputStream))
-                   {
-                       byte[] array = binaryReader.ReadBytes(file.ContentLength);
+                            // Guardo la foto en un espacio fisico primero en la carpeta /Images
+                            var fileName = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Images" + fileName));
+                            file.SaveAs(path);
 
-                       var foto = Mapper.Map(array, producto.Imagen);
-                       // Aqui mapeo la foto
-                       var productoDominio = Mapper.Map<ProductoViewModel, Producto>(producto);
-                       productoDominio.Imagen = foto;
+                            using (var binaryReader = new BinaryReader(file.InputStream))
+                            {
+                                byte[] array = binaryReader.ReadBytes(file.ContentLength);
 
-                       //Se agrega la foto a la BD
-                       _productoAppService.Agregar(productoDominio);
-                   }
+                                var foto = Mapper.Map(array, producto.Imagen);
+                                // Aqui mapeo la foto
+                                var productoDominio = Mapper.Map<ProductoViewModel, Producto>(producto);
+                                productoDominio.Imagen = foto;
 
-                  
+                                //Se agrega la foto a la BD
+                                _productoAppService.Agregar(productoDominio);
+                            }
 
-                   return RedirectToAction("Index");
 
-                     }
-                   
 
-                   //Mapeo el viewmodel "productoSinimagen" a una entidad
-                   var productoSinimagen = Mapper.Map<ProductoViewModel, Producto>(producto);
-                   // Actualizo la entidad 
-                   _productoAppService.Agregar(productoSinimagen);
+                            return RedirectToAction("Index");
 
-                   return RedirectToAction("Index");
+                        }
 
-               }
+
+                        //Mapeo el viewmodel "productoSinimagen" a una entidad
+                        var productoSinimagen = Mapper.Map<ProductoViewModel, Producto>(producto);
+                        // Actualizo la entidad 
+                        _productoAppService.Agregar(productoSinimagen);
+
+                        return RedirectToAction("Index");
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+               
                 
             }
 
@@ -142,7 +150,9 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Verifico si hay algun request
+                try
+                {
+                    //Verifico si hay algun request
                 if (Request.Files.Count > 0)
                 {   
                     //obtengo el valor del Input del file de la vista
@@ -189,6 +199,13 @@ namespace ProyectoFinal.MVC5.Controllers
                     return RedirectToAction("Index");
                     
                 }
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+
+                
                 return RedirectToAction("Index");
             }
             ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion", producto.MarcaId);

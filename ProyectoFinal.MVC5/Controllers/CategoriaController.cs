@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -47,10 +48,18 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var categoriaDominio = Mapper.Map<CategoriaViewModel, Categoria>(categoria);
-                _categoriaAppService.Agregar(categoriaDominio);
+                try
+                {
+                    var categoriaDominio = Mapper.Map<CategoriaViewModel, Categoria>(categoria);
+                    _categoriaAppService.Agregar(categoriaDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
             return View(categoria);
@@ -72,10 +81,20 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var categoriaDominio = Mapper.Map<CategoriaViewModel, Categoria>(categoria);
-                _categoriaAppService.Actualizar(categoriaDominio);
 
-                return RedirectToAction("Index");
+                try
+                {
+                    var categoriaDominio = Mapper.Map<CategoriaViewModel, Categoria>(categoria);
+                    _categoriaAppService.Actualizar(categoriaDominio);
+
+                    return RedirectToAction("Index");
+
+                }
+
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
             return View(categoria);

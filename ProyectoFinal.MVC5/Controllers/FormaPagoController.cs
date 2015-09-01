@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -47,10 +48,18 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var formapagoDominio = Mapper.Map<FormaPagoViewModel, FormaPago>(formapago);
-                _formaPagoAppService.Agregar(formapagoDominio);
+                try
+                {
+                    var formapagoDominio = Mapper.Map<FormaPagoViewModel, FormaPago>(formapago);
+                    _formaPagoAppService.Agregar(formapagoDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch(Exception ex)
+                {
+                    return View(ex.Message);
+                }
+               
             }
 
             return View(formapago);
@@ -72,10 +81,17 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var formapagoDominio = Mapper.Map<FormaPagoViewModel, FormaPago>(formapago);
-                _formaPagoAppService.Actualizar(formapagoDominio);
+                try 
+                {
+                    var formapagoDominio = Mapper.Map<FormaPagoViewModel, FormaPago>(formapago);
+                    _formaPagoAppService.Actualizar(formapagoDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
             return View(formapago);

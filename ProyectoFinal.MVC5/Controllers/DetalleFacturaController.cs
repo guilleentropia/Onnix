@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -56,10 +57,20 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var detallefacturaDominio = Mapper.Map<DetalleFacturaViewModel, DetalleFactura>(detallefactura);
-                _detalleFacturaAppService.Agregar(detallefacturaDominio);
+                try
+                {
+                    var detallefacturaDominio = Mapper.Map<DetalleFacturaViewModel, DetalleFactura>(detallefactura);
+                    _detalleFacturaAppService.Agregar(detallefacturaDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+                
+                
             }
 
             ViewBag.ProductoId = new SelectList(_productoAppService.ObtenerTodo(), "Id", "Descripcion", detallefactura.ProductoId);
@@ -87,11 +98,21 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var detallefacturaDominio =
-                    Mapper.Map<DetalleFacturaViewModel, DetalleFactura>(detallefactura);
-                _detalleFacturaAppService.Actualizar(detallefacturaDominio);
 
-                return RedirectToAction("Index");
+                try
+                {
+                    var detallefacturaDominio =
+                   Mapper.Map<DetalleFacturaViewModel, DetalleFactura>(detallefactura);
+                    _detalleFacturaAppService.Actualizar(detallefacturaDominio);
+
+                    return RedirectToAction("Index");
+                }
+
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+               
             }
 
 

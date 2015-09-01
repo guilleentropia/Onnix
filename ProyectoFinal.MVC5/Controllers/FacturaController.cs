@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -54,10 +55,17 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var facturaDominio = Mapper.Map<FacturaViewModel, Factura>(factura);
-                _facturaAppService.Agregar(facturaDominio);
+                try 
+                {
+                    var facturaDominio = Mapper.Map<FacturaViewModel, Factura>(factura);
+                    _facturaAppService.Agregar(facturaDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
 
@@ -86,10 +94,21 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var facturaDominio = Mapper.Map<FacturaViewModel, Factura>(factura);
-                _facturaAppService.Actualizar(facturaDominio);
 
-                return RedirectToAction("Index");
+                try
+                {
+                    var facturaDominio = Mapper.Map<FacturaViewModel, Factura>(factura);
+                    _facturaAppService.Actualizar(facturaDominio);
+
+                    return RedirectToAction("Index");
+                }
+
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+                
+                
             }
             ViewBag.UsuarioId = new SelectList(_usuarioAppService.ObtenerTodo(), "Id", "NombreUsuario", factura.UsuarioId);
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido", factura.TerceroId);

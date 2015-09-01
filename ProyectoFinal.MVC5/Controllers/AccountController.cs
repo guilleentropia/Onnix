@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using ProyectoFinal.Aplicacion;
 using ProyectoFinal.MVC5.Models;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -47,17 +48,36 @@ namespace ProyectoFinal.MVC5.Controllers
             ViewBag.EmpresaId = new SelectList(_empresaAppService.ObtenerTodo(), "Id", "Descripcion");
             if (ModelState.IsValid)
             {
-                var user = _usuarioAppService.BuscarUsuario(nombreusuario,password,empresaid);
-                if (user != null)
+                try
                 {
-                   // await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    var user = _usuarioAppService.BuscarUsuario(nombreusuario, password, empresaid);
+                    if (user != null)
+                    {
+                        if (empresaid == 1)
+                        {
+                            Session["UserId"] = "sanjuan";
+                        }
+                        if (empresaid == 2)
+                        {
+                            Session["UserId"] = "mendoza";
+                        }
+
+                        return RedirectToAction("Index", "Home");
+
+                    }
+                    else
+                    {
+                        TempData["notice"] = "Revise los datos ingresados!";
+                        RedirectToAction("Login");
+                    }
+
                 }
-                else
+
+                catch (Exception ex)
                 {
-                    TempData["notice"] = "Revise los datos ingresados";
-                    RedirectToAction("Login");
+                    return View(ex.Message);
                 }
+               
             }
 
             // If we got this far, something failed, redisplay form
@@ -81,17 +101,26 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+
+                try
                 {
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    var user = new ApplicationUser() { UserName = model.UserName };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    AddErrors(result);
+                    return View(ex.Message);
                 }
+               
             }
 
             // If we got this far, something failed, redisplay form

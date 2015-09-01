@@ -45,7 +45,7 @@ video {
 audio:not([controls]) {
   display: none;
   height: 0;
-}
+}container body-content
 
 [hidden] {
   display: none;
@@ -59,7 +59,7 @@ html {
 
 body {
   margin: 0;
-    background-color: #d3d3d3;
+    background-color: yellow;
 }
 
 a:focus {

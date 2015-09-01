@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -47,10 +48,21 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var tipoterceroDominio = Mapper.Map<TipoTerceroViewModel, TipoTercero>(tipotercero);
-                _tipoterceroAppService.Agregar(tipoterceroDominio);
 
-                return RedirectToAction("Index");
+                try
+                {
+                    var tipoterceroDominio = Mapper.Map<TipoTerceroViewModel, TipoTercero>(tipotercero);
+                    _tipoterceroAppService.Agregar(tipoterceroDominio);
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+
+                }
+                
+                
             }
 
             return View(tipotercero);
@@ -72,10 +84,18 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var tipoterceroDominio = Mapper.Map<TipoTerceroViewModel, TipoTercero>(tipotercero);
-                _tipoterceroAppService.Actualizar(tipoterceroDominio);
+                try 
+                {
+                    var tipoterceroDominio = Mapper.Map<TipoTerceroViewModel, TipoTercero>(tipotercero);
+                    _tipoterceroAppService.Actualizar(tipoterceroDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
             return View(tipotercero);

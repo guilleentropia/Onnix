@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -64,10 +65,20 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var transaccionDominio = Mapper.Map<TransaccionViewModel, Transaccion>(transaccion);
-                _transaccionAppService.Agregar(transaccionDominio);
 
-                return RedirectToAction("Index");
+                try
+                {
+                    var transaccionDominio = Mapper.Map<TransaccionViewModel, Transaccion>(transaccion);
+                    _transaccionAppService.Agregar(transaccionDominio);
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+                
+                
             }
 
 
@@ -104,10 +115,20 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var transaccionDominio = Mapper.Map<TransaccionViewModel, Transaccion>(transaccion);
-                _transaccionAppService.Actualizar(transaccionDominio);
+                try
+                {
+                    var transaccionDominio = Mapper.Map<TransaccionViewModel, Transaccion>(transaccion);
+                    _transaccionAppService.Actualizar(transaccionDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+                
+                
+               
             }
             ViewBag.UsuarioId = new SelectList(_usuarioAppService.ObtenerTodo(), "Id", "NombreUsuario", transaccion.UsuarioId);
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido", transaccion.TerceroId);

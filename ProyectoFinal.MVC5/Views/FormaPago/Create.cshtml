@@ -1,6 +1,23 @@
 ﻿@model ProyectoFinal.MVC5.ViewModels.FormaPagoViewModel
 
 @{
+   
+    if (Session["UserId"] == "sanjuan")
+    {
+        Layout = "~/Views/Shared/_OtroLayout.cshtml";
+    }
+
+    if (Session["UserId"] == "mendoza")
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    if (Session["UserId"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    
+    
     ViewBag.Title = "Create";
 }
 

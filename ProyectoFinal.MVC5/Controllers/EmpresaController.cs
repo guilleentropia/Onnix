@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -47,10 +48,17 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var empresaDominio = Mapper.Map<EmpresaViewModel, Empresa>(empresa);
-                _empresaAppService.Agregar(empresaDominio);
+                try
+                {
+                    var empresaDominio = Mapper.Map<EmpresaViewModel, Empresa>(empresa);
+                    _empresaAppService.Agregar(empresaDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
             return View(empresa);
@@ -72,10 +80,17 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var empresaDominio = Mapper.Map<EmpresaViewModel, Empresa>(empresa);
-                _empresaAppService.Actualizar(empresaDominio);
+                try 
+                {
+                    var empresaDominio = Mapper.Map<EmpresaViewModel, Empresa>(empresa);
+                    _empresaAppService.Actualizar(empresaDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
             return View(empresa);

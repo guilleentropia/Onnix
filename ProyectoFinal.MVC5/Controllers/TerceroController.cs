@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -57,10 +58,17 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var terceroDominio = Mapper.Map<TerceroViewModel, Tercero>(tercero);
-                _terceroAppService.Agregar(terceroDominio);
+                try 
+                {
+                    var terceroDominio = Mapper.Map<TerceroViewModel, Tercero>(tercero);
+                    _terceroAppService.Agregar(terceroDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
 
          
@@ -88,10 +96,17 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var terceroDominio = Mapper.Map<TerceroViewModel, Tercero>(tercero);
-                _terceroAppService.Actualizar(terceroDominio);
+                try 
+                {
+                    var terceroDominio = Mapper.Map<TerceroViewModel, Tercero>(tercero);
+                    _terceroAppService.Actualizar(terceroDominio);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
             }
             ViewBag.TipoTerceroId = new SelectList(_tipoterceroAppService.ObtenerTodo(), "Id", "Descripcion", tercero.TipoTerceroId);
             return View(tercero);

@@ -4,6 +4,7 @@ using AutoMapper;
 using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
+using System;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -55,11 +56,20 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var detalletransaccionDominio = Mapper.Map<DetalleTransaccionViewModel, DetalleTransaccion>(detalletransaccion);
-                _detalleTransaccionAppService.Agregar(detalletransaccionDominio);
 
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    var detalletransaccionDominio = Mapper.Map<DetalleTransaccionViewModel, DetalleTransaccion>(detalletransaccion);
+                    _detalleTransaccionAppService.Agregar(detalletransaccionDominio);
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+
+            }    
 
             ViewBag.ProductoId = new SelectList(_productoAppService.ObtenerTodo(), "Id", "Descripcion", detalletransaccion.ProductoId);
             ViewBag.TransaccionId = new SelectList(_transaccionAppService.ObtenerTodo(), "Id", "Fecha", detalletransaccion.TransaccionId);
@@ -86,11 +96,23 @@ namespace ProyectoFinal.MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var detalletransaccionDominio =
+                
+                try
+                { 
+                    var detalletransaccionDominio =
                     Mapper.Map<DetalleTransaccionViewModel, DetalleTransaccion>(detalletransaccion);
                 _detalleTransaccionAppService.Actualizar(detalletransaccionDominio);
 
                 return RedirectToAction("Index");
+
+                }
+
+                catch(Exception ex)
+                {
+                    return View(ex.Message);
+                }
+                
+               
             }
             
             
