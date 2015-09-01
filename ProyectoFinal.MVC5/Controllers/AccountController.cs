@@ -33,6 +33,7 @@ namespace ProyectoFinal.MVC5.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            Session.Abandon();
             ViewBag.ReturnUrl = returnUrl;
             ViewBag.EmpresaId = new SelectList(_empresaAppService.ObtenerTodo(), "Id", "Descripcion");
             return View();
@@ -60,6 +61,15 @@ namespace ProyectoFinal.MVC5.Controllers
                         if (empresaid == 2)
                         {
                             Session["UserId"] = "mendoza";
+                        }
+                        if (user.PerfilId == 1)
+                        {
+                            Session["UserPerfil"] = "administrador";
+                        }
+
+                        if (user.PerfilId == 2)
+                        {
+                            Session["UserPerfil"] = "vendedor";
                         }
 
                         return RedirectToAction("Index", "Home");

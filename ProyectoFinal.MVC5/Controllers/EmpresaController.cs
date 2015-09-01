@@ -19,6 +19,7 @@ namespace ProyectoFinal.MVC5.Controllers
 
 
         // GET: Empresa
+        [Authorize(Roles="Administrador")]
         public ActionResult Index()
         {
             var empresaViewModel = Mapper.Map<IEnumerable<Empresa>,
