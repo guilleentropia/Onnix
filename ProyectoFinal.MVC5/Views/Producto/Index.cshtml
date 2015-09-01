@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ProyectoFinal.MVC5.ViewModels.ProductoViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Productos</h2>
+
+<p>
+    @Html.ActionLink("Agregar Producto", "Create", null, new { @class = "k-button" })
+      
+
+
+</p>
+
+
+@(Html.Kendo().Grid(Model)
+      .Name("Grid")
+      .Columns(columns =>
+      {
+          
+          columns.Bound(p => p.Descripcion).Title("Producto");
+          columns.Bound(p => p.PrecioCompra).Title("Precio de Compra");
+          columns.Bound(p => p.PrecioVenta).Title("Precio de Venta");
+          columns.Bound(p => p.Stock);
+          
+          columns.Bound(c => c.Imagen).Template(@<text>
+                                                       
+                                                        <img src="@Url.Action("getImg", "Producto", new {id = @item.Id })" alt="Person Image" width="80" height="80"/>
+                                                   
+                                                 </text>).Filterable(false).Sortable(false);
+          columns.Bound(p => p.CategoriaProducto.Descripcion).Title("Categoria");
+          columns.Bound(p => p.MarcaProducto.Descripcion).Title("Marca");
+          columns.Bound(p => p.TerceroProducto.NombreCompleto).Title("Proveedor");
+
+          columns.Template(@<text>
+            @Html.ActionLink("Modificar", "Edit", new { id = @item.Id }, new { @class = "k-button" })
+            ||
+            @Html.ActionLink("Detalles", "Details", new { id = @item.Id }, new { @class = "k-button" })
+            ||
+            @Html.ActionLink("Eliminar", "Delete", new { id = @item.Id }, new { @class = "k-button" })
+        </text>).Title("Acciones");
+      })
+      .Pageable()
+      .Sortable()
+      .DataSource(p=> p.Server().PageSize(4))
+      .Filterable(f=> 
+              f.Operators(o=> o.ForString(s => s
+        .Clear()
+        .IsEqualTo("Es igual a")
+        .Contains("Contiene")
+        .StartsWith("Comienza con")
+        )
+        .ForNumber(s=>s
+        .Clear()
+        .IsEqualTo("Es igual a"))).Messages(a=>
+            a.And("Y")
+            .Cancel("Cancelar")
+            .Or("O")
+            .Clear("Limpiar")
+            .Filter("Filtrar")
+            .Info("Seleccione los valores a Filtrar")
+            )))
+
+
+
+

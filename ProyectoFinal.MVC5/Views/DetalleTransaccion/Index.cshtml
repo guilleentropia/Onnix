@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ProyectoFinal.MVC5.ViewModels.DetalleTransaccionViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Detalles de Transacciones</h2>
+
+<p>
+    @Html.ActionLink("Agregar Detalle de Transaccion", "Create", null, new { @class = "k-button" })
+</p>
+
+@(Html.Kendo().Grid(Model)
+      .Name("Grid")
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.TransaccionDetalleTransaccion.Fecha).Title("Fecha de Transaccion");
+          columns.Bound(p => p.ProductoDetalleTransaccion.Descripcion).Title("Producto");
+          columns.Bound(p => p.Cantidad);
+          columns.Bound(p => p.SubTotal);
+
+          columns.Template(@<text>
+            @Html.ActionLink("Modificar", "Edit", new { id = @item.Id }, new { @class = "k-button" })
+            ||
+            @Html.ActionLink("Detalles", "Details", new { id = @item.Id }, new { @class = "k-button" })
+            ||
+            @Html.ActionLink("Eliminar", "Delete", new { id = @item.Id }, new { @class = "k-button" })
+        </text>).Title("Acciones");
+      })
+      .Pageable()
+      .Sortable()
+
+)

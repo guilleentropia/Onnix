@@ -1,0 +1,58 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.DetalleTransaccionViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Detalle de Transaccion</h2>
+
+<h3 class="alert-danger">¿Esta seguro de eliminar este Detalle de Transaccion?</h3>
+<div>
+    
+    <hr />
+    <dl >
+        <dt >
+            @Html.DisplayName("Transaccion")
+        </dt>
+
+        <dd >
+            @Html.DisplayFor(model => model.TransaccionDetalleTransaccion.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Producto")
+        </dt>
+
+        <dd >
+            @Html.DisplayFor(model => model.ProductoDetalleTransaccion.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubTotal)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @(Html.Kendo().Button()
+                 .Name("imageButton")
+                 .Content("Eliminar"))
+            @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "k-button" })
+        </div>
+    }
+</div>

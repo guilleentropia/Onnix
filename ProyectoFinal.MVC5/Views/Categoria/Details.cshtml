@@ -1,0 +1,26 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.CategoriaViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles de la Categoria</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.Id }, new {@class= "k-button"}) |
+    @Html.ActionLink("Volver al Listado", "Index", null, new {@class = "k-button"})
+</p>

@@ -1,0 +1,82 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.TerceroViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Tercero</h2>
+
+<h3 class="alert-danger">¿Esta seguro de eliminar este Tercero?</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dni)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Domicilio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Domicilio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Celular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mail)
+        </dd>
+
+        <dt>
+            Tipo de Tercero
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoTerceros.Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @(Html.Kendo().Button()
+                 .Name("imageButton")
+                 .Content("Eliminar"))
+            @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "k-button" })
+        </div>
+    }
+</div>

@@ -1,0 +1,62 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.DetalleFacturaViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Detalle de Factura</h2>
+
+<h3 class="alert-danger">¿Esta seguro de eliminar el Detalle de esta Factura?</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayName("Factura")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaDetalleFactura.NumeroFactura)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Producto")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductoDetalleFactura.Descripcion)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubTotal)
+        </dd>
+
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @(Html.Kendo().Button()
+                 .Name("imageButton")
+                 .Content("Eliminar"))
+            @Html.ActionLink("Volver al Listado", "Index", null, new{@class="k-button"})
+        </div>
+    }
+</div>

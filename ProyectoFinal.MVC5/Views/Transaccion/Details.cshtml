@@ -1,0 +1,74 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.TransaccionViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Usuario")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioTransaccion.NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Tercero")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TerceroTransaccion.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Numero de Factura")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaTransaccion.NumeroFactura)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Tipo de Transaccion")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoTransacciones.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Forma de Pago")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FormaPagoTransaccion.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.Id }, new { @class = "k-button" }) |
+    @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "k-button" })
+</p>

@@ -1,0 +1,91 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.ProductoViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Producto</h2>
+
+<h3 class="alert-danger">¿Esta seguro de eliminar el Producto?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioVenta)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imagen)
+        </dt>
+
+        <dd>
+            <img src="@Url.Action("getImg", "Producto", new { id = Model.Id })" alt="Person Image" width="100" height="100" /> 
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Categoria")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoriaProducto.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Marca")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MarcaProducto.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Proveedor")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TerceroProducto.NombreCompleto)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @(Html.Kendo().Button()
+                 .Name("imageButton")
+                 .Content("Eliminar"))
+            @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "k-button" })
+        </div>
+    }
+</div>

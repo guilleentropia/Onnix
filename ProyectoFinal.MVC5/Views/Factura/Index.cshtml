@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ProyectoFinal.MVC5.ViewModels.FacturaViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Facturas</h2>
+
+<p>
+    @Html.ActionLink("Agregar Factura", "Create", null, new { @class = "k-button" })
+</p>
+
+
+@(Html.Kendo().Grid(Model) 
+      .Name("Grid")
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.Fecha).Width(50); 
+          columns.Bound(p => p.NumeroFactura); 
+          columns.Bound(p => p.TerceroFactura.NombreCompleto).Title("Tercero"); 
+          columns.Bound(p => p.UsuarioFactura.NombreUsuario).Title("Usuario"); 
+          columns.Bound(p => p.Total);
+
+          columns.Template(@<text>
+                                                   @Html.ActionLink("Modificar", "Edit", new { id = @item.Id }, new { @class = "k-button" })
+                                                   ||
+                                                   @Html.ActionLink("Detalles", "Details", new { id = @item.Id }, new { @class = "k-button" })
+                                                   ||
+                                                   @Html.ActionLink("Eliminar", "Delete", new { id = @item.Id }, new { @class = "k-button" })
+                                                </text>).Title("Acciones");
+      })
+      .Pageable()
+      .Sortable()
+      
+)
+
+

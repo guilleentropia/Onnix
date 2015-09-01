@@ -1,0 +1,143 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.UsuarioViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Agregar Usuario</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.NombreUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NombreUsuario, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.NombreUsuario)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Empresa", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { style = "width:400px" })
+                .Name("EmpresaId")
+                .DataTextField("Descripcion")
+                .DataValueField("Id")
+                .OptionLabel("Seleccione una Empresa")
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                       {
+                           read.Action("ObtenerEmpresas", "Usuario");
+                       })
+                  .ServerFiltering(true);
+                })
+                 .SelectedIndex(0)
+                )
+
+
+
+
+
+                @Html.ValidationMessageFor(model => model.PerfilId)
+            </div>
+        </div>
+
+
+
+        
+        
+        
+        
+        <div class="form-group">
+            @Html.Label("Perfil", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { style = "width:400px" })
+                .Name("PerfilId") 
+                .DataTextField("Descripcion") 
+                .DataValueField("Id")
+                .OptionLabel("Seleccione un Perfil")
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                       {
+                           read.Action("ObtenerPerfiles", "Usuario");
+                       })
+                  .ServerFiltering(true);
+                })
+                 .SelectedIndex(0) 
+                )
+
+
+
+
+
+                @Html.ValidationMessageFor(model => model.PerfilId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Empleado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { style = "width:400px" })
+                .Name("EmpleadoId") 
+                .DataTextField("NombreCompleto") 
+                .DataValueField("Id")
+                .OptionLabel("Seleccione un Empleado")
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                       {
+                           read.Action("ObtenerEmpleados", "Usuario"); 
+                       })
+                  .ServerFiltering(true); 
+                })
+                 .SelectedIndex(0) 
+                )
+
+
+
+
+                @Html.ValidationMessageFor(model => model.EmpleadoId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+               @(Html.Kendo().Button()
+                 .Name("imageButton")
+                 .Content("Guardar"))
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "k-button" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,93 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.TransaccionViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Modificar Transaccion</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fecha, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.Fecha)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Total, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.Total)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("UsuarioId", string.Empty)
+                @Html.ValidationMessageFor(model => model.UsuarioId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Tercero", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TerceroId", string.Empty)
+                @Html.ValidationMessageFor(model => model.TerceroId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Numero de Factura", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FacturaId", string.Empty)
+                @Html.ValidationMessageFor(model => model.FacturaId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Tipo de Transaccion", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownList("TipoTransaccionId", string.Empty)
+                @Html.ValidationMessageFor(model => model.TipoTransaccionId)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Forma de Pago", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FormaPagoId", string.Empty)
+                @Html.ValidationMessageFor(model => model.FormaPagoId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+               @(Html.Kendo().Button()
+                 .Name("imageButton")
+                 .Content("Guardar"))
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "k-button" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

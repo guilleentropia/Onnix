@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ProyectoFinal.MVC5.ViewModels.UsuarioViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Usuarios</h2>
+
+<p>
+    @Html.ActionLink("Agregar Usuario", "Create", null, new { @class = "k-button" })
+</p>
+
+
+@(Html.Kendo().Grid(Model)
+      .Name("Grid")
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.NombreUsuario).Title("Nombre de Usuario");
+          columns.Bound(p => p.Password).Title("Contraseña");
+          columns.Bound(p => p.EmpresaUsuario.Descripcion).Title("Empresa");
+          columns.Bound(p => p.PerfilUsuario.Descripcion).Title("Perfil");
+          columns.Bound(p => p.EmpleadoUsuario.NombreCompleto).Title("Empleado");
+         
+
+          columns.Template(@<text>
+            @Html.ActionLink("Modificar", "Edit", new { id = @item.Id }, new { @class = "k-button" })
+            ||
+            @Html.ActionLink("Detalles", "Details", new { id = @item.Id }, new { @class = "k-button" })
+            ||
+            @Html.ActionLink("Eliminar", "Delete", new { id = @item.Id }, new { @class = "k-button" })
+        </text>).Title("Acciones");
+      })
+      .Pageable()
+      .Sortable()
+
+)
+
+
+
+

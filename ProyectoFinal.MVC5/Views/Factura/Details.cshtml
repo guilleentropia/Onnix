@@ -1,0 +1,57 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.FacturaViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroFactura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroFactura)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Usuario")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioFactura.NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Tercero")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TerceroFactura.Apellido)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.Id }, new { @class = "k-button" }) |
+    @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "k-button" })
+</p>

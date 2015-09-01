@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3BF68FD8-EA63-4824-90D5-90486354FB36}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProyectoFinal.Aplicacion</RootNamespace>
+    <AssemblyName>ProyectoFinal.Aplicacion</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppServiceBase.cs" />
+    <Compile Include="CategoriaAppService.cs" />
+    <Compile Include="DetalleFacturaAppService.cs" />
+    <Compile Include="DetalleTransaccionAppService.cs" />
+    <Compile Include="EmpleadoAppService.cs" />
+    <Compile Include="EmpresaAppService.cs" />
+    <Compile Include="FacturaAppService.cs" />
+    <Compile Include="FormaPagoAppService.cs" />
+    <Compile Include="Interface\IAppServiceBase.cs" />
+    <Compile Include="Interface\ICategoriaAppService.cs" />
+    <Compile Include="Interface\IDetalleFacturaAppService.cs" />
+    <Compile Include="Interface\IDetalleTransaccionAppService.cs" />
+    <Compile Include="Interface\IEmpleadoAppService.cs" />
+    <Compile Include="Interface\IEmpresaAppService.cs" />
+    <Compile Include="Interface\IFacturaAppService.cs" />
+    <Compile Include="Interface\IFormaPagoAppService.cs" />
+    <Compile Include="Interface\IMarcaAppService.cs" />
+    <Compile Include="Interface\IPerfilAppService.cs" />
+    <Compile Include="Interface\IProductoAppService.cs" />
+    <Compile Include="Interface\ITerceroAppService.cs" />
+    <Compile Include="Interface\ITipoTerceroAppService.cs" />
+    <Compile Include="Interface\ITipoTransaccionAppService.cs" />
+    <Compile Include="Interface\ITransaccionAppService.cs" />
+    <Compile Include="Interface\IUsuarioAppService.cs" />
+    <Compile Include="MarcaAppService.cs" />
+    <Compile Include="PerfilAppService.cs" />
+    <Compile Include="ProductoAppService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TerceroAppService.cs" />
+    <Compile Include="TipoTerceroAppService.cs" />
+    <Compile Include="TipoTransaccionAppService.cs" />
+    <Compile Include="TransaccionAppService.cs" />
+    <Compile Include="UsuarioAppService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProyectoFinal.Dominio\ProyectoFinal.Dominio.csproj">
+      <Project>{3dbce2df-3de8-4942-8ea5-637fb9eb9890}</Project>
+      <Name>ProyectoFinal.Dominio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

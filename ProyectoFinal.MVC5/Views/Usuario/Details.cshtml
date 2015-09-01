@@ -1,0 +1,63 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.UsuarioViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreUsuario, new { @class = "k-textbox" })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password, new { @class = "k-textbox" })
+        </dd>
+
+
+        <dt>
+            @Html.DisplayName("Empresa")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpresaUsuario.Descripcion, new { @class = "k-textbox" })
+        </dd>
+
+
+
+
+
+        <dt>
+            @Html.DisplayName("Perfil")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerfilUsuario.Descripcion, new { @class = "k-textbox" })
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Empleado")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpleadoUsuario.Nombre, new { @class = "k-textbox" })
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.Id }, new { @class = "k-button" }) |
+    @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "k-button" })
+</p>

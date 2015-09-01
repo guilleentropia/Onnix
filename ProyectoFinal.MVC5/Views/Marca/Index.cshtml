@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ProyectoFinal.MVC5.ViewModels.MarcaViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Marcas</h2>
+
+<p>
+    @Html.ActionLink("Agregar Marca", "Create", null, new { @class = "k-button" })
+</p>
+
+
+@(Html.Kendo().Grid(Model)
+      .Name("Grid")
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.Descripcion).Title("Marca");
+
+
+          columns.Template(@<text>
+            @Html.ActionLink("Modificar", "Edit", new { id = @item.Id }, new { @class = "k-button" })
+            ||
+            @Html.ActionLink("Detalles", "Details", new { id = @item.Id }, new { @class = "k-button" })
+            ||
+            @Html.ActionLink("Eliminar", "Delete", new { id = @item.Id }, new { @class = "k-button" })
+        </text>).Title("Acciones");
+      })
+      .Pageable()
+      .Sortable()
+
+)

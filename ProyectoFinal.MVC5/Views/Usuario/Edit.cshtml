@@ -1,0 +1,77 @@
+﻿@model ProyectoFinal.MVC5.ViewModels.UsuarioViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Modificar Usuario</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NombreUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NombreUsuario, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.NombreUsuario)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            @Html.Label("Empresa", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("EmpresaId", string.Empty)
+                @Html.ValidationMessageFor(model => model.EmpresaId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Perfil", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PerfilId", string.Empty)
+                @Html.ValidationMessageFor(model => model.PerfilId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Empleado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("EmpleadoId", string.Empty)
+                @Html.ValidationMessageFor(model => model.EmpleadoId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+               @(Html.Kendo().Button()
+                 .Name("imageButton")
+                 .Content("Guardar"))
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "k-button" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
