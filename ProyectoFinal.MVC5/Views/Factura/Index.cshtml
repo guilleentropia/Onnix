@@ -4,15 +4,39 @@
    
     if (Session["UserId"] == "sanjuan")
     {
-        Layout = "~/Views/Shared/_OtroLayout.cshtml";
+
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Layout = "~/Views/Shared/_SanJuanVendedor.cshtml";
+
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_SanJuanAdministrador.cshtml";
+
+        }
     }
 
     if (Session["UserId"] == "mendoza")
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Layout = "~/Views/Shared/_MendozaVendedor.cshtml";
+
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_MendozaAdministrador.cshtml";
+
+        }
     }
 
-    if (Session["UserId"] == null)
+    if (Session["UserId"] == null && Session["UserPerfil"] == null)
     {
         Response.Redirect("~/Account/Login");
     }

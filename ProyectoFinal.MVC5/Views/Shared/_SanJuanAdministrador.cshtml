@@ -12,8 +12,8 @@
 	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.common.min.css")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.highcontrast.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.dataviz.highcontrast.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.flat.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.dataviz.flat.min.css")" rel="stylesheet" type="text/css" />
 	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/jquery.min.js")"></script>
 	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/jszip.min.js")"></script>
 	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/kendo.all.min.js")"></script>
@@ -33,17 +33,20 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Productos", "Index", "Producto")</li>
-                    <li>@Html.ActionLink("Marcas", "Index", "Marca")</li>
-                    <li>@Html.ActionLink("Terceros", "Index", "Tercero")</li>
-                    <li>@Html.ActionLink("Transacciones", "Index", "Transaccion")</li>
-                    <li>@Html.ActionLink("Facturas", "Index", "Factura")</li>
-                    <li>@Html.ActionLink("Tercero", "Index", "Tercero")</li>
-                    <li>@Html.ActionLink("Transaccion", "Index", "Transaccion")</li>
-                    <li>@Html.ActionLink("Detalle de Factura", "Index", "DetalleFactura")</li>
-                    <li>@Html.ActionLink("Detalle de Transaccion", "Index", "DetalleTransaccion")</li>
+                    <li>@Html.ActionLink("Categorias", "Index", "Categoria")</li>                    
+                    <li>@Html.ActionLink("Empleados", "Index", "Empleado")</li>
+                    <li>@Html.ActionLink("Formas de Pago", "Index", "FormaPago")</li>
+                    <li>@Html.ActionLink("Perfiles", "Index", "Perfil")</li>
+                    <li>@Html.ActionLink("Tipos de Tercero", "Index", "TipoTercero")</li>
+                    <li>@Html.ActionLink("Tipos de Transaccion", "Index", "TipoTransaccion")</li>
+                    <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
                     
+                    <li>@{
+                        
 
+                        @Html.ActionLink("Logout", "Login", "Account", null, new { @class = "navbar-brand" });
+
+                    }</li>
                 </ul>
                
             </div>

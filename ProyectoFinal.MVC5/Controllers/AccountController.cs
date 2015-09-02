@@ -68,22 +68,38 @@ namespace ProyectoFinal.MVC5.Controllers
                         if (empresaid == 1)
                         {
                             Session["UserId"] = "sanjuan";
+
+                            if (user.PerfilId == 1)
+                            {
+                                Session["UserPerfil"] = "Administrador";
+                            }
+
+                            if (user.PerfilId == 2)
+                            {
+                                Session["UserPerfil"] = "vendedor";
+                            }
+
+                            return RedirectToAction("SanJuan", "Home");
+
                         }
                         if (empresaid == 2)
                         {
                             Session["UserId"] = "mendoza";
-                        }
-                        if (user.PerfilId == 1)
-                        {
-                            Session["UserPerfil"] = "administrador";
-                        }
 
-                        if (user.PerfilId == 2)
-                        {
-                            Session["UserPerfil"] = "vendedor";
-                        }
+                            if (user.PerfilId == 1)
+                            {
+                                Session["UserPerfil"] = "Administrador";
+                            }
 
-                        return RedirectToAction("Index", "Home");
+                            if (user.PerfilId == 2)
+                            {
+                                Session["UserPerfil"] = "vendedor";
+                            }
+
+                            return RedirectToAction("Mendoza", "Home");
+
+                        }
+                        
 
                     }
                     else

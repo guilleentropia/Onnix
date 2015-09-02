@@ -25,14 +25,14 @@ namespace ProyectoFinal.MVC5.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult SanJuan()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Mendoza()
         {
             ViewBag.Message = "Your contact page.";
 

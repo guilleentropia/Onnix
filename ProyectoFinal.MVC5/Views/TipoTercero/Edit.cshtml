@@ -5,11 +5,18 @@
     
     if (Session["UserId"] == "sanjuan")
     {
-        Layout = "~/Views/Shared/_OtroLayout.cshtml";
+
 
         if (Session["UserPerfil"] == "vendedor")
         {
+            Layout = "~/Views/Shared/_SanJuanVendedor.cshtml";
             Response.Redirect("~/Account/LoginPermission");
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_SanJuanAdministrador.cshtml";
+
         }
     }
 
@@ -19,7 +26,14 @@
 
         if (Session["UserPerfil"] == "vendedor")
         {
+            Layout = "~/Views/Shared/_MendozaVendedor.cshtml";
             Response.Redirect("~/Account/LoginPermission");
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_MendozaAdministrador.cshtml";
+
         }
     }
 
@@ -27,7 +41,6 @@
     {
         Response.Redirect("~/Account/Login");
     }
-
     
     
     ViewBag.Title = "Edit";
