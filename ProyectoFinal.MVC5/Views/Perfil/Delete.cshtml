@@ -5,17 +5,28 @@
     if (Session["UserId"] == "sanjuan")
     {
         Layout = "~/Views/Shared/_OtroLayout.cshtml";
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Response.Redirect("~/Account/LoginPermission");
+        }
     }
 
     if (Session["UserId"] == "mendoza")
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Response.Redirect("~/Account/LoginPermission");
+        }
     }
 
-    if (Session["UserId"] == null)
+    if (Session["UserId"] == null && Session["UserPerfil"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
+
     
     ViewBag.Title = "Delete";
 }

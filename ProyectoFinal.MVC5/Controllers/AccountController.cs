@@ -40,6 +40,17 @@ namespace ProyectoFinal.MVC5.Controllers
         }
 
         //
+        // GET: /Account/LoginPermission
+        [AllowAnonymous]
+        public ActionResult LoginPermission(string returnUrl)
+        {
+            Session.Abandon();
+            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.EmpresaId = new SelectList(_empresaAppService.ObtenerTodo(), "Id", "Descripcion");
+            return View();
+        }
+
+        //
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]

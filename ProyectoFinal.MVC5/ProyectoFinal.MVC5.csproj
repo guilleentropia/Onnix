@@ -946,6 +946,8 @@
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Shared\_OtroLayout.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Account\View.cshtml" />
+    <Content Include="Views\Account\LoginPermission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
