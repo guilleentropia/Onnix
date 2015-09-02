@@ -268,8 +268,50 @@ namespace ProyectoFinal.MVC5.Controllers
 
         }
 
-       
 
+
+        public ActionResult Busqueda()
+        {
+            ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion","Seleccione un valor");
+            ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
+            ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult Busqueda(string descripcion, int terceroid, int categoriaid, int marcaid)
+        {
+            ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion");
+            ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
+            ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
+            
+            try {
+                if (descripcion == "")
+                {
+                    var prodViewModel = Mapper.Map<IEnumerable<Producto>,
+                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid));
+
+                    return View(prodViewModel);
+                }
+
+                else
+                {
+                    var prodViewModel = Mapper.Map<IEnumerable<Producto>,
+                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid));
+
+                    return View(prodViewModel);
+                }
+            
+            }
+
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+            
+        }
 
     }
 }

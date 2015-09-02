@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ProyectoFinal.MVC5.ViewModels.ProductoViewModel>
+
+@{
+    
+    ViewBag.Title = "Index";
+}
+
+<h2>Seleccione Productos</h2>
+
+<br />
+
+@using (Html.BeginForm("Busqueda", "Producto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Label("Producto  : ")
+    @Html.TextBox("descripcion");
+    <br />
+    <br />
+    @Html.Label("Categoria  : ")
+  @Html.DropDownList("CategoriaId", (IEnumerable<SelectListItem>)ViewBag.CategoriaId, new { @class = "dropdown" })
+    <br />
+    <br />
+    @Html.Label("Proveedor  : ")
+    @Html.DropDownList("TerceroId", (IEnumerable<SelectListItem>)ViewBag.TerceroId, new { @class = "dropdown" })
+    <br />
+    <br />
+    @Html.Label("Marca  : ")
+   @Html.DropDownList("MarcaId", (IEnumerable<SelectListItem>)ViewBag.MarcaId, new { @class = "dropdown" })
+
+<br />
+    <br />
+    <br />
+    <input type="submit" value="Filtrar">
+<br />
+<br />
+<br />
+}
+
+
+
+@(Html.Kendo().Grid(Model)
+      .Name("Grid")
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.Id).Title("Seleccionar").Template(@<input type="checkbox" class="chk" onclick="javascript:uncheckShowYear(this);" />);
+
+          columns.Bound(p => p.Descripcion).Title("Producto");
+
+          columns.Bound(p => p.Stock);
+
+          columns.Bound(p => p.PrecioVenta).Title("Precio");
+
+
+
+      }))
+<br />
+<br />
+<div>
+   
+       
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.Label("Ingrese la cantidad :")
+                @Html.TextBox("Cantidad")
+                @(Html.Kendo().Button()
+                 .Name("imageButton")
+                 .Content("Agregar"))
+            </div>
+        </div>
+</div>
+
+<script type="text/javascript">
+   
+    function uncheckShowYear(obj)
+    {
+        var cbs = document.getElementsByName("Grid");
+           for (var i = 0; i < cbs.length; i++) {
+               if (cbs[i].checked == true) {
+                   alert("Esta chequeada");
+               }
+        }
+        }
+    
+</script>

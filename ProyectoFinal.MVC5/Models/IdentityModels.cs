@@ -13,5 +13,13 @@ namespace ProyectoFinal.MVC5.Models
             : base("DefaultConnection")
         {
         }
+
+        public System.Data.Entity.DbSet<ProyectoFinal.MVC5.ViewModels.ProductoViewModel> ProductoViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<ProyectoFinal.Dominio.Entidades.Categoria> Categorias { get; set; }
+
+        public System.Data.Entity.DbSet<ProyectoFinal.Dominio.Entidades.Marca> Marcas { get; set; }
+
+        public System.Data.Entity.DbSet<ProyectoFinal.Dominio.Entidades.Tercero> Terceroes { get; set; }
     }
 }

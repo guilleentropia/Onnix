@@ -20,5 +20,18 @@ namespace ProyectoFinal.Aplicacion
         {
             return _productoService.BuscarProductoImagen(id);
         }
+
+
+        public System.Collections.Generic.IEnumerable<Producto> BuscarProducto(string descripcion, int terceroid, int categoriaid, int marcaid)
+        {
+            return _productoService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid);
+
+        }
+
+
+        public System.Collections.Generic.IEnumerable<Producto> BuscarProducto(int terceroid, int categoriaid, int marcaid)
+        {
+            return _productoService.BuscarProducto(terceroid, categoriaid, marcaid);
+        }
     }
 }

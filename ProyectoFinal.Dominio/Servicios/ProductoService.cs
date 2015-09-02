@@ -20,5 +20,17 @@ namespace ProyectoFinal.Dominio.Servicios
         {
             return _productoRepository.BuscarProductoImagen(id);
         }
+
+
+        public System.Collections.Generic.IEnumerable<Producto> BuscarProducto(string descripcion, int terceroid, int categoriaid, int marcaid)
+        {
+            return _productoRepository.BuscarProducto(descripcion, terceroid, categoriaid, marcaid);
+        }
+
+
+        public System.Collections.Generic.IEnumerable<Producto> BuscarProducto(int terceroid, int categoriaid, int marcaid)
+        {
+            return _productoRepository.BuscarProducto(terceroid, categoriaid, marcaid);
+        }
     }
 }

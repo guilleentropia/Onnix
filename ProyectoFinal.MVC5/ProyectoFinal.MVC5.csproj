@@ -951,6 +951,7 @@
     <Content Include="Views\Shared\_SanJuanAdministrador.cshtml" />
     <Content Include="Views\Shared\_MendozaVendedor.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Producto\Busqueda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
