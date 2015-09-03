@@ -7,6 +7,8 @@ using ProyectoFinal.Aplicacion.Interface;
 using ProyectoFinal.Dominio.Entidades;
 using ProyectoFinal.MVC5.ViewModels;
 using System;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -275,13 +277,24 @@ namespace ProyectoFinal.MVC5.Controllers
             ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion","Seleccione un valor");
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
             ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
+            
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Lista()
+        {
+            ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion", "Seleccione un valor");
+            ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
+            ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
+
+            return View();
+        }
+      
 
 
         [HttpPost]
-        public ActionResult Busqueda(string descripcion, int terceroid, int categoriaid, int marcaid)
+        public ActionResult Lista([DataSourceRequest]DataSourceRequest request, string descripcion, int terceroid, int categoriaid, int marcaid)
         {
             ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion");
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
@@ -290,8 +303,17 @@ namespace ProyectoFinal.MVC5.Controllers
             try {
                 if (descripcion == "")
                 {
+
+
                     var prodViewModel = Mapper.Map<IEnumerable<Producto>,
                   IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid));
+
+                    DataSourceResult result = prodViewModel.ToDataSourceResult(request, p=> 
+                        new ProductoViewModel {
+                    Id = p.Id,
+                    Descripcion =  p.Descripcion,
+                    Stock =  p.Stock
+                    }); 
 
                     return View(prodViewModel);
                 }
@@ -300,6 +322,69 @@ namespace ProyectoFinal.MVC5.Controllers
                 {
                     var prodViewModel = Mapper.Map<IEnumerable<Producto>,
                   IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid));
+
+                    DataSourceResult result = prodViewModel.ToDataSourceResult(request, p =>
+                       new ProductoViewModel
+                       {
+                           Id = p.Id,
+                           Descripcion = p.Descripcion,
+                           Stock = p.Stock
+                       });
+
+                    return View(prodViewModel);
+                }
+            
+            }
+
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+            
+        
+
+    }
+
+
+
+
+        [HttpPost]
+        public ActionResult Busqueda([DataSourceRequest]DataSourceRequest request, string descripcion, int terceroid, int categoriaid, int marcaid)
+        {
+            ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion");
+            ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
+            ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
+            
+            try {
+                if (descripcion == "")
+                {
+
+
+                    var prodViewModel = Mapper.Map<IEnumerable<Producto>,
+                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid));
+
+                    DataSourceResult result = prodViewModel.ToDataSourceResult(request, p=> 
+                        new ProductoViewModel {
+                    Id = p.Id,
+                    Descripcion =  p.Descripcion,
+                    Stock =  p.Stock
+                    }); 
+
+                    return View(prodViewModel);
+                }
+
+                else
+                {
+                    var prodViewModel = Mapper.Map<IEnumerable<Producto>,
+                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid));
+
+                    DataSourceResult result = prodViewModel.ToDataSourceResult(request, p =>
+                       new ProductoViewModel
+                       {
+                           Id = p.Id,
+                           Descripcion = p.Descripcion,
+                           Stock = p.Stock
+                       });
 
                     return View(prodViewModel);
                 }

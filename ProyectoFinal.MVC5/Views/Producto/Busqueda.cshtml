@@ -37,48 +37,93 @@
 
 
 
+    
+
+
+
 @(Html.Kendo().Grid(Model)
-      .Name("Grid")
+      .Name("Grida")
+      
       .Columns(columns =>
       {
-          columns.Bound(p => p.Id).Title("Seleccionar").Template(@<input type="checkbox" class="chk" onclick="javascript:uncheckShowYear(this);" />);
+          columns.Bound(p => p.Id).Hidden(true); ///Title("Seleccionar").Template(@<input type="checkbox" class="chk" onclick="javascript:uncheckShowYear(this);" />).Width("100px");
 
           columns.Bound(p => p.Descripcion).Title("Producto");
+
+          columns.Bound(p => p.MarcaProducto.Descripcion).Title("Marca");
 
           columns.Bound(p => p.Stock);
 
           columns.Bound(p => p.PrecioVenta).Title("Precio");
 
+          
+       //   columns.Command(command => command.Custom("ViewDetails").Click("SelectBackupButtonClickHandler"));
+      }).Filterable().Selectable()
+      .Events(ev=> ev.Change("Una"))
+      .DataSource(dataSource => dataSource
+            .Server()
+                          .Read(read => read.Action("Busqueda", "Producto"))
+            .Model(model => model.Id(p => p.Id)
+            )
+        ).Pageable())
 
-
-      }))
 <br />
 <br />
+@using (Html.BeginForm("Index", "Categoria"))
+{
 <div>
    
        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                @Html.Label("Ingrese la cantidad :")
-                @Html.TextBox("Cantidad")
-                @(Html.Kendo().Button()
-                 .Name("imageButton")
-                 .Content("Agregar"))
+                
+                
+                <input type="submit" value="Agregar" name="Index" />
             </div>
         </div>
 </div>
 
+}
+
+
+
+
+
+
+
 <script type="text/javascript">
-   
-    function uncheckShowYear(obj)
-    {
-        var cbs = document.getElementsByName("Grid");
-           for (var i = 0; i < cbs.length; i++) {
-               if (cbs[i].checked == true) {
-                   alert("Esta chequeada");
-               }
+
+    function Una(e) {
+        e.preventDefault;
+        var grid = $('#Grida').data('kendoGrid');
+        var selectedRows = grid.select();
+        var selected = $.map(selectedRows, function (item) {
+            var checked = $(item).find('.check-box').attr('checked');
+            return {
+                id: $(item).find(':nth-child(1)').text(),
+                descripcion: $(item).find(':nth-child(2)').text(),
+                marca: $(item).find(':nth-child(3)').text(),
+                stock: $(item).find(':nth-child(4)').text(),
+                precio: $(item).find(':nth-child(5)').text(),
+                
+               
+            };
+        });
+        
+        alert(selected[0].id);
+        alert(selected[0].descripcion);
+        alert(selected[0].marca);
+        alert(selected[0].stock);
+        alert(selected[0].precio);
+
+        if (selected[0].stock == 1) {
+            alert("Esta es la ultima que queda");
         }
-        }
-    
-</script>
+       
+        
+    }
+
+    </script>
+
+
