@@ -282,68 +282,42 @@ namespace ProyectoFinal.MVC5.Controllers
         }
 
         [HttpGet]
-        public ActionResult Lista()
+        public ActionResult Lista(int id, string marca, string descripcion, int stock, int precio)
         {
-            ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion", "Seleccione un valor");
-            ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
-            ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
+           ProductoViewModel prodview = new ProductoViewModel();
+           List<ProductoViewModel> prod = new List<ProductoViewModel>();
+           prodview.Id = id;
+            prodview.Descripcion= descripcion;
+           // rod.MarcaProducto.Descripcion = descripcion;
+            prodview.Stock = stock;
+            prodview.PrecioVenta = precio;
+            prod.Add(prodview);
 
-            return View();
+            return View(prod);
         }
       
-
-
-        [HttpPost]
-        public ActionResult Lista([DataSourceRequest]DataSourceRequest request, string descripcion, int terceroid, int categoriaid, int marcaid)
-        {
-            ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion");
-            ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
-            ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
-            
-            try {
-                if (descripcion == "")
-                {
-
-
-                    var prodViewModel = Mapper.Map<IEnumerable<Producto>,
-                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid));
-
-                    DataSourceResult result = prodViewModel.ToDataSourceResult(request, p=> 
-                        new ProductoViewModel {
-                    Id = p.Id,
-                    Descripcion =  p.Descripcion,
-                    Stock =  p.Stock
-                    }); 
-
-                    return View(prodViewModel);
-                }
-
-                else
-                {
-                    var prodViewModel = Mapper.Map<IEnumerable<Producto>,
-                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid));
-
-                    DataSourceResult result = prodViewModel.ToDataSourceResult(request, p =>
-                       new ProductoViewModel
-                       {
-                           Id = p.Id,
-                           Descripcion = p.Descripcion,
-                           Stock = p.Stock
-                       });
-
-                    return View(prodViewModel);
-                }
-            
-            }
-
-            catch (Exception ex)
-            {
-                return View(ex.Message);
-            }
-            
         
 
+        [HttpPost]
+        public ActionResult Lista()
+        {
+
+
+          
+
+            return View();
+
     }
+
+
+        
+        public ActionResult Venta()
+        {
+
+
+            return View();
+
+        }
 
 
 

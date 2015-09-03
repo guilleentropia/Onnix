@@ -953,6 +953,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Producto\Busqueda.cshtml" />
     <Content Include="Views\Producto\Lista.cshtml" />
+    <Content Include="Views\Shared\_TableLayout.cshtml" />
+    <Content Include="Views\Producto\Venta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

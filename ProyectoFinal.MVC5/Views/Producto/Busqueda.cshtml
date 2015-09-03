@@ -57,7 +57,7 @@
           columns.Bound(p => p.PrecioVenta).Title("Precio");
 
           
-       //   columns.Command(command => command.Custom("ViewDetails").Click("SelectBackupButtonClickHandler"));
+         // columns.Command(command => command.Custom("Agregar").Click("Una");
       }).Filterable().Selectable()
       .Events(ev=> ev.Change("Una"))
       .DataSource(dataSource => dataSource
@@ -69,7 +69,7 @@
 
 <br />
 <br />
-@using (Html.BeginForm("Index", "Categoria"))
+@using (Html.BeginForm("Lista", "Producto"))
 {
 <div>
    
@@ -79,12 +79,12 @@
             <div class="col-md-offset-2 col-md-10">
                 
                 
-                <input type="submit" value="Agregar" name="Index" />
+                <input type="submit" value="Agregar" name="Index" onclick="Una" />
             </div>
         </div>
 </div>
 
-}
+
 
 
 
@@ -111,6 +111,8 @@
             };
         });
         
+        location.href = '/Producto/Lista?id='+ selected[0].id + "&marca=" + selected[0].marca + "&descripcion=" + selected[0].descripcion
+            + "&stock=" + selected[0].stock + "&precio=" + selected[0].precio;
         alert(selected[0].id);
         alert(selected[0].descripcion);
         alert(selected[0].marca);
@@ -120,10 +122,15 @@
         if (selected[0].stock == 1) {
             alert("Esta es la ultima que queda");
         }
-       
+       @{
+            
+            
+           
+       }
         
     }
 
     </script>
 
 
+}
