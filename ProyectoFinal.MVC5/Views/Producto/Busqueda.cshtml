@@ -46,7 +46,7 @@
       
       .Columns(columns =>
       {
-          columns.Bound(p => p.Id).Hidden(true); ///Title("Seleccionar").Template(@<input type="checkbox" class="chk" onclick="javascript:uncheckShowYear(this);" />).Width("100px");
+          columns.Bound(p => p.Id);//.Title("Seleccionar")//.Template(@<input type="checkbox" class="check-box" onclick="" />).Width("100px");
 
           columns.Bound(p => p.Descripcion).Title("Producto");
 
@@ -56,36 +56,40 @@
 
           columns.Bound(p => p.PrecioVenta).Title("Precio");
 
-          
-         // columns.Command(command => command.Custom("Agregar").Click("Una");
+
+     //      columns.Command(command => command.Custom("Agregar").Click("Una"));
       }).Filterable().Selectable()
-      .Events(ev=> ev.Change("Una"))
-      .DataSource(dataSource => dataSource
-            .Server()
-                          .Read(read => read.Action("Busqueda", "Producto"))
-            .Model(model => model.Id(p => p.Id)
-            )
-        ).Pageable())
+ 
+      //    .Events(ev=> ev.Change("Una"))
+          .DataSource(dataSource => dataSource
+                .Server()
+                              .Read(read => read.Action("Busqueda", "Producto"))
+                .Model(model => model.Id(p => p.Id)
+                )
+            ).Pageable())
 
 <br />
 <br />
 @using (Html.BeginForm("Lista", "Producto"))
 {
-<div>
+    <div>
    
        
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                       
+      @(Html.Kendo().Button()
+                     .Name("imageButton").Events(ev=> ev.Click("Una"))
+                     .Content("Guardar"))
                 
-                
-                <input type="submit" value="Agregar" name="Index" onclick="Una" />
+                   <input type="submit" value="Agregar" name="Index" onclick="Una" />
+                </div>
             </div>
-        </div>
-</div>
+    </div>
 
-
-
+}
+    
 
 
 
@@ -95,6 +99,7 @@
 <script type="text/javascript">
 
     function Una(e) {
+        
         e.preventDefault;
         var grid = $('#Grida').data('kendoGrid');
         var selectedRows = grid.select();
@@ -109,28 +114,26 @@
                 
                
             };
+            
         });
-        
-        location.href = '/Producto/Lista?id='+ selected[0].id + "&marca=" + selected[0].marca + "&descripcion=" + selected[0].descripcion
-            + "&stock=" + selected[0].stock + "&precio=" + selected[0].precio;
-        alert(selected[0].id);
-        alert(selected[0].descripcion);
-        alert(selected[0].marca);
-        alert(selected[0].stock);
-        alert(selected[0].precio);
 
         if (selected[0].stock == 1) {
             alert("Esta es la ultima que queda");
         }
-       @{
-            
-            
-           
-       }
+      
+        location.href = '/Producto/Lista?id='+ selected[0].id + "&marca=" + selected[0].marca + "&descripcion=" + selected[0].descripcion
+            + "&stock=" + selected[0].stock + "&precio=" + selected[0].precio;
+       alert(selected[0].id);
+       alert(selected[0].descripcion);
+        alert(selected[0].marca);
+        alert(selected[0].stock);
+        alert(selected[0].precio);
+
+        
+     
         
     }
 
     </script>
 
 
-}

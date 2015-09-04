@@ -299,7 +299,7 @@ namespace ProyectoFinal.MVC5.Controllers
         
 
         [HttpPost]
-        public ActionResult Lista()
+        public ActionResult Lista(string marca, string descripcion)
         {
 
 
