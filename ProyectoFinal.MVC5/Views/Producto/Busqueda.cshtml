@@ -1,49 +1,72 @@
-﻿@model IEnumerable<ProyectoFinal.MVC5.ViewModels.ProductoViewModel>
+﻿
+@model IEnumerable<ProyectoFinal.MVC5.ViewModels.ProductoViewModel>
+           
 
 @{
     
     ViewBag.Title = "Index";
+    
+    Layout="~/Views/Shared/_TableLayout.cshtml";
 }
 
 <h2>Seleccione Productos</h2>
 
 <br />
+<div id="form-busqueda" style="top:20px; left:0px; border:groove 4px black; height:700px;"  >
+    @using (Html.BeginForm("Busqueda", "Producto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        
+    <div id="result" style="position:relative; float:right; width:700px; height: 300px; border:double 1px red">
 
-@using (Html.BeginForm("Busqueda", "Producto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.Label("Producto  : ")
-    @Html.TextBox("descripcion");
-    <br />
-    <br />
-    @Html.Label("Categoria  : ")
-  @Html.DropDownList("CategoriaId", (IEnumerable<SelectListItem>)ViewBag.CategoriaId, new { @class = "dropdown" })
-    <br />
-    <br />
-    @Html.Label("Proveedor  : ")
-    @Html.DropDownList("TerceroId", (IEnumerable<SelectListItem>)ViewBag.TerceroId, new { @class = "dropdown" })
-    <br />
-    <br />
-    @Html.Label("Marca  : ")
-   @Html.DropDownList("MarcaId", (IEnumerable<SelectListItem>)ViewBag.MarcaId, new { @class = "dropdown" })
+       @if (Model != null)
+       {
+           foreach (var r in Model)
+           {
+               //src="data:image/jpg;base64,@(Convert.ToBase64String(r.Imagen))"
+            <img src=""  id="miniatura" width="200" height="200" style="position:center;" />
+           }
+           
+           
+           <label id="prueba">Hola</label>
+       }
 
-<br />
-    <br />
-    <br />
-    <input type="submit" value="Filtrar">
-<br />
-<br />
-<br />
-}
+    </div>
+
+    <div id="busque" style=" position: relative;left; width:400px; height: 300px; border:double 1px green">
+        @Html.Label("Producto  : ")
+        @Html.TextBox("descripcion");
+        <br />
+        <br />
+        @Html.Label("Categoria  : ")
+        @Html.DropDownList("CategoriaId", (IEnumerable<SelectListItem>)ViewBag.CategoriaId, new { @class = "dropdown" })
+        <br />
+        <br />
+        @Html.Label("Proveedor  : ")
+        @Html.DropDownList("TerceroId", (IEnumerable<SelectListItem>)ViewBag.TerceroId, new { @class = "dropdown" })
+        <br />
+        <br />
+        @Html.Label("Marca  : ")
+        @Html.DropDownList("MarcaId", (IEnumerable<SelectListItem>)ViewBag.MarcaId, new { @class = "dropdown" })
+
+        <br />
+        <br />
+        <br />
+        <input type="submit" value="Filtrar">
+        <br />
+        <br />
+        <br />
+    </div>
 
 
+    }
 
     
+    <div id="tabla" style="width:1100px;bottom:20px; left:20px; border:ridge 5px blue;box-sizing: border-box;">
 
 
-
-@(Html.Kendo().Grid(Model)
+        @(Html.Kendo().Grid(Model)
       .Name("Grida")
-      
+
       .Columns(columns =>
       {
           columns.Bound(p => p.Id);//.Title("Seleccionar")//.Template(@<input type="checkbox" class="check-box" onclick="" />).Width("100px");
@@ -56,11 +79,17 @@
 
           columns.Bound(p => p.PrecioVenta).Title("Precio");
 
+          columns.Bound(c => c.Imagen).Template(@<text>
 
-     //      columns.Command(command => command.Custom("Agregar").Click("Una"));
+            <img src="@Url.Action("getImg", "Producto", new {id = @item.Id })" alt="Person Image" width="80" height="80" />
+
+        </text>).Filterable(false).Sortable(false);
+
+
+          //      columns.Command(command => command.Custom("Agregar").Click("Una"));
       }).Filterable().Selectable()
- 
-      //    .Events(ev=> ev.Change("Una"))
+
+          .Events(ev => ev.Change("Una"))
           .DataSource(dataSource => dataSource
                 .Server()
                               .Read(read => read.Action("Busqueda", "Producto"))
@@ -68,27 +97,41 @@
                 )
             ).Pageable())
 
-<br />
-<br />
-@using (Html.BeginForm("Lista", "Producto"))
-{
-    <div>
-   
-       
+        <br />
+        <br />
+        @using (Html.BeginForm("Lista", "Producto"))
+        {
+            <div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                       
-      @(Html.Kendo().Button()
-                     .Name("imageButton").Events(ev=> ev.Click("Una"))
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+
+                        @(Html.Kendo().Button()
+                     .Name("imageButton").Events(ev => ev.Click("Una"))
                      .Content("Guardar"))
-                
-                   <input type="submit" value="Agregar" name="Index" onclick="Una" />
+
+                        <input type="submit" value="Agregar" name="Index" onclick="Una" />
+                    </div>
                 </div>
             </div>
+
+        }
+
     </div>
 
-}
+
+
+
+</div>
+
+
+    
+
+
+
+
     
 
 
@@ -111,6 +154,7 @@
                 marca: $(item).find(':nth-child(3)').text(),
                 stock: $(item).find(':nth-child(4)').text(),
                 precio: $(item).find(':nth-child(5)').text(),
+                imagen: $(item).find('img:nth-child(6)'),
                 
                
             };
@@ -121,8 +165,12 @@
             alert("Esta es la ultima que queda");
         }
       
-        location.href = '/Producto/Lista?id='+ selected[0].id + "&marca=" + selected[0].marca + "&descripcion=" + selected[0].descripcion
-            + "&stock=" + selected[0].stock + "&precio=" + selected[0].precio;
+        alert(selected[0].imagen);
+        document.getElementById('miniatura').src = selected[0].imagen;
+        document.getElementById('prueba').innerHTML = selected[0].marca;
+
+       // location.href = '/Producto/Listar?id='+ selected[0].id + "&marca=" + selected[0].marca + "&descripcion=" + selected[0].descripcion
+      //      + "&stock=" + selected[0].stock + "&precio=" + selected[0].precio;
        alert(selected[0].id);
        alert(selected[0].descripcion);
         alert(selected[0].marca);
@@ -135,5 +183,8 @@
     }
 
     </script>
-
-
+<br />
+<br />
+<br />
+<br />
+<br />

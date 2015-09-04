@@ -3,27 +3,21 @@
 @{
      ViewBag.Title = "Index";
      Layout = "~/Views/Shared/_TableLayout.cshtml";
+    
 }
 <br />
 <br />
 <br />
 
-@(Html.Kendo().Grid(Model)
-      .Name("Grid")
-      .Columns(columns =>
-      {
 
-          columns.Bound(p => p.Descripcion).Title("Producto");
-          columns.Bound(p => p.PrecioVenta).Title("Precio de Venta");
-          columns.Bound(p => p.Stock);
-          columns.Template(@<text> 
+@if (Model != null)
+{
+       foreach (var r in Model) { 
 
+        <img src="data:image/jpg;base64,@(Convert.ToBase64String(r.Imagen))" width="200" height="200" style="position:center;" />
+       }   
+}
 
 
-                </text>).Title("Cantidad");
-          
-         
-          
-      }))
                       
                       

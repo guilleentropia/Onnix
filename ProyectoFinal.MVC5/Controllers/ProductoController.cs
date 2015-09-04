@@ -295,7 +295,16 @@ namespace ProyectoFinal.MVC5.Controllers
 
             return View(prod);
         }
-      
+
+
+        [HttpGet]
+        public ActionResult Listar(int id)
+        {
+            var prodViewModel = Mapper.Map<Producto,ProductoViewModel>(_productoAppService.BuscarporId(id));
+            
+            
+            return View("Lista",prodViewModel);
+        }
         
 
         [HttpPost]
