@@ -277,22 +277,24 @@ namespace ProyectoFinal.MVC5.Controllers
             ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion","Seleccione un valor");
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
             ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
+            ViewBag.Productos = _productoAppService.ObtenerTodo();
            
             
             return View();
         }
 
         [HttpGet]
-        public ActionResult Lista(int id, string marca, string descripcion, int stock, int precio)
+        public ActionResult Lista(int id, string marca, string descripcion, int codigo, int precio, byte[] imagen)
         {
             
            ProductoViewModel prodview = new ProductoViewModel();
            List<ProductoViewModel> prod = new List<ProductoViewModel>();
             prodview.Id = id;
-            prodview.Descripcion= descripcion;
-           // rod.MarcaProducto.Descripcion = descripcion;
-            prodview.Stock = stock;
+            prodview.MarcaProducto.Descripcion = marca;
+            prodview.Descripcion = descripcion;
+            prodview.Codigo = codigo;
             prodview.PrecioVenta = precio;
+            prodview.Imagen = imagen;
             prod.Add(prodview);
             ViewBag.Lista =  new SelectList(prod);
 
@@ -339,22 +341,27 @@ namespace ProyectoFinal.MVC5.Controllers
                 {
 
 
-                    var prodViewModel = Mapper.Map<IEnumerable<Producto>,
+               /*     var prodViewModel = Mapper.Map<IEnumerable<Producto>,
+                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid));*/
+
+                    ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
                   IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid));
 
-                    
-
-                    return View(prodViewModel);
+                    return View();
                 }
 
                 else
                 {
-                    var prodViewModel = Mapper.Map<IEnumerable<Producto>,
+
+
+                    ViewBag.Productos= Mapper.Map<IEnumerable<Producto>,
                   IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid));
+                    /*var prodViewModel = Mapper.Map<IEnumerable<Producto>,
+                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid));*/
 
                    
 
-                    return View(prodViewModel);
+                    return View();
                 }
             
             }

@@ -5,7 +5,7 @@
 @{
     
     ViewBag.Title = "Index";
-
+    
     
     
     Layout="~/Views/Shared/_TableLayout.cshtml";
@@ -24,8 +24,8 @@
        {
            foreach (var r in Model)
            {
-               //src="data:image/jpg;base64,@(Convert.ToBase64String(r.Imagen))"
-            <img src=""  id="miniatura" width="200" height="200" style="position:center;" />
+               
+            <img src="data:image/jpg;base64,@(Convert.ToBase64String(r.Imagen))"  id="miniatura" width="200" height="200" style="position:center;" />
            }
            
            
@@ -63,89 +63,13 @@
     }
 
     
-    <div id="tabla" style="width:1100px;bottom:20px; left:20px; border:ridge 5px blue;box-sizing: border-box;">
-
-
-        @(Html.Kendo().Grid(Model)
-      .Name("Grida")
-
-      .Columns(columns =>
-      {
-          columns.Bound(p => p.Id);//.Title("Seleccionar")//.Template(@<input type="checkbox" class="check-box" onclick="" />).Width("100px");
-
-          columns.Bound(p => p.Descripcion).Title("Producto");
-
-          columns.Bound(p => p.MarcaProducto.Descripcion).Title("Marca");
-
-          columns.Bound(p => p.Stock);
-
-          columns.Bound(p => p.PrecioVenta).Title("Precio");
-
-          columns.Bound(c => c.Imagen).Template(@<text>
-
-            <img src="@Url.Action("getImg", "Producto", new {id = @item.Id })" alt="Person Image" width="80" height="80" />
-
-        </text>).Filterable(false).Sortable(false);
-
-
-          //      columns.Command(command => command.Custom("Agregar").Click("Una"));
-      }).Filterable().Selectable()
-
-          .Events(ev => ev.Change("Una"))
-          .DataSource(dataSource => dataSource
-                .Server()
-                              .Read(read => read.Action("Busqueda", "Producto"))
-                .Model(model => model.Id(p => p.Id)
-                )
-            ).Pageable())
-
-        <br />
-        <br />
-        @using (Html.BeginForm("Lista", "Producto"))
-        {
-            <div>
-
-
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-
-                        @(Html.Kendo().Button()
-                     .Name("imageButton").Events(ev => ev.Click("Una"))
-                     .Content("Guardar"))
-
-                        <input type="submit" value="Agregar" name="Index" onclick="Una" />
-                    </div>
-                </div>
-            </div>
-
-        }
-
-    </div>
-
-
-
-
-</div>
-
-
-    
-
-
-
-
-    
-
-
-
-
-
-
+  
 <script type="text/javascript">
 
     function Una(e) {
         
         e.preventDefault;
+        
         var grid = $('#Grida').data('kendoGrid');
         var selectedRows = grid.select();
         var selected = $.map(selectedRows, function (item) {
@@ -191,7 +115,66 @@
 <br />
 <br />
 
+    <div id="tabla" style="width:1100px;bottom:20px; left:20px; border:ridge 5px blue;box-sizing: border-box;">
+
+
+        <table id="table">
+            <tr>
+                <th>Seleccione</th>
+                <th>Id</th>
+                <th>Codigo</th>
+                <th>Marca</th>
+                <th>Nombre</th>
+                <th>Precio Venta</th>
+                <th> Imagen</th>
+            </tr>
+            @foreach ( var p in ViewBag.Productos) {
+    <tr>
+        <td><input type='checkbox' name='chk1' /></td>
+        <td onclick="Prueba(e)">@p.Id</td>
+        <td>@p.Codigo</td>
+        <td>@p.MarcaProducto.Descripcion</td>
+        <td>@p.Descripcion</td>
+        <td>@p.PrecioVenta</td>
+        <td><img src="@Url.Action("getImg", "Producto", new {id = @p.Id })" alt="Person Image" width="80" height="80" /></td>
+    </tr>
+    }
+
+        </table>
+        </div>
+
+
+        <script type="text/javascript">
+            $("#table tr").click(function () {
+                $(this).addClass('selected').siblings().removeClass('selected');
+                var value = $(this).find('td:first').html();
+                var id = $(this).find('td').next().html();
+                var codigo = $(this).find('td').next().next().html();
+                var marca = $(this).find('td').next().next().next().html();
+                var nombre = $(this).find('td').next().next().next().next().html();
+                var precioventa = $(this).find('td').next().next().next().next().next().html();
+                var imagen = $(this).find('td:last').html();
+
+
+                
+
+                location.href = '/Producto/Lista?id=' + id + "&marca=" + marca + "&codigo=" + 3 + "&descripcion=" + nombre
+              + "&precio=" + precioventa + "&imagen=" + imagen;
 
 
 
+            });
+
+            $('.ok').on('click', function (e) {
+                alert($("#table tr.selected td:first").html());
+            });
+
+        </script>
+
+        <script type="text/javascript">
+            $('input[type="checkbox"]').on('change', function () {
+                $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+            });
+
+        </script>
 

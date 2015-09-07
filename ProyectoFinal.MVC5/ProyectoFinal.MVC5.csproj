@@ -548,6 +548,7 @@
     <Content Include="Content\kendo\2015.2.805\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2015.2.805\Uniform\sprite_kpi_2x.png" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\TableStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
