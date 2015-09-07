@@ -5,6 +5,7 @@
         // Declaracion de la Entidad Producto
         public int Id { get; set; }
 
+        public int Codigo { get; set; }
         public string Descripcion { get; set; }
         public double PrecioCompra { get; set; }
         public double PrecioVenta { get; set; }

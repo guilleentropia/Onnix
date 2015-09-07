@@ -3,6 +3,7 @@
 @{
      ViewBag.Title = "Index";
      Layout = "~/Views/Shared/_TableLayout.cshtml";
+     var Producto = ViewBag.Lista;
     
 }
 <br />
@@ -10,14 +11,15 @@
 <br />
 
 
+
+
+
 @if (Model != null)
 {
-       foreach (var r in Model) { 
+    foreach (var r in Model)
+    {
 
         <img src="data:image/jpg;base64,@(Convert.ToBase64String(r.Imagen))" width="200" height="200" style="position:center;" />
-       }   
-}
-
-
-                      
+    }
+}             
                       

@@ -8,6 +8,12 @@ namespace ProyectoFinal.MVC5.ViewModels
         [Key]
         public int Id { get; set; }
 
+
+        [Required(ErrorMessage = "El campo Codigo de Producto es obligatorio")]
+        [Display(Name = "Codigo")]
+        public double Codigo { get; set; }
+
+
         [Required(ErrorMessage = "El campo Producto es obligatorio")]
         [MaxLength(50, ErrorMessage = "Ha alcanzado el maximo de caracteres para el Producto")]
         [MinLength(2, ErrorMessage = "Debe ingresar un valor valido, minimo 2 caracteres..."),
@@ -16,9 +22,11 @@ namespace ProyectoFinal.MVC5.ViewModels
 
 
         [Required(ErrorMessage = "El campo Precio de Compra es obligatorio")]
+        [Display(Name = "Precio de Compra")]
         public double PrecioCompra { get; set; }
 
         [Required(ErrorMessage = "El campo Precio de Venta es obligatorio")]
+        [Display(Name = "Precio de Venta")]
         public double PrecioVenta { get; set; }
 
         public int Stock { get; set; }

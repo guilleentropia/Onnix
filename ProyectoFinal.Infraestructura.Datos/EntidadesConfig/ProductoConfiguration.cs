@@ -10,6 +10,10 @@ namespace ProyectoFinal.Infraestructura.Datos.EntidadesConfig
 
             HasKey(c => c.Id);
 
+            Property(c => c.Codigo)
+                .IsRequired();
+
+
             Property(c => c.Descripcion)
                 .IsRequired()
                 .HasMaxLength(50);

@@ -1,10 +1,12 @@
-﻿
+﻿@using ProyectoFinal.MVC5.ViewModels
 @model IEnumerable<ProyectoFinal.MVC5.ViewModels.ProductoViewModel>
            
 
 @{
     
     ViewBag.Title = "Index";
+
+    
     
     Layout="~/Views/Shared/_TableLayout.cshtml";
 }
@@ -169,15 +171,15 @@
         document.getElementById('miniatura').src = selected[0].imagen;
         document.getElementById('prueba').innerHTML = selected[0].marca;
 
-       // location.href = '/Producto/Listar?id='+ selected[0].id + "&marca=" + selected[0].marca + "&descripcion=" + selected[0].descripcion
-      //      + "&stock=" + selected[0].stock + "&precio=" + selected[0].precio;
-       alert(selected[0].id);
-       alert(selected[0].descripcion);
-        alert(selected[0].marca);
-        alert(selected[0].stock);
-        alert(selected[0].precio);
-
-        
+        location.href = '/Producto/Lista?id='+ selected[0].id + "&marca=" + selected[0].marca + "&descripcion=" + selected[0].descripcion
+            + "&stock=" + selected[0].stock + "&precio=" + selected[0].precio;
+      // alert(selected[0].id);
+      // alert(selected[0].descripcion);
+      //  alert(selected[0].marca);
+      //  alert(selected[0].stock);
+      //  alert(selected[0].precio);
+       
+      
      
         
     }
@@ -188,3 +190,8 @@
 <br />
 <br />
 <br />
+
+
+
+
+

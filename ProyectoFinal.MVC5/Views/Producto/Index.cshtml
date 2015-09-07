@@ -59,10 +59,10 @@
       .Name("Grid")
       .Columns(columns =>
       {
-          
+          columns.Bound(p => p.Codigo).Title("Codigo").HtmlAttributes(new { style = "width:10px" });
           columns.Bound(p => p.Descripcion).Title("Producto");
-          columns.Bound(p => p.PrecioCompra).Title("Precio de Compra");
-          columns.Bound(p => p.PrecioVenta).Title("Precio de Venta");
+          columns.Bound(p => p.PrecioCompra).Title("Precio Compra").HtmlAttributes(new { style = "width:10px" });
+          columns.Bound(p => p.PrecioVenta).Title("Precio Venta").HtmlAttributes(new { style = "width:10px" });
           columns.Bound(p => p.Stock);
           
           columns.Bound(c => c.Imagen).Template(@<text>
@@ -70,9 +70,9 @@
                                                         <img src="@Url.Action("getImg", "Producto", new {id = @item.Id })" alt="Person Image" width="80" height="80"/>
                                                    
                                                  </text>).Filterable(false).Sortable(false);
-          columns.Bound(p => p.CategoriaProducto.Descripcion).Title("Categoria");
-          columns.Bound(p => p.MarcaProducto.Descripcion).Title("Marca");
-          columns.Bound(p => p.TerceroProducto.NombreCompleto).Title("Proveedor");
+          columns.Bound(p => p.CategoriaProducto.Descripcion).Title("Categoria").HtmlAttributes(new { style = "width:10px" });
+          columns.Bound(p => p.MarcaProducto.Descripcion).Title("Marca").HtmlAttributes(new { style = "width:10px" });
+          columns.Bound(p => p.TerceroProducto.NombreCompleto).Title("Proveedor").HtmlAttributes(new { style = "width:10px" });
 
           columns.Template(@<text>
             @Html.ActionLink("Modificar", "Edit", new { id = @item.Id }, new { @class = "k-button" })
