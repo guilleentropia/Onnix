@@ -278,27 +278,33 @@ namespace ProyectoFinal.MVC5.Controllers
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
             ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
             ViewBag.Productos = _productoAppService.ObtenerTodo();
+            ViewBag.Lista = "";
            
             
             return View();
         }
 
         [HttpGet]
-        public ActionResult Lista(int id, string marca, string descripcion, int codigo, int precio, byte[] imagen)
+        public ActionResult Lista(int id, string marca, string descripcion, int codigo, double precio)
         {
             
            ProductoViewModel prodview = new ProductoViewModel();
            List<ProductoViewModel> prod = new List<ProductoViewModel>();
             prodview.Id = id;
-            prodview.MarcaProducto.Descripcion = marca;
+         //   prodview.MarcaProducto.Descripcion = marca;
             prodview.Descripcion = descripcion;
             prodview.Codigo = codigo;
             prodview.PrecioVenta = precio;
-            prodview.Imagen = imagen;
+            byte[] byteArray = _productoAppService.BuscarporId(id).Imagen;
+            prodview.Imagen = byteArray;
             prod.Add(prodview);
-            ViewBag.Lista =  new SelectList(prod);
+            ViewBag.Lista =prod;
+            ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion", "Seleccione un valor");
+            ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
+            ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
+            ViewBag.Productos = _productoAppService.ObtenerTodo();
 
-            return View(prod);
+            return View("Busqueda", prod);
         }
 
 

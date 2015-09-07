@@ -13,30 +13,20 @@
 
 <h2>Seleccione Productos</h2>
 
-<br />
-<div id="form-busqueda" style="top:20px; left:0px; border:groove 4px black; height:700px;"  >
+<br /> 
+<div id="form-busqueda" style="top:20px; left:0px; border:groove 4px black; height:320px;"  >
     @using (Html.BeginForm("Busqueda", "Producto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         
-    <div id="result" style="position:relative; float:right; width:700px; height: 300px; border:double 1px red">
+    <div id="result" style="width:700px;float:right;bottom:20px; left:20px; border:ridge 5px blue;box-sizing: border-box;">
 
-       @if (Model != null)
-       {
-           foreach (var r in Model)
-           {
-               
-            <img src="data:image/jpg;base64,@(Convert.ToBase64String(r.Imagen))"  id="miniatura" width="200" height="200" style="position:center;" />
-           }
-           
-           
-           <label id="prueba">Hola</label>
-       }
+      @Html.Partial("Lista")
 
     </div>
 
-    <div id="busque" style=" position: relative;left; width:400px; height: 300px; border:double 1px green">
+    <div id="busque" style=" position: relative;float:left; width:400px; height: 300px; border:double 1px green">
         @Html.Label("Producto  : ")
-        @Html.TextBox("descripcion");
+        @Html.TextBox("descripcion")
         <br />
         <br />
         @Html.Label("Categoria  : ")
@@ -115,13 +105,13 @@
 <br />
 <br />
 
-    <div id="tabla" style="width:1100px;bottom:20px; left:20px; border:ridge 5px blue;box-sizing: border-box;">
+    <div id="tabla" style="position:relative; float:right; width:1110px; height: 500px; border:double 1px red">
 
 
-        <table id="table">
+        <table id="table" style="width:900px">
             <tr>
-                <th>Seleccione</th>
-                <th>Id</th>
+                <th>Sel</th>
+                
                 <th>Codigo</th>
                 <th>Marca</th>
                 <th>Nombre</th>
@@ -131,7 +121,7 @@
             @foreach ( var p in ViewBag.Productos) {
     <tr>
         <td><input type='checkbox' name='chk1' /></td>
-        <td onclick="Prueba(e)">@p.Id</td>
+        <td onclick="Prueba(e)" hidden>@p.Id</td>
         <td>@p.Codigo</td>
         <td>@p.MarcaProducto.Descripcion</td>
         <td>@p.Descripcion</td>
@@ -153,13 +143,13 @@
                 var marca = $(this).find('td').next().next().next().html();
                 var nombre = $(this).find('td').next().next().next().next().html();
                 var precioventa = $(this).find('td').next().next().next().next().next().html();
-                var imagen = $(this).find('td:last').html();
+                
 
 
                 
 
-                location.href = '/Producto/Lista?id=' + id + "&marca=" + marca + "&codigo=" + 3 + "&descripcion=" + nombre
-              + "&precio=" + precioventa + "&imagen=" + imagen;
+                location.href = '/Producto/Lista?id=' + id + "&marca=" + marca + "&codigo=" + codigo + "&descripcion=" + nombre
+              + "&precio=" + precioventa ;
 
 
 
