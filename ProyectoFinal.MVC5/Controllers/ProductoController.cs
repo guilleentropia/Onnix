@@ -18,6 +18,9 @@ namespace ProyectoFinal.MVC5.Controllers
         private readonly IMarcaAppService _marcaAppService;
         private readonly ICategoriaAppService _categoriaAppService;
         private readonly ITerceroAppService _terceroAppService;
+        ProductoViewModel prodview = new ProductoViewModel();
+        List<ProductoViewModel> prod = new List<ProductoViewModel>();
+        
 
         public ProductoController(IProductoAppService productoAppService, IMarcaAppService marcaAppService,
             ICategoriaAppService categoriaAppService, ITerceroAppService terceroAppService)
@@ -26,6 +29,7 @@ namespace ProyectoFinal.MVC5.Controllers
             _marcaAppService = marcaAppService;
             _categoriaAppService = categoriaAppService;
             _terceroAppService = terceroAppService;
+           
         }
 
 
@@ -279,7 +283,7 @@ namespace ProyectoFinal.MVC5.Controllers
             ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
             ViewBag.Productos = _productoAppService.ObtenerTodo();
             ViewBag.Lista = "";
-           
+            
             
             return View();
         }
@@ -288,8 +292,7 @@ namespace ProyectoFinal.MVC5.Controllers
         public ActionResult Lista(int id, string marca, string descripcion, int codigo, double precio)
         {
             
-           ProductoViewModel prodview = new ProductoViewModel();
-           List<ProductoViewModel> prod = new List<ProductoViewModel>();
+          
             prodview.Id = id;
          //   prodview.MarcaProducto.Descripcion = marca;
             prodview.Descripcion = descripcion;
@@ -303,6 +306,8 @@ namespace ProyectoFinal.MVC5.Controllers
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
             ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
             ViewBag.Productos = _productoAppService.ObtenerTodo();
+            Session.Add("Productos", descripcion);
+            
 
             return View("Busqueda", prod);
         }

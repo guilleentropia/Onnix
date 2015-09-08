@@ -11,6 +11,55 @@
     Layout="~/Views/Shared/_TableLayout.cshtml";
 }
 
+<head>
+    <script language="javascript" type="text/javascript" src="@Url.Content("~/Content")/Js/jquery-ui.js"></script>
+    <script language="javascript" type="text/javascript" src="@Url.Content("~/Content")/Js/jquery-ui.min.js"></script>
+    
+
+    <script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $('#tabla img').css({
+            'cursor': 'pointer',
+            'z-index': 100
+        }).draggable({ 'revert': true });
+
+
+        function displayCart(data) {
+            var s = '';
+            var sum = 0;
+            for (var i = 0; i < data.length; i++) {
+                sum += parseInt(data[i].Cantidad) * parseFloat(data[i].producto.precioventa);
+                $ += '<br> Id:' + data[i].producto.Id;
+                $ += '<br> Nombre:' + data[i].producto.Cantidad;
+
+            }
+
+            $ += '<br> Total:' + sum;
+            $('#cart').html(s);
+        }
+
+        $('#cart').droppable({
+            drop: function (event, ui) {
+                var productid = $(ui.draggable).siblings('.productId').val();
+                $.ajax({
+                    type: 'GET',
+                    url: 'Cart/Buy' + productid,
+                    success: function (data) {
+                        displayCart(data);
+                    }
+                });
+            }
+
+        })
+
+    });
+
+
+
+    </script>
+
+</head>
+
 <h2>Seleccione Productos</h2>
 
 <br /> 
@@ -43,7 +92,7 @@
         <br />
         <br />
         <br />
-        <input type="submit" value="Filtrar">
+        <input type="submit" id="sub" value="Filtrar">
         <br />
         <br />
         <br />
@@ -105,6 +154,11 @@
 <br />
 <br />
 
+    
+
+
+
+
     <div id="tabla" style="position:relative; float:right; width:1110px; height: 500px; border:double 1px red">
 
 
@@ -112,7 +166,7 @@
             <tr>
                 <th>Sel</th>
                 
-                <th>Codigo</th>
+                <th id="codigo">Codigo</th>
                 <th>Marca</th>
                 <th>Nombre</th>
                 <th>Precio Venta</th>
@@ -126,7 +180,7 @@
         <td>@p.MarcaProducto.Descripcion</td>
         <td>@p.Descripcion</td>
         <td>@p.PrecioVenta</td>
-        <td><img src="@Url.Action("getImg", "Producto", new {id = @p.Id })" alt="Person Image" width="80" height="80" /></td>
+        <td><img src="@Url.Action("getImg", "Producto", new {id = @p.Id })"alt="Person Image" width="80" height="80" /></td>
     </tr>
     }
 
@@ -134,6 +188,11 @@
         </div>
 
 
+
+
+
+
+    
         <script type="text/javascript">
             $("#table tr").click(function () {
                 $(this).addClass('selected').siblings().removeClass('selected');
@@ -143,10 +202,11 @@
                 var marca = $(this).find('td').next().next().next().html();
                 var nombre = $(this).find('td').next().next().next().next().html();
                 var precioventa = $(this).find('td').next().next().next().next().next().html();
-                
 
 
-                
+              
+
+
 
                 location.href = '/Producto/Lista?id=' + id + "&marca=" + marca + "&codigo=" + codigo + "&descripcion=" + nombre
               + "&precio=" + precioventa ;

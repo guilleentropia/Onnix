@@ -19,7 +19,9 @@
         <th>Precio</th>
         <th> Imagen</th>
     </tr>
-    @foreach (var p in ViewBag.Lista)
+    @if(ViewBag.Lista!=null){
+
+    foreach (var p in ViewBag.Lista)
     {
         <tr>
             
@@ -32,7 +34,7 @@
            
            
         </tr>
-    }
+    }}
 
 </table>
        
