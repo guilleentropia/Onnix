@@ -61,7 +61,7 @@
 </head>
 
 <h2>Seleccione Productos</h2>
-
+@Html.ActionLink("Carrito", "Carrito", "Cart", null,new { @class = "carrito" })
 <br /> 
 <div id="form-busqueda" style="top:20px; left:0px; border:groove 4px black; height:320px;"  >
     @using (Html.BeginForm("Busqueda", "Producto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -69,9 +69,9 @@
         
     <div id="result" style="width:700px;float:right;bottom:20px; left:20px; border:ridge 5px blue;box-sizing: border-box;">
 
-      @Html.Partial("Lista")
+     @Html.Partial("../Cart/Lista", null)
 
-    </div>
+    </div> 
 
     <div id="busque" style=" position: relative;float:left; width:400px; height: 300px; border:double 1px green">
         @Html.Label("Producto  : ")
@@ -154,7 +154,7 @@
 <br />
 <br />
 
-    
+   
 
 
 
@@ -171,10 +171,11 @@
                 <th>Nombre</th>
                 <th>Precio Venta</th>
                 <th> Imagen</th>
+                
             </tr>
             @foreach ( var p in ViewBag.Productos) {
     <tr>
-        <td><input type='checkbox' name='chk1' /></td>
+        <td><input type='button' id='chk1'  value="Agregar"/></td>
         <td onclick="Prueba(e)" hidden>@p.Id</td>
         <td>@p.Codigo</td>
         <td>@p.MarcaProducto.Descripcion</td>
@@ -194,37 +195,41 @@
 
     
         <script type="text/javascript">
-            $("#table tr").click(function () {
-                $(this).addClass('selected').siblings().removeClass('selected');
+            $("#table tr").click(
+            function () {
+                
+                $("#table tr").addClass('selected').siblings().removeClass('selected');
+
                 var value = $(this).find('td:first').html();
                 var id = $(this).find('td').next().html();
+                
                 var codigo = $(this).find('td').next().next().html();
                 var marca = $(this).find('td').next().next().next().html();
                 var nombre = $(this).find('td').next().next().next().next().html();
                 var precioventa = $(this).find('td').next().next().next().next().next().html();
 
+                var myObj = [value, id, codigo, marca, nombre, precioventa];
 
-              
+                //     alert(myObj[0]);
 
 
 
-                location.href = '/Producto/Lista?id=' + id + "&marca=" + marca + "&codigo=" + codigo + "&descripcion=" + nombre
-              + "&precio=" + precioventa ;
+
+                location.href = '/Cart/Buy?id=' + id //+ "&marca=" + marca + "&codigo=" + codigo + "&descripcion=" + nombre
+                //    + "&precio=" + precioventa ;
 
 
 
             });
 
-            $('.ok').on('click', function (e) {
-                alert($("#table tr.selected td:first").html());
-            });
+           
 
         </script>
 
         <script type="text/javascript">
             $('input[type="checkbox"]').on('change', function () {
-                $('input[name="' + this.name + '"]').not(this).prop('checked', false);
-            });
+               $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+           });
 
         </script>
 

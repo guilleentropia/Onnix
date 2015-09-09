@@ -29,6 +29,14 @@ namespace ProyectoFinal.MVC5.Controllers
         }
 
 
+        public ActionResult Carrito()
+        {
+
+            ViewBag.Lista = (List<Item>)Session["cart"];
+            return View("Lista");
+        }
+
+
         public ActionResult Buy(int id)
         {
             if (Session["cart"] == null)
@@ -49,7 +57,9 @@ namespace ProyectoFinal.MVC5.Controllers
                 Session["cart"] = cart;
                 
             }
-            return Json((List<Item>)Session["cart"], JsonRequestBehavior.AllowGet);
+
+            ViewBag.Lista = (List<Item>)Session["cart"];
+            return View("Lista");
         }
 
 
@@ -59,7 +69,8 @@ namespace ProyectoFinal.MVC5.Controllers
             int index = isExist(id);
             cart.RemoveAt(index);
             Session["cart"] = cart;
-            return Json((List<Item>) Session["cart"], JsonRequestBehavior.AllowGet);
+            ViewBag.Lista = (List<Item>)Session["cart"];
+            return View("Lista");
 
         }
 

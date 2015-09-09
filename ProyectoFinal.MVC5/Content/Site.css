@@ -43,3 +43,21 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
+.carrito{
+    background: url(../Images/carrito.gif) no-repeat top left;
+     display: block;
+     width: 120px;
+     height: 30px;
+     text-indent: -9999px;
+     text-align:right;
+     
+     color: black;
+}
+
+.boton{
+    background:#000000;
+    color: white;
+    position:center;
+
+}
+

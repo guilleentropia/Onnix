@@ -1,0 +1,66 @@
+﻿<link rel="stylesheet" type="text/css" href="~/Content/TableStyle.css">
+
+@{
+     ViewBag.Title = "Index";
+     Layout = "~/Views/Shared/_TableLayout.cshtml";
+     var Producto = ViewBag.Lista;
+    
+}
+<br />
+<br />
+<br />
+
+<table id="tablita">
+    <tr>
+        
+        
+        <th>Codigo</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th> Imagen</th>
+        <th> Cantidad</th>
+        <th> Eliminar</th>
+    </tr>
+    @if(ViewBag.Lista!=null){
+
+    foreach (var p in ViewBag.Lista)
+    {
+        <tr>
+            
+            <td hidden>@p.producto.Id</td>
+            <td>@p.producto.Codigo</td>
+            <td>@p.producto.Descripcion</td>
+            <td>@p.producto.PrecioVenta</td>
+            <td><img src="@Url.Action("getImg", "Producto", new {id = @p.producto.Id })" alt="Person Image" width="80" height="80" /></td>
+            <td>@p.Cantidad</td>
+            <td><input type='button' id='chk1' onclick="Elegir()" value="Eliminar" /></td>
+           
+        </tr>
+    }}
+
+</table>
+
+@Html.ActionLink("Regresar", "Busqueda", "Producto", null, new { @class = "boton" }) 
+@Html.ActionLink("Realizar Venta", "Index", "Venta",null , new { @class = "boton" }) 
+
+
+
+<script type="text/javascript">
+    $("#tablita tr").click(
+    function Elegir () {
+
+        $("#tablita tr").addClass('selected').siblings().removeClass('selected')
+
+        var id = $(this).find('td:first').html()
+       
+
+        
+        location.href = '/Cart/Delete?id=' + id 
+
+
+    })
+
+
+
+</script>
+

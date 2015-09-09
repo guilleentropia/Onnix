@@ -206,6 +206,7 @@
     <Compile Include="Controllers\TipoTransaccionController.cs" />
     <Compile Include="Controllers\TransaccionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VentaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -558,6 +559,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\background.png" />
+    <Content Include="Images\carrito.png" />
     <Content Include="Images\key.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -960,10 +962,11 @@
     <Content Include="Views\Producto\Lista.cshtml" />
     <Content Include="Views\Shared\_TableLayout.cshtml" />
     <Content Include="Views\Producto\Venta.cshtml" />
+    <Content Include="Views\Cart\Lista.cshtml" />
+    <Content Include="Views\Venta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

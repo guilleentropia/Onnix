@@ -65,6 +65,8 @@ namespace ProyectoFinal.MVC5.Controllers
                     var user = _usuarioAppService.BuscarUsuario(nombreusuario, password, empresaid);
                     if (user != null)
                     {
+                        Session["User"] = nombreusuario;
+
                         if (empresaid == 1)
                         {
                             Session["UserId"] = "sanjuan";

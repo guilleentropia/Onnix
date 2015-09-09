@@ -35,6 +35,14 @@ namespace ProyectoFinal.MVC5.ViewModels
         [EmailAddress(ErrorMessage=" Ingrese una cuenta de mail valida")]
         public string Mail { get; set; }
 
+
+        public string NombreCompleto
+        {
+            get
+            {
+                return Apellido + " " + Nombre;
+            }
+        }
         
         public int TipoTerceroId { get; set; }
         public virtual TipoTercero TipoTerceros { get; set; }

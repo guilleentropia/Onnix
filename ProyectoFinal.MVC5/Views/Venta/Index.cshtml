@@ -1,0 +1,86 @@
+﻿<link rel="stylesheet" type="text/css" href="~/Content/TableStyle.css">
+@{
+    Layout = "~/Views/Shared/_TableLayout.cshtml";
+    var Productos = ViewBag.Productos;
+    var anio = DateTime.Now.Year;
+    var mes = DateTime.Now.Month;
+    var dia = DateTime.Now.Day;
+    var hora = DateTime.Now.Hour;
+    var minutos = DateTime.Now.Minute;
+    var Fecha = dia + "/" + mes + "/" + anio + " " + hora + ":" + minutos;
+    var usuario = Session["User"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <br />
+    <br />
+    <div class="form-group">
+        @Html.Label("Clientes", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" })
+        <div class="col-md-10">
+            @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { style = "width:400px" })
+                .Name("Clientes")
+                .DataTextField("NombreCompleto")
+                .DataValueField("Id")
+                .OptionLabel("Seleccione un Cliente")
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                       {
+                           read.Action("ObtenerCliente", "Venta");
+                       })
+                  .ServerFiltering(true);
+                })
+                 .SelectedIndex(0)
+            )
+            
+            @Html.Label("Usuario  : " )
+            @Html.TextBox("nombreuser", usuario, new { disabled = "disabled"})
+            
+            @Html.TextBox("fechahoy", Fecha, new { disabled = "disabled" ,style="float:right;"})
+             @Html.Label("Fecha  : ", new { style = "float:right;" })
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+            <table id="tabla">
+                <tr>
+
+
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th> Cantidad</th>
+
+                </tr>
+                @if (ViewBag.Productos != null)
+                {
+
+                    foreach (var p in ViewBag.Productos)
+                    {
+                        <tr>
+
+                            <td hidden>@p.producto.Id</td>
+                            <td>@p.producto.Codigo</td>
+                            <td>@p.producto.Descripcion</td>
+                            <td>@p.producto.PrecioVenta</td>
+                            <td>@p.Cantidad</td>
+
+
+                        </tr>
+                    }
+                }
+            </table>
+</body>
+</html>
