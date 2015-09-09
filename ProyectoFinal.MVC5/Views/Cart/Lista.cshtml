@@ -19,6 +19,7 @@
         <th>Precio</th>
         <th> Imagen</th>
         <th> Cantidad</th>
+        <th> Subtotal</th>
         <th> Eliminar</th>
     </tr>
     @if(ViewBag.Lista!=null){
@@ -33,6 +34,7 @@
             <td>@p.producto.PrecioVenta</td>
             <td><img src="@Url.Action("getImg", "Producto", new {id = @p.producto.Id })" alt="Person Image" width="80" height="80" /></td>
             <td>@p.Cantidad</td>
+            <td>@p.SubTotal</td>
             <td><input type='button' id='chk1' onclick="Elegir()" value="Eliminar" /></td>
            
         </tr>

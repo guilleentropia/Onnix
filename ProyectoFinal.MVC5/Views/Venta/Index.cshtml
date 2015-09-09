@@ -9,6 +9,7 @@
     var minutos = DateTime.Now.Minute;
     var Fecha = dia + "/" + mes + "/" + anio + " " + hora + ":" + minutos;
     var usuario = Session["User"];
+    var suma = 0.0;
 }
 
 <!DOCTYPE html>
@@ -62,6 +63,8 @@
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th> Cantidad</th>
+                    <th>Subtotal</th>
+                    
 
                 </tr>
                 @if (ViewBag.Productos != null)
@@ -76,11 +79,17 @@
                             <td>@p.producto.Descripcion</td>
                             <td>@p.producto.PrecioVenta</td>
                             <td>@p.Cantidad</td>
-
-
+                            <td>@p.SubTotal</td>
+                            @{  suma = suma + p.SubTotal;}
                         </tr>
                     }
                 }
+                <tfoot>
+                    <tr>
+                        <th id="total" colspan="4" style="text-align:right;">Total :</th>
+                        <td>@suma</td>
+                    </tr>
+                </tfoot>
             </table>
 </body>
 </html>

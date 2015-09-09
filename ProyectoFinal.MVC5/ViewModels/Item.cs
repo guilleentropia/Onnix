@@ -9,5 +9,6 @@ namespace ProyectoFinal.MVC5.ViewModels
     {
         public Producto producto { get; set; }
         public int Cantidad { get; set; }
+        public double SubTotal { get; set; }
     }
 }

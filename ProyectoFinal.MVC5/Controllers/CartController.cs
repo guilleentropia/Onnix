@@ -43,6 +43,7 @@ namespace ProyectoFinal.MVC5.Controllers
             {
                 List<Item> cart = new List<Item>();
                 cart.Add(new Item{producto= _productoAppService.BuscarporId(id), Cantidad=1});
+                cart[0].SubTotal = cart[0].producto.PrecioVenta * cart[0].Cantidad;
                 Session["cart"] = cart;
             }
             else
@@ -54,6 +55,10 @@ namespace ProyectoFinal.MVC5.Controllers
                     cart[index].Cantidad++;
                 else
                     cart.Add(new Item { producto = _productoAppService.BuscarporId(id), Cantidad = 1 });
+                for (int i = 0; i < cart.Count; i++)
+                {
+                    cart[i].SubTotal = cart[i].producto.PrecioVenta * cart[i].Cantidad;
+                }
                 Session["cart"] = cart;
                 
             }
