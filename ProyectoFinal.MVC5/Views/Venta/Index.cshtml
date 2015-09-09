@@ -20,12 +20,15 @@
     <title>Index</title>
 </head>
 <body>
+
+@using (Html.BeginForm("Venta", "Venta", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{ 
     <br />
     <br />
     <div class="form-group">
-        @Html.Label("Clientes", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" })
+        @Html.Label("Clientes", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" ,id="cli"})
         <div class="col-md-10">
-            @(Html.Kendo().DropDownList()
+       @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { style = "width:400px" })
                 .Name("Clientes")
                 .DataTextField("NombreCompleto")
@@ -41,18 +44,47 @@
                 })
                  .SelectedIndex(0)
             )
-            
-            @Html.Label("Usuario  : " )
-            @Html.TextBox("nombreuser", usuario, new { disabled = "disabled"})
-            
-            @Html.TextBox("fechahoy", Fecha, new { disabled = "disabled" ,style="float:right;"})
-             @Html.Label("Fecha  : ", new { style = "float:right;" })
+
+
+
+            @Html.Label("Usuario  : ")
+            @Html.TextBox("nombreuser", usuario, new { disabled = "disabled" })
+
+            @Html.TextBox("fechahoy", Fecha, new { disabled = "disabled", style = "float:right", id="fecha" })
+            @Html.Label("Fecha  : ", new { style = "float:right;" })
         </div>
-    </div>
+        </div>
+            <br />
+            <br />
+        <div class="form-group">
+            @Html.Label("Pago", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" })
+
+            <div class="col-md-10">
+                @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { style = "width:400px" })
+                .Name("FormaPago")
+                .DataTextField("Descripcion")
+                .DataValueField("Id")
+                .OptionLabel("Seleccione una Forma de Pago")
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                       {
+                           read.Action("ObtenerFormaPago", "Venta");
+                       })
+                  .ServerFiltering(true);
+                })
+                 .SelectedIndex(0)
+                )
+            </div>
+
+
+
+
+        </div>
     <br />
     <br />
-    <br />
-    <br />
+    
     <br />
     <br />
             <table id="tabla">
@@ -86,10 +118,26 @@
                 }
                 <tfoot>
                     <tr>
-                        <th id="total" colspan="4" style="text-align:right;">Total :</th>
-                        <td>@suma</td>
+                        <th  colspan="4" style="text-align:right;">Total :</th>
+                        <td id="total">@suma</td>
                     </tr>
                 </tfoot>
             </table>
+
+    @Html.ActionLink("Vender","Venta", "Venta",
+    routeValues: new
+    {
+        fecha = Fecha,
+        usuario = usuario,
+        total = suma,
+        
+        
+    },
+    htmlAttributes: null
+)
+
+}
 </body>
+
+
 </html>
