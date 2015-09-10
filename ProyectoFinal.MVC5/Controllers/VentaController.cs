@@ -31,7 +31,7 @@ namespace ProyectoFinal.MVC5.Controllers
         }
 
         
-        public ActionResult Venta(string fecha, string usuario, double total)
+        public ActionResult Venta(string fecha, string usuario, double total, string cli)
         {
 
 

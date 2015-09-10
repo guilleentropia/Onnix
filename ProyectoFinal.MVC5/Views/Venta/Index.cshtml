@@ -10,25 +10,27 @@
     var Fecha = dia + "/" + mes + "/" + anio + " " + hora + ":" + minutos;
     var usuario = Session["User"];
     var suma = 0.0;
-}
+    var clien = "";
 
-<!DOCTYPE html>
+        }
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
+        <!DOCTYPE HTML>
 
-@using (Html.BeginForm("Venta", "Venta", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{ 
-    <br />
-    <br />
-    <div class="form-group">
-        @Html.Label("Clientes", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" ,id="cli"})
-        <div class="col-md-10">
-       @(Html.Kendo().DropDownList()
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width" />
+            <title>Index</title>
+        </head>
+        <body>
+
+            @using (Html.BeginForm("Venta", "Venta", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+                <br />
+                <br />
+                <div class="form-group">
+                    @Html.Label("Clientes", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" ,id="cli"})
+                    <div class="col-md-10">
+                        @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { style = "width:400px" })
                 .Name("Clientes")
                 .DataTextField("NombreCompleto")
@@ -43,29 +45,36 @@
                   .ServerFiltering(true);
                 })
                  .SelectedIndex(0)
-            )
+                        )
+                        @Html.DropDownList("cli", (IEnumerable<SelectListItem>)ViewBag.Clientes,new { @class = "dropdown" })
+
+                        @{
+                            
+                                clien=Request["cli"];
+                                }
 
 
 
-            @Html.Label("Usuario  : ")
-            @Html.TextBox("nombreuser", usuario, new { disabled = "disabled" })
 
-            @Html.TextBox("fechahoy", Fecha, new { disabled = "disabled", style = "float:right", id="fecha" })
-            @Html.Label("Fecha  : ", new { style = "float:right;" })
-        </div>
-        </div>
-            <br />
-            <br />
-        <div class="form-group">
-            @Html.Label("Pago", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" })
+                        @Html.Label("Usuario  : ")
+                        @Html.TextBox("nombreuser", usuario, new { disabled = "disabled" } )
 
-            <div class="col-md-10">
-                @(Html.Kendo().DropDownList()
+                        @Html.TextBox("fechahoy", Fecha, new { disabled = "disabled", style = "float:right", id="fecha" })
+                        @Html.Label("Fecha  : ", new { style = "float:right;" })
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    @Html.Label("Pago", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" })
+
+                    <div class="col-md-10">
+                        @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { style = "width:400px" })
                 .Name("FormaPago")
                 .DataTextField("Descripcion")
                 .DataValueField("Id")
-                .OptionLabel("Seleccione una Forma de Pago")
+                 .OptionLabel("Seleccione una Forma de Pago")
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -75,31 +84,31 @@
                   .ServerFiltering(true);
                 })
                  .SelectedIndex(0)
-                )
-            </div>
+                        )
+                    </div>
 
 
 
 
-        </div>
-    <br />
-    <br />
-    
-    <br />
-    <br />
-            <table id="tabla">
-                <tr>
+                </div>
+                <br />
+                <br />
+
+                <br />
+                <br />
+                <table id="tabla">
+                    <tr>
 
 
-                    <th>Codigo</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th> Cantidad</th>
-                    <th>Subtotal</th>
-                    
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th> Cantidad</th>
+                        <th>Subtotal</th>
 
-                </tr>
-                @if (ViewBag.Productos != null)
+
+                    </tr>
+                    @if (ViewBag.Productos != null)
                 {
 
                     foreach (var p in ViewBag.Productos)
@@ -116,28 +125,41 @@
                         </tr>
                     }
                 }
-                <tfoot>
-                    <tr>
-                        <th  colspan="4" style="text-align:right;">Total :</th>
-                        <td id="total">@suma</td>
-                    </tr>
-                </tfoot>
-            </table>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" style="text-align:right;">Total :</th>
+                            <td id="total">@suma</td>
+                        </tr>
+                    </tfoot>
+                </table>
 
-    @Html.ActionLink("Vender","Venta", "Venta",
+                @Html.ActionLink("Vender","Venta", "Venta",
     routeValues: new
     {
         fecha = Fecha,
         usuario = usuario,
         total = suma,
-        
-        
+        cli= 5
+
+
     },
     htmlAttributes: null
 )
+                <input type="submit" value="guardar" />
+
+                <script type="text/javascript">
+                    function onSelect(e) {
+
+                        $('#Clientes').change(function () {
+
+                            var value = this.value;
+                            
+                            alert(value);
+                        });
+                    };
+                </script>
+
 
 }
-</body>
-
-
-</html>
+        </body>
+    </html>
