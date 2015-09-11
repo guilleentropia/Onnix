@@ -136,11 +136,7 @@
 
         location.href = '/Producto/Lista?id='+ selected[0].id + "&marca=" + selected[0].marca + "&descripcion=" + selected[0].descripcion
             + "&stock=" + selected[0].stock + "&precio=" + selected[0].precio;
-      // alert(selected[0].id);
-      // alert(selected[0].descripcion);
-      //  alert(selected[0].marca);
-      //  alert(selected[0].stock);
-      //  alert(selected[0].precio);
+     
        
       
      
@@ -153,8 +149,7 @@
 <br />
 <br />
 <br />
-
-   
+ 
 
 
 
@@ -209,19 +204,18 @@
                 var marca = $(this).find('td').next().next().next().html();
                 var nombre = $(this).find('td').next().next().next().next().html();
                 var precioventa = $(this).find('td').next().next().next().next().next().html();
+                var stock = $(this).find('td').next().next().next().next().next().next().html();
 
                 var myObj = [value, id, codigo, marca, nombre, precioventa];
 
-                //     alert(myObj[0]);
-
-
-
-
-                location.href = '/Cart/Buy?id=' + id //+ "&marca=" + marca + "&codigo=" + codigo + "&descripcion=" + nombre
-                //    + "&precio=" + precioventa ;
-
-
-
+                if (stock < 1) {
+                    alert("No hay Stock disponible");
+                }
+                else
+                {
+                    location.href = '/Cart/Buy?id=' + id
+                }
+               
             });
 
            
