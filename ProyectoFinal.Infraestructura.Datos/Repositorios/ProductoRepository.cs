@@ -36,5 +36,16 @@ namespace ProyectoFinal.Infraestructura.Datos.Repositorios
                 && x.MarcaId == marcaid);
             return b;
         }
+
+
+        public Producto BuscarProductoStock(int id)
+        {
+            var a = Context.Set<Producto>().ToList();
+            var b = a.SingleOrDefault(x => x.Id == id);
+            var c = b.Stock;
+            b.Stock = c - 1;
+            Context.SaveChanges();
+            return b;
+        }
     }
 }

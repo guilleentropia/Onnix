@@ -10,5 +10,7 @@ namespace ProyectoFinal.Dominio.Interfaces.Servicios
         IEnumerable<Producto> BuscarProducto(string descripcion, int terceroid, int categoriaid, int marcaid);
 
         IEnumerable<Producto> BuscarProducto( int terceroid, int categoriaid, int marcaid);
+
+        Producto BuscarProductoStock(int id);
     }
 }

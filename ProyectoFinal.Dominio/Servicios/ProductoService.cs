@@ -32,5 +32,11 @@ namespace ProyectoFinal.Dominio.Servicios
         {
             return _productoRepository.BuscarProducto(terceroid, categoriaid, marcaid);
         }
+
+
+        public Producto BuscarProductoStock(int id)
+        {
+            return _productoRepository.BuscarProductoStock(id);
+        }
     }
 }

@@ -170,6 +170,7 @@
                 <th>Marca</th>
                 <th>Nombre</th>
                 <th>Precio Venta</th>
+                <th> Stock</th>
                 <th> Imagen</th>
 
             </tr>
@@ -181,6 +182,7 @@
         <td>@p.MarcaProducto.Descripcion</td>
         <td>@p.Descripcion</td>
         <td>@p.PrecioVenta</td>
+        <td>@p.Stock</td>
         <td><img src="@Url.Action("getImg", "Producto", new {id = @p.Id })"alt="Person Image" width="80" height="80" /></td>
     </tr>
     }

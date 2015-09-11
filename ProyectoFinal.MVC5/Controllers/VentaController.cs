@@ -18,10 +18,12 @@ namespace ProyectoFinal.MVC5.Controllers
         private readonly IDetalleFacturaAppService _detallefacturaAppService;
         private readonly ITransaccionAppService _transaccionAppService;
         private readonly IDetalleTransaccionAppService _detalletransaccionAppService;
+        private readonly IProductoAppService _productoAppService;
 
         public VentaController(ITerceroAppService terceroAppService, IFormaPagoAppService formapagoAppService, IUsuarioAppService
             usuarioAppService, IFacturaAppService facturaAppService, IDetalleFacturaAppService detallefacturaAppService,
-            ITransaccionAppService transaccionAppService, IDetalleTransaccionAppService detalletransaccionAppService)
+            ITransaccionAppService transaccionAppService, IDetalleTransaccionAppService detalletransaccionAppService,
+            IProductoAppService productoAppService)
         {
             _terceroAppService = terceroAppService;
             _formapagoAppService = formapagoAppService;
@@ -30,6 +32,7 @@ namespace ProyectoFinal.MVC5.Controllers
             _detallefacturaAppService = detallefacturaAppService;
             _transaccionAppService = transaccionAppService;
             _detalletransaccionAppService = detalletransaccionAppService;
+            _productoAppService = productoAppService;
         }
 
         // GET: Venta
@@ -83,8 +86,13 @@ namespace ProyectoFinal.MVC5.Controllers
             {
                 var cantidad = item.Cantidad;
                 var subtotal = item.SubTotal;
-                var producto = item.producto.Id;
+                var producto = Convert.ToInt32(item.producto.Id);
+
+                //Actualizacion de Stock
                 
+                 _productoAppService.BuscarProductoStock(producto);
+                
+
                 //Detalle de Factura
                 Factura ultima = new Factura();
                 ultima = _facturaAppService.UltimaFactura();

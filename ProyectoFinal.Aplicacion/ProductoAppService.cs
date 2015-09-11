@@ -33,5 +33,11 @@ namespace ProyectoFinal.Aplicacion
         {
             return _productoService.BuscarProducto(terceroid, categoriaid, marcaid);
         }
+
+
+        public Producto BuscarProductoStock(int id)
+        {
+            return _productoService.BuscarProductoStock(id);
+        }
     }
 }
