@@ -18,5 +18,11 @@ namespace ProyectoFinal.Dominio.Servicios
         {
             return _usuarioRepository.BuscarUsuario(usuario, contraseña,empresaid);
         }
+
+
+        public Usuario BuscarIdUsuarioporNombre(string usuario)
+        {
+            return _usuarioRepository.BuscarIdUsuarioporNombre(usuario);
+        }
     }
 }

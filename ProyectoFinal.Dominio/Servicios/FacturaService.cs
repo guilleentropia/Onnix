@@ -13,5 +13,10 @@ namespace ProyectoFinal.Dominio.Servicios
         {
             _facturaRepository = facturaRepository;
         }
+
+        public Factura UltimaFactura()
+        {
+            return _facturaRepository.UltimaFactura();
+        }
     }
 }

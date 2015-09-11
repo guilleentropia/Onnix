@@ -10,7 +10,8 @@
     var Fecha = dia + "/" + mes + "/" + anio + " " + hora + ":" + minutos;
     var usuario = Session["User"];
     var suma = 0.0;
-    var clien = "";
+    
+    
 
         }
 
@@ -23,8 +24,12 @@
         </head>
         <body>
 
-            @using (Html.BeginForm("Venta", "Venta", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
+            <fieldset>
+                @using (Ajax.BeginForm("Venta", "Venta",
+                            new AjaxOptions { UpdateTargetId = "divInterestDeatils" }))
+                
+                {
+                    <div id="divInterestDeatils"></div>
                 <br />
                 <br />
                 <div class="form-group">
@@ -46,20 +51,15 @@
                 })
                  .SelectedIndex(0)
                         )
-                        @Html.DropDownList("cli", (IEnumerable<SelectListItem>)ViewBag.Clientes,new { @class = "dropdown" })
-
-                        @{
-                            
-                                clien=Request["cli"];
-                                }
-
+                        
 
 
 
                         @Html.Label("Usuario  : ")
+                        
                         @Html.TextBox("nombreuser", usuario, new { disabled = "disabled" } )
 
-                        @Html.TextBox("fechahoy", Fecha, new { disabled = "disabled", style = "float:right", id="fecha" })
+                        @Html.TextBox("fechahoy", Fecha, new { disabled="disabled",  style = "float:right" })
                         @Html.Label("Fecha  : ", new { style = "float:right;" })
                     </div>
                 </div>
@@ -121,45 +121,29 @@
                             <td>@p.producto.PrecioVenta</td>
                             <td>@p.Cantidad</td>
                             <td>@p.SubTotal</td>
-                            @{  suma = suma + p.SubTotal;}
+                            @{  suma = suma + p.SubTotal;
+                                Productos = p;}
                         </tr>
                     }
                 }
                     <tfoot>
                         <tr>
                             <th colspan="4" style="text-align:right;">Total :</th>
-                            <td id="total">@suma</td>
+                            <td id="total" name="total">@suma</td>
                         </tr>
                     </tfoot>
                 </table>
 
-                @Html.ActionLink("Vender","Venta", "Venta",
-    routeValues: new
-    {
-        fecha = Fecha,
-        usuario = usuario,
-        total = suma,
-        cli= 5
+                    <input type="hidden" value=@suma name="total"/>
+                    <input type="hidden" value=@usuario name="nombreuser" />
+                     <input type="hidden" value=@Fecha name="fechahoy" />
+                    <input type="hidden" value=@Productos name="detalle"/>
 
-
-    },
-    htmlAttributes: null
-)
+  
                 <input type="submit" value="guardar" />
-
-                <script type="text/javascript">
-                    function onSelect(e) {
-
-                        $('#Clientes').change(function () {
-
-                            var value = this.value;
-                            
-                            alert(value);
-                        });
-                    };
-                </script>
-
+      
 
 }
+                </fieldset>
         </body>
     </html>

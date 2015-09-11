@@ -13,5 +13,10 @@ namespace ProyectoFinal.Aplicacion
         {
             _facturaService = facturaService;
         }
+
+        public Factura UltimaFactura()
+        {
+            return _facturaService.UltimaFactura();
+        }
     }
 }

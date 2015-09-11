@@ -12,5 +12,13 @@ namespace ProyectoFinal.Infraestructura.Datos.Repositorios
             var b = a.SingleOrDefault(x => x.NombreUsuario == usuario && x.Password == contraseña && x.EmpresaId == empresaid);
             return b;
         }
+
+
+        public Usuario BuscarIdUsuarioporNombre(string usuario)
+        {
+            var a = Context.Set<Usuario>().ToList();
+            var b = a.SingleOrDefault(x => x.NombreUsuario== usuario);
+            return b;
+        }
     }
 }

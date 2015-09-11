@@ -5,5 +5,7 @@ namespace ProyectoFinal.Dominio.Interfaces.Repositorios
     public interface IUsuarioRepository: IRepositoryBase<Usuario>
     {
         Usuario BuscarUsuario(string usuario, string contraseña, int empresaid);
+
+        Usuario BuscarIdUsuarioporNombre(string usuario);
     }
 }

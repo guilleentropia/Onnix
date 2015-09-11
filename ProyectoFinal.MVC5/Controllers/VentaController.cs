@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoFinal.MVC5.ViewModels;
 using ProyectoFinal.Aplicacion.Interface;
+using ProyectoFinal.Dominio.Entidades;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -12,11 +13,18 @@ namespace ProyectoFinal.MVC5.Controllers
     {
         private readonly ITerceroAppService _terceroAppService;
         private readonly IFormaPagoAppService _formapagoAppService;
+        private readonly IUsuarioAppService _usuarioAppService;
+        private readonly IFacturaAppService _facturaAppService;
+        private readonly IDetalleFacturaAppService _detallefacturaAppService;
 
-        public VentaController(ITerceroAppService terceroAppService, IFormaPagoAppService formapagoAppService)
+        public VentaController(ITerceroAppService terceroAppService, IFormaPagoAppService formapagoAppService, IUsuarioAppService
+            usuarioAppService, IFacturaAppService facturaAppService, IDetalleFacturaAppService detallefacturaAppService)
         {
             _terceroAppService = terceroAppService;
             _formapagoAppService = formapagoAppService;
+            _usuarioAppService = usuarioAppService;
+            _facturaAppService = facturaAppService;
+            _detallefacturaAppService = detallefacturaAppService;
         }
 
         // GET: Venta
@@ -30,12 +38,50 @@ namespace ProyectoFinal.MVC5.Controllers
             return View();
         }
 
-        
-        public ActionResult Venta(string fecha, string usuario, double total, string cli)
+        [HttpPost]
+        public ActionResult Venta()
         {
+            string usuario =  Request["nombreuser"].ToString();
+            var fechahoy = Convert.ToDateTime(Request["fechahoy"].ToString());
+            var total = Convert.ToDecimal(Request["total"].ToString());
+            var cliente = Convert.ToInt32(Request["Clientes"].ToString());
+            var formapago = Request["FormaPago"].ToString();
+
+            var usuer = _usuarioAppService.BuscarIdUsuarioporNombre(usuario);
+            int idusuario = usuer.Id;
+
+            Factura factura = new Factura();
+            factura.NumeroFactura = 456789;
+            factura.Fecha = fechahoy;
+            factura.Total = total;
+            factura.UsuarioId = idusuario;
+            factura.TerceroId = cliente;
+            _facturaAppService.Agregar(factura);
 
 
-            return View();
+            ViewBag.Productos = (List<Item>)Session["cart"];
+            foreach (var item in ViewBag.Productos)
+            {
+                var cantidad = item.Cantidad;
+                var subtotal = item.SubTotal;
+                var producto = item.producto.Id;
+
+                Factura ultima = new Factura();
+                ultima = _facturaAppService.UltimaFactura();
+                var id = ultima.Id;
+                DetalleFactura detalle = new DetalleFactura();
+                detalle.Cantidad = cantidad;
+                detalle.SubTotal = Convert.ToDecimal(subtotal);
+                detalle.FacturaId = id;
+                detalle.ProductoId = producto;
+
+                _detallefacturaAppService.Agregar(detalle);
+                
+            }
+            
+
+
+            return View("Index");
         }
 
 

@@ -4,5 +4,6 @@ namespace ProyectoFinal.Aplicacion.Interface
 {
     public interface IFacturaAppService: IAppServiceBase<Factura>
     {
+        Factura UltimaFactura();
     }
 }

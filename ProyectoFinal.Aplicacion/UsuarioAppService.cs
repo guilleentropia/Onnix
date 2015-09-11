@@ -18,5 +18,11 @@ namespace ProyectoFinal.Aplicacion
         {
            return _usuarioService.BuscarUsuario(usuario, contraseña, empresaid);
         }
+
+
+        public Usuario BuscarIdUsuarioporNombre(string usuario)
+        {
+            return _usuarioService.BuscarIdUsuarioporNombre(usuario);
+        }
     }
 }
