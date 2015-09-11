@@ -13,5 +13,10 @@ namespace ProyectoFinal.Dominio.Servicios
         {
             _transaccionRepository = transaccionRepository;
         }
+
+        public Transaccion UltimaTransaccion()
+        {
+            return _transaccionRepository.UltimaTransaccion();
+        }
     }
 }

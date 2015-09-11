@@ -4,5 +4,6 @@ namespace ProyectoFinal.Dominio.Interfaces.Repositorios
 {
     public interface ITransaccionRepository: IRepositoryBase<Transaccion>
     {
+        Transaccion UltimaTransaccion();
     }
 }

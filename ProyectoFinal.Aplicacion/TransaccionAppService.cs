@@ -13,5 +13,10 @@ namespace ProyectoFinal.Aplicacion
         {
             _transaccionService = transaccionService;
         }
+
+        public Transaccion UltimaTransaccion()
+        {
+            return _transaccionService.UltimaTransaccion();
+        }
     }
 }

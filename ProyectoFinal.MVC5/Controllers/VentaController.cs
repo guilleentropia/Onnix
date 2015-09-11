@@ -16,15 +16,20 @@ namespace ProyectoFinal.MVC5.Controllers
         private readonly IUsuarioAppService _usuarioAppService;
         private readonly IFacturaAppService _facturaAppService;
         private readonly IDetalleFacturaAppService _detallefacturaAppService;
+        private readonly ITransaccionAppService _transaccionAppService;
+        private readonly IDetalleTransaccionAppService _detalletransaccionAppService;
 
         public VentaController(ITerceroAppService terceroAppService, IFormaPagoAppService formapagoAppService, IUsuarioAppService
-            usuarioAppService, IFacturaAppService facturaAppService, IDetalleFacturaAppService detallefacturaAppService)
+            usuarioAppService, IFacturaAppService facturaAppService, IDetalleFacturaAppService detallefacturaAppService,
+            ITransaccionAppService transaccionAppService, IDetalleTransaccionAppService detalletransaccionAppService)
         {
             _terceroAppService = terceroAppService;
             _formapagoAppService = formapagoAppService;
             _usuarioAppService = usuarioAppService;
             _facturaAppService = facturaAppService;
             _detallefacturaAppService = detallefacturaAppService;
+            _transaccionAppService = transaccionAppService;
+            _detalletransaccionAppService = detalletransaccionAppService;
         }
 
         // GET: Venta
@@ -45,11 +50,12 @@ namespace ProyectoFinal.MVC5.Controllers
             var fechahoy = Convert.ToDateTime(Request["fechahoy"].ToString());
             var total = Convert.ToDecimal(Request["total"].ToString());
             var cliente = Convert.ToInt32(Request["Clientes"].ToString());
-            var formapago = Request["FormaPago"].ToString();
+            var formapago = Convert.ToInt32(Request["FormaPago"].ToString());
 
             var usuer = _usuarioAppService.BuscarIdUsuarioporNombre(usuario);
             int idusuario = usuer.Id;
 
+            //Factura
             Factura factura = new Factura();
             factura.NumeroFactura = 456789;
             factura.Fecha = fechahoy;
@@ -58,6 +64,19 @@ namespace ProyectoFinal.MVC5.Controllers
             factura.TerceroId = cliente;
             _facturaAppService.Agregar(factura);
 
+            // Transaccion
+            Transaccion transaccion = new Transaccion();
+            transaccion.Fecha = fechahoy;
+            transaccion.Total = total;
+            transaccion.UsuarioId = idusuario;
+            transaccion.TerceroId = cliente;
+            Factura obtengo = new Factura();
+            obtengo= _facturaAppService.UltimaFactura();
+            transaccion.FacturaId = obtengo.Id;
+            transaccion.TipoTransaccionId = 2;
+            transaccion.FormaPagoId = formapago;
+            _transaccionAppService.Agregar(transaccion);
+
 
             ViewBag.Productos = (List<Item>)Session["cart"];
             foreach (var item in ViewBag.Productos)
@@ -65,7 +84,8 @@ namespace ProyectoFinal.MVC5.Controllers
                 var cantidad = item.Cantidad;
                 var subtotal = item.SubTotal;
                 var producto = item.producto.Id;
-
+                
+                //Detalle de Factura
                 Factura ultima = new Factura();
                 ultima = _facturaAppService.UltimaFactura();
                 var id = ultima.Id;
@@ -76,6 +96,18 @@ namespace ProyectoFinal.MVC5.Controllers
                 detalle.ProductoId = producto;
 
                 _detallefacturaAppService.Agregar(detalle);
+
+                //Detalle de Transaccion
+                Transaccion ultra = new Transaccion();
+                ultra = _transaccionAppService.UltimaTransaccion();
+                var idultra = ultra.Id;
+                DetalleTransaccion detalletran = new DetalleTransaccion();
+                detalletran.Cantidad = cantidad;
+                detalletran.SubTotal = Convert.ToDecimal(subtotal);
+                detalletran.TransaccionId = idultra;
+                detalletran.ProductoId = producto;
+
+                _detalletransaccionAppService.Agregar(detalletran);
                 
             }
             
