@@ -39,28 +39,31 @@
     @using (Html.BeginForm("Busqueda", "Producto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {<h2 style="text-align:center; font-family:Arial Black, Gadget, sans-serif">Listado de Productos</h2>
    
-        <div id="busque" style=" color:white; position: relative;float:left; width:250px; height: 400px; background-image: url(../../Images/fondobusqueda.jpg)">
+        <div id="busque" style=" color:white; position: relative;float:left; width:270px; height: 400px; background-image: url(../../Images/fondobusqueda.jpg)">
             <br />
             <br />
-            
+            @Html.Label("Codigo", null, new { style = "margin-left:10px; " })
+            @Html.TextBox("codigo", null, new { style = "width: 155px; height:25px; margin-left:35px;" })
+            <br />
+            <br />
             @Html.Label("Producto", null, new { style = "margin-left:10px;" })
-            @Html.TextBox("descripcion", null,new { style = "width: 155px;" })
+            @Html.TextBox("descripcion", null, new { style = "width: 155px;height:25px; margin-left:20px;" })
             <br />
             <br />
             @Html.Label("Talle", null, new { style = "margin-left:10px;" })
-            @Html.TextBox("talle", null, new { style = "width: 155px; margin-left:30px;" })
+            @Html.TextBox("talle", null, new { style = "width: 155px; height:25px; margin-left:50px;" })
             <br />
             <br />
             @Html.Label("Categoria", null, new { style = "margin-left:10px;" })
-            @Html.DropDownList("CategoriaId", (IEnumerable<SelectListItem>)ViewBag.CategoriaId, string.Empty, new { style = "width: 150px;" })
+            @Html.DropDownList("CategoriaId", (IEnumerable<SelectListItem>)ViewBag.CategoriaId, string.Empty, new { style = "width: 155px; height:25px;margin-left:15px;" })
             <br />
             <br />
             @Html.Label("Proveedor", null, new { style = "margin-left:10px;" })
-            @Html.DropDownList("TerceroId", (IEnumerable<SelectListItem>)ViewBag.TerceroId, string.Empty, new { style = "width: 140px;" })
+            @Html.DropDownList("TerceroId", (IEnumerable<SelectListItem>)ViewBag.TerceroId, string.Empty, new { style = "width: 152px; height:25px;margin-left:10px;" })
             <br />
             <br />
             @Html.Label("Marca", null, new { style = "margin-left:10px;" })
-            @Html.DropDownList("MarcaId", (IEnumerable<SelectListItem>)ViewBag.MarcaId, string.Empty,new { style = "width: 150px; margin-left:20px;" })
+            @Html.DropDownList("MarcaId", (IEnumerable<SelectListItem>)ViewBag.MarcaId, string.Empty, new { style = "width: 152px; height:25px; margin-left:40px;" })
 
             <br />
             <br />
@@ -77,7 +80,7 @@
 
     
 
-    <div id="tabla" style="position:relative; float:right; top:-20px; width:880px; height: 500px; ">
+    <div id="tabla" style="position:relative; float:right; top:-20px; width:860px; height: 500px; ">
         
 
         <table id="table" style="width:880px">

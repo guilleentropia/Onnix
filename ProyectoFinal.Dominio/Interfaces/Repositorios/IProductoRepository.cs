@@ -17,6 +17,8 @@ namespace ProyectoFinal.Dominio.Interfaces.Repositorios
 
         IEnumerable<Producto> BuscarProductoporMarca(int ? marca);
 
+        IEnumerable<Producto> BuscarProductoporCodigo(int? codigo);
+
         IEnumerable<Producto> BuscarProductoporTallesinCategoria(string talle, int ? terceroid , int ? marcaid);
 
         IEnumerable<Producto> BuscarProductoporTallesinProveedor(string talle, int? categoriaid, int? marcaid);

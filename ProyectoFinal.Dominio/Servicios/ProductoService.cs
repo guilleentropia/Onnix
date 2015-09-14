@@ -113,5 +113,11 @@ namespace ProyectoFinal.Dominio.Servicios
         {
             return _productoRepository.BuscarProductoporTalleyMarca(talle, marcaid);
         }
+
+
+        public System.Collections.Generic.IEnumerable<Producto> BuscarProductoporCodigo(int? codigo)
+        {
+            return _productoRepository.BuscarProductoporCodigo(codigo);
+        }
     }
 }

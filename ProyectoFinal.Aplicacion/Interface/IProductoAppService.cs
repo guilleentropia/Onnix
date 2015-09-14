@@ -19,6 +19,8 @@ namespace ProyectoFinal.Aplicacion.Interface
 
        IEnumerable<Producto> BuscarProductoporMarca(int ? marca);
 
+       IEnumerable<Producto> BuscarProductoporCodigo(int? codigo);
+
        IEnumerable<Producto> BuscarProductoporCategoria(int ? categoria);
 
        IEnumerable<Producto> BuscarProductoporProveedor(int ? proveedor);

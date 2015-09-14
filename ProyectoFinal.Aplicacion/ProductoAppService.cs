@@ -114,5 +114,11 @@ namespace ProyectoFinal.Aplicacion
         {
             return _productoService.BuscarProductoporTalleyMarca(talle, marcaid);
         }
+
+
+        public System.Collections.Generic.IEnumerable<Producto> BuscarProductoporCodigo(int? codigo)
+        {
+            return _productoService.BuscarProductoporCodigo(codigo);
+        }
     }
 }

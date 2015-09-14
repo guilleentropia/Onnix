@@ -322,9 +322,6 @@ namespace ProyectoFinal.MVC5.Controllers
         public ActionResult Lista(string marca, string descripcion)
         {
 
-
-          
-
             return View();
 
     }
@@ -343,15 +340,19 @@ namespace ProyectoFinal.MVC5.Controllers
 
 
         [HttpPost]
-        public ActionResult Busqueda([DataSourceRequest]DataSourceRequest request,string talle , string descripcion, int ? terceroid, int ? categoriaid, int ? marcaid, int ? page)
+        public ActionResult Busqueda([DataSourceRequest]DataSourceRequest request,int ?codigo,string talle , string descripcion, int ? terceroid, int ? categoriaid, int ? marcaid, int ? page)
         {
             ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion");
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
             ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
             
             try {
-                if (descripcion == "")
-                {
+
+                if (codigo == null) 
+                { 
+
+                    if (descripcion == "")
+                    {
 
                     if (talle == "")
                     {
@@ -498,17 +499,20 @@ namespace ProyectoFinal.MVC5.Controllers
 
                 else
                 {
-
-
+                    
                     ViewBag.Productos= Mapper.Map<IEnumerable<Producto>,
                   IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid)).ToPagedList(page ?? 1, 2);
                     
-
-                   
-
                     return View();
                 }
-            
+             }
+                else
+                {
+                    ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                     IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductoporCodigo(codigo)).ToPagedList(page ?? 1, 2);
+
+                    return View();
+                }   
             }
 
             catch (Exception ex)

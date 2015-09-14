@@ -149,5 +149,13 @@ namespace ProyectoFinal.Infraestructura.Datos.Repositorios
             var b = a.Where(x => x.Talle == talle && x.MarcaId == marcaid);
             return b;
         }
+
+
+        public IEnumerable<Producto> BuscarProductoporCodigo(int? codigo)
+        {
+            var a = Context.Set<Producto>().ToList();
+            var b = a.Where(x => x.Codigo == codigo);
+            return b;
+        }
     }
 }
