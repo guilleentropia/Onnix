@@ -560,7 +560,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\background.png" />
     <Content Include="Images\carrito.png" />
+    <Content Include="Images\fondobusqueda.jpg" />
     <Content Include="Images\key.png" />
+    <Content Include="Images\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\kendo\2015.2.805\fonts\DejaVu\DejaVuSans-Bold.ttf" />

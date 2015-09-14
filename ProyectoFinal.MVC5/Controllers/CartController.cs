@@ -64,7 +64,7 @@ namespace ProyectoFinal.MVC5.Controllers
             }
 
             ViewBag.Lista = (List<Item>)Session["cart"];
-            return View("Lista");
+            return RedirectToAction("Busqueda", "Producto");
         }
 
 

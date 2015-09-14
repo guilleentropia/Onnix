@@ -21,6 +21,13 @@ namespace ProyectoFinal.MVC5.ViewModels
         public string Descripcion { get; set; }
 
 
+        [Required(ErrorMessage = "El campo Talle es obligatorio")]
+        [MaxLength(50, ErrorMessage = "Ha alcanzado el maximo de caracteres para el Talle")]
+        [MinLength(2, ErrorMessage = "Debe ingresar un valor valido, minimo 2 caracteres..."),
+        Display(Name = "Talle")]
+        public string Talle { get; set; }
+
+
         [Required(ErrorMessage = "El campo Precio de Compra es obligatorio")]
         [Display(Name = "Precio de Compra")]
         public double PrecioCompra { get; set; }

@@ -60,9 +60,10 @@
       .Columns(columns =>
       {
           columns.Bound(p => p.Codigo).Title("Codigo").HtmlAttributes(new { style = "width:10px" });
-          columns.Bound(p => p.Descripcion).Title("Producto");
+          columns.Bound(p => p.Descripcion).Title("Producto").HtmlAttributes(new { style = "width:10px" });
           columns.Bound(p => p.PrecioCompra).Title("Precio Compra").HtmlAttributes(new { style = "width:10px" });
           columns.Bound(p => p.PrecioVenta).Title("Precio Venta").HtmlAttributes(new { style = "width:10px" });
+          columns.Bound(p => p.Talle).Title("Talle").HtmlAttributes(new { style = "width:10px" });
           columns.Bound(p => p.Stock);
           
           columns.Bound(c => c.Imagen).Template(@<text>

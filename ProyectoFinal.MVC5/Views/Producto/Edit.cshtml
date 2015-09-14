@@ -94,6 +94,16 @@
             </div>
         </div>
 
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Talle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Talle, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.Talle)
+            </div>
+        </div>
+
+
         <div class="form-group">
             @Html.LabelFor(model => model.Stock, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

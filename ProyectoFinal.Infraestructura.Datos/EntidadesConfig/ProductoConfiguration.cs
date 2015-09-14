@@ -24,6 +24,10 @@ namespace ProyectoFinal.Infraestructura.Datos.EntidadesConfig
             Property(c => c.PrecioVenta)
                 .IsRequired();
 
+            Property(c => c.Talle)
+                .IsRequired()
+                .HasMaxLength(50);
+
             Property(c => c.Stock)
                 .IsRequired();
 

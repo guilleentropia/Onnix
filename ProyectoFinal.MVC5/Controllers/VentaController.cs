@@ -49,7 +49,8 @@ namespace ProyectoFinal.MVC5.Controllers
         [HttpPost]
         public ActionResult Venta()
         {
-            string usuario =  Request["nombreuser"].ToString();
+            try { 
+                string usuario = Request["nombreuser"].ToString();
             var fechahoy = Convert.ToDateTime(Request["fechahoy"].ToString());
             var total = Convert.ToDecimal(Request["total"].ToString());
             var cliente = Convert.ToInt32(Request["Clientes"].ToString());
@@ -119,9 +120,14 @@ namespace ProyectoFinal.MVC5.Controllers
                 
             }
             
+         }
+         catch (Exception ex)
+         {
+             return View(ex.Message);  
+         }
 
-
-            return View("Index");
+            Session["cart"] = null;
+            return RedirectToAction("Busqueda", "Producto");
         }
 
 

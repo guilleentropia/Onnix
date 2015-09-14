@@ -9,6 +9,7 @@
         public string Descripcion { get; set; }
         public double PrecioCompra { get; set; }
         public double PrecioVenta { get; set; }
+        public string Talle { get; set; }
         public int Stock { get; set; }
         public byte[] Imagen { get; set; }
              

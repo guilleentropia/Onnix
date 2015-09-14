@@ -16,6 +16,7 @@
         
         <th>Codigo</th>
         <th>Nombre</th>
+        <th> Talle </th>
         <th>Precio</th>
         <th> Imagen</th>
     </tr>
@@ -28,6 +29,7 @@
             <td hidden>@p.Id</td>
             <td>@p.Codigo</td>
             <td>@p.Descripcion</td>
+            <td>@p.Talle</td>
             <td>@p.PrecioVenta</td>
             <td><img src="@Url.Action("getImg", "Producto", new {id = @p.Id })" alt="Person Image" width="80" height="80" /></td>
 
