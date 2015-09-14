@@ -39,7 +39,7 @@
     @using (Html.BeginForm("Busqueda", "Producto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {<h2 style="text-align:center; font-family:Arial Black, Gadget, sans-serif">Listado de Productos</h2>
    
-        <div id="busque" style=" color:white; position: relative;float:left; width:250px; height: 300px; background-image: url(../../Images/fondobusqueda.jpg)">
+        <div id="busque" style=" color:white; position: relative;float:left; width:250px; height: 400px; background-image: url(../../Images/fondobusqueda.jpg)">
             <br />
             <br />
             
@@ -47,16 +47,20 @@
             @Html.TextBox("descripcion", null,new { style = "width: 155px;" })
             <br />
             <br />
+            @Html.Label("Talle", null, new { style = "margin-left:10px;" })
+            @Html.TextBox("talle", null, new { style = "width: 155px; margin-left:30px;" })
+            <br />
+            <br />
             @Html.Label("Categoria", null, new { style = "margin-left:10px;" })
-            @Html.DropDownList("CategoriaId", (IEnumerable<SelectListItem>)ViewBag.CategoriaId, new { style = "width: 150px;" })
+            @Html.DropDownList("CategoriaId", (IEnumerable<SelectListItem>)ViewBag.CategoriaId, string.Empty, new { style = "width: 150px;" })
             <br />
             <br />
             @Html.Label("Proveedor", null, new { style = "margin-left:10px;" })
-            @Html.DropDownList("TerceroId", (IEnumerable<SelectListItem>)ViewBag.TerceroId, new { style = "width: 140px;" })
+            @Html.DropDownList("TerceroId", (IEnumerable<SelectListItem>)ViewBag.TerceroId, string.Empty, new { style = "width: 140px;" })
             <br />
             <br />
             @Html.Label("Marca", null, new { style = "margin-left:10px;" })
-            @Html.DropDownList("MarcaId", (IEnumerable<SelectListItem>)ViewBag.MarcaId, new { style = "width: 150px; margin-left:20px;" })
+            @Html.DropDownList("MarcaId", (IEnumerable<SelectListItem>)ViewBag.MarcaId, string.Empty,new { style = "width: 150px; margin-left:20px;" })
 
             <br />
             <br />
@@ -89,7 +93,11 @@
                 <th> Imagen</th>
 
             </tr>
-            @foreach (var p in ViewBag.Productos)
+
+            @if (ViewBag.Productos != null) 
+            {
+           
+                foreach (var p in ViewBag.Productos)
             {
                 <tr>
                     <td><input type='button' id='chk1' value="Agregar" /></td>
@@ -103,8 +111,15 @@
                     <td><img src="@Url.Action("getImg", "Producto", new {id = @p.Id })" alt="Person Image" width="80" height="80"  /></td>
                 </tr>
             }
+            }
             
         </table>
+        @if (ViewBag.Productos == null)
+        {
+            <script type="text/javascript">
+                alert('No hay productos para mostrar');
+            </script>
+        }
     </div>
 </div>
 
@@ -243,6 +258,9 @@
 
 </script>
 
+@if (ViewBag.Productos != null) { 
 <div  style="position:absolute; right:500px; bottom:0px;">
     @Html.PagedListPager((IPagedList)ViewBag.Productos, page => Url.Action("Busqueda", new { page }))
 </div>
+    
+}

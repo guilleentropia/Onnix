@@ -41,10 +41,13 @@
     }}
 
 </table>
+<br />
+<br />
 
-@Html.ActionLink("Regresar", "Busqueda", "Producto", null, new { @class = "boton" }) 
-@Html.ActionLink("Realizar Venta", "Index", "Venta",null , new { @class = "boton" }) 
-
+<div style="position:absolute;right:600px">
+    @Html.ActionLink("Regresar", "Busqueda", "Producto", null, new { @class = "boton" })
+    @Html.ActionLink("Realizar Venta", "Index", "Venta", null, new { @class = "boton" })
+</div>
 
 
 <script type="text/javascript">

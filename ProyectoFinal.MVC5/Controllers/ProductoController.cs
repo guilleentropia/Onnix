@@ -343,7 +343,7 @@ namespace ProyectoFinal.MVC5.Controllers
 
 
         [HttpPost]
-        public ActionResult Busqueda([DataSourceRequest]DataSourceRequest request, string descripcion, int terceroid, int categoriaid, int marcaid, int ? page)
+        public ActionResult Busqueda([DataSourceRequest]DataSourceRequest request,string talle , string descripcion, int ? terceroid, int ? categoriaid, int ? marcaid, int ? page)
         {
             ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion");
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
@@ -353,14 +353,147 @@ namespace ProyectoFinal.MVC5.Controllers
                 if (descripcion == "")
                 {
 
+                    if (talle == "")
+                    {
+                        //NINGUN DROPDOWN VACIO
+                        if (terceroid != null && categoriaid != null && marcaid != null) 
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                            IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid)).ToPagedList(page ?? 1, 2);
 
-               /*     var prodViewModel = Mapper.Map<IEnumerable<Producto>,
-                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid));*/
+                            return View();
+                        }
+                        //DROPDOWN DE MARCA VACIO
+                        if(terceroid !=null && categoriaid!=null && marcaid==null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                            IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductosinMarca(terceroid, categoriaid)).ToPagedList(page ?? 1, 2);
 
-                    ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
-                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid)).ToPagedList(page ?? 1, 2);
+                            return View();
+                        }
+                        //DROPDOWN DE CATEGORIA VACIO
+                        if (terceroid != null && categoriaid == null && marcaid != null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                            IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductosinCategoria(terceroid, marcaid)).ToPagedList(page ?? 1, 2);
 
-                    return View();
+                            return View();
+                        }
+                        //DROPDOWN DE PROVEEDOR VACIO
+                        if (terceroid == null && categoriaid != null && marcaid != null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                            IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductosinProveedor(categoriaid, marcaid)).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+                        //DROPDOWNS DE PROVEEDOR Y CATEGORIA VACIOS
+                        if (terceroid == null && categoriaid == null && marcaid != null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                            IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductoporMarca(marcaid)).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+
+                        //DROPDOWNS DE PROVEEDOR Y MARCA  VACIOS
+                        if (terceroid == null && categoriaid != null && marcaid == null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                            IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductoporCategoria(categoriaid)).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+
+                        //DROPDOWNS DE CATEGORIA Y MARCA  VACIOS
+                        if (terceroid != null && categoriaid == null && marcaid == null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                            IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductoporProveedor(terceroid)).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+
+                        else  
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                           IEnumerable<ProductoViewModel>>(_productoAppService.ObtenerTodo()).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+                        
+                    }
+                    
+                    else
+                    {
+
+                        if  (categoriaid == null && terceroid == null && marcaid == null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                             IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(talle)).ToPagedList(page ?? 1, 2);
+                            return View();
+                        }
+                        
+                        // buscar por talla y marca
+                        if (categoriaid == null && terceroid == null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                           IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductoporTalleyMarca(talle,marcaid)).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+
+                        // buscar por talla y proveedor
+                        if (categoriaid == null && marcaid == null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                           IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductoporTalleyProveedor(talle,terceroid)).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+
+                        // buscar por talla y categoria
+                        if (terceroid == null && marcaid == null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                           IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductoporTalleyCategoria(talle, categoriaid)).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+
+                        if (categoriaid == null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                            IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductoporTallesinCategoria(talle, terceroid, marcaid)).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+
+                        if (terceroid == null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                            IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductoporTallesinProveedor(talle, categoriaid, marcaid)).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+
+                        if (marcaid == null)
+                        {
+                            ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
+                            IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProductoporTallesinMarca(talle, categoriaid, terceroid)).ToPagedList(page ?? 1, 2);
+
+                            return View();
+                        }
+
+                        else
+                        {
+                            return View();
+                        }
+                        
+                        
+                    }
+
+                    
                 }
 
                 else
@@ -369,8 +502,7 @@ namespace ProyectoFinal.MVC5.Controllers
 
                     ViewBag.Productos= Mapper.Map<IEnumerable<Producto>,
                   IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid)).ToPagedList(page ?? 1, 2);
-                    /*var prodViewModel = Mapper.Map<IEnumerable<Producto>,
-                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid));*/
+                    
 
                    
 
