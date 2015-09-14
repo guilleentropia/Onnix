@@ -1,7 +1,10 @@
 ﻿<link rel="stylesheet" type="text/css" href="~/Content/TableStyle.css">
 @using ProyectoFinal.MVC5.ViewModels
+@using PagedList;
+@using PagedList.Mvc;
 
-@model IEnumerable<ProyectoFinal.MVC5.ViewModels.ProductoViewModel>
+
+@model IPagedList<IEnumerable<ProyectoFinal.MVC5.ViewModels.ProductoViewModel>>
            
 
 @{
@@ -22,12 +25,19 @@
 
 </head>
 
-<h3 style="text-align:center; background-color:#85a1b1; color:white; opacity:0.5">Seleccione Productos</h3>
-@Html.ActionLink("Carrito", "Carrito", "Cart", null,new { @class = "carrito" })
+<h3 style="text-align:center; background-color:#3684ac; color:white; opacity:0.5; font-family: Lucida Console, Monaco, monospace; ">Seleccione Productos</h3>
+<div style="position: absolute;
+    right: 150px; text-align:left; ">
+    
+    @Html.ActionLink("Compra", "Carrito", "Cart", null, new { @class = "carrito", style = "text-align: center;" })
+</div>
+
+
+
 
 <div id="form-busqueda" style="top:0px; left:0px;  height:320px; ">
     @using (Html.BeginForm("Busqueda", "Producto", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {<h2 style="text-align:center">Listado de Productos</h2>
+    {<h2 style="text-align:center; font-family:Arial Black, Gadget, sans-serif">Listado de Productos</h2>
    
         <div id="busque" style=" color:white; position: relative;float:left; width:250px; height: 300px; background-image: url(../../Images/fondobusqueda.jpg)">
             <br />
@@ -63,7 +73,7 @@
 
     
 
-    <div id="tabla" style="position:relative; float:right; top:0px; width:880px; height: 500px; ">
+    <div id="tabla" style="position:relative; float:right; top:-20px; width:880px; height: 500px; ">
         
 
         <table id="table" style="width:880px">
@@ -90,10 +100,10 @@
                     <td>@p.PrecioVenta</td>
                     <td>@p.Talle</td>
                     <td>@p.Stock</td>
-                    <td><img src="@Url.Action("getImg", "Producto", new {id = @p.Id })" alt="Person Image" width="80" height="80" /></td>
+                    <td><img src="@Url.Action("getImg", "Producto", new {id = @p.Id })" alt="Person Image" width="80" height="80"  /></td>
                 </tr>
             }
-
+            
         </table>
     </div>
 </div>
@@ -232,3 +242,7 @@
 
 
 </script>
+
+<div  style="position:absolute; right:500px; bottom:0px;">
+    @Html.PagedListPager((IPagedList)ViewBag.Productos, page => Url.Action("Busqueda", new { page }))
+</div>

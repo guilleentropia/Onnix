@@ -44,12 +44,11 @@ input[type="checkbox"].input-validation-error {
 }
 
 .carrito{
-    background: url(../Images/carrito.gif) no-repeat top left;
+    
+    background: url(../Images/carrito.jpg) no-repeat top left;
      display: block;
      width: 120px;
-     height: 30px;
-     text-indent: -9999px;
-     text-align:right;
+     height: 40px;
      
      color: black;
 }

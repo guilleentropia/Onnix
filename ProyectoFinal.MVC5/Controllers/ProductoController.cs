@@ -9,6 +9,8 @@ using ProyectoFinal.MVC5.ViewModels;
 using System;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using PagedList;
+using PagedList.Mvc;
 
 namespace ProyectoFinal.MVC5.Controllers
 {
@@ -276,12 +278,12 @@ namespace ProyectoFinal.MVC5.Controllers
 
 
 
-        public ActionResult Busqueda()
+        public ActionResult Busqueda(int ? page)
         {
             ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion","Seleccione un valor");
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
             ViewBag.MarcaId = new SelectList(_marcaAppService.ObtenerTodo(), "Id", "Descripcion");
-            ViewBag.Productos = _productoAppService.ObtenerTodo();
+            ViewBag.Productos = _productoAppService.ObtenerTodo().ToPagedList(page ?? 1, 2);
             ViewBag.Lista = "";
             
             
@@ -341,7 +343,7 @@ namespace ProyectoFinal.MVC5.Controllers
 
 
         [HttpPost]
-        public ActionResult Busqueda([DataSourceRequest]DataSourceRequest request, string descripcion, int terceroid, int categoriaid, int marcaid)
+        public ActionResult Busqueda([DataSourceRequest]DataSourceRequest request, string descripcion, int terceroid, int categoriaid, int marcaid, int ? page)
         {
             ViewBag.CategoriaId = new SelectList(_categoriaAppService.ObtenerTodo(), "Id", "Descripcion");
             ViewBag.TerceroId = new SelectList(_terceroAppService.ObtenerTodo(), "Id", "Apellido");
@@ -356,7 +358,7 @@ namespace ProyectoFinal.MVC5.Controllers
                   IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid));*/
 
                     ViewBag.Productos = Mapper.Map<IEnumerable<Producto>,
-                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid));
+                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(terceroid, categoriaid, marcaid)).ToPagedList(page ?? 1, 2);
 
                     return View();
                 }
@@ -366,7 +368,7 @@ namespace ProyectoFinal.MVC5.Controllers
 
 
                     ViewBag.Productos= Mapper.Map<IEnumerable<Producto>,
-                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid));
+                  IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid)).ToPagedList(page ?? 1, 2);
                     /*var prodViewModel = Mapper.Map<IEnumerable<Producto>,
                   IEnumerable<ProductoViewModel>>(_productoAppService.BuscarProducto(descripcion, terceroid, categoriaid, marcaid));*/
 
