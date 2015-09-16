@@ -39,9 +39,9 @@
     {
         Response.Redirect("~/Account/Login");
     }
-    
-    
-    
+
+
+
     ViewBag.Title = "Index";
 }
 
@@ -49,7 +49,7 @@
 
 <p>
     @Html.ActionLink("Agregar Producto", "Create", null, new { @class = "k-button" })
-      
+
 
 
 </p>
@@ -59,50 +59,56 @@
       .Name("Grid")
       .Columns(columns =>
       {
-          columns.Bound(p => p.Codigo).Title("Codigo").HtmlAttributes(new { style = "width:1px  ;font-size:12px;" });
-          columns.Bound(p => p.Descripcion).Title("Producto").HtmlAttributes(new { style = "width:10px ;font-size:12px;" });
-          columns.Bound(p => p.PrecioCompra).Title("Compra").HtmlAttributes(new { style = "width:1px ;font-size:12px;" });
-          columns.Bound(p => p.PrecioVenta).Title("Venta").HtmlAttributes(new { style = "width:1px ;font-size:12px;" });
-          columns.Bound(p => p.Talle).Title("Talle").HtmlAttributes(new { style = "width:1px ;font-size:12px;" });
-          columns.Bound(p => p.Stock);
+          columns.Bound(p => p.Codigo).Title("Codigo").HtmlAttributes(new { style = "font-size:12px;" });
+          columns.Bound(p => p.Descripcion).Title("Producto").HtmlAttributes(new { style = "font-size:12px;" });
           
+          columns.Bound(p => p.PrecioVenta).Title("Venta").HtmlAttributes(new { style = "font-size:12px;" });
+          columns.Bound(p => p.Talle).Title("Talle").HtmlAttributes(new { style = "font-size:12px;" });
+          columns.Bound(p => p.Stock);
+
           columns.Bound(c => c.Imagen).Template(@<text>
-                                                       
-                                                        <img src="@Url.Action("getImg", "Producto", new {id = @item.Id })" alt="Person Image" width="80" height="80"/>
-                                                   
-                                                 </text>).Filterable(false).Sortable(false);
-          columns.Bound(p => p.CategoriaProducto.Descripcion).Title("Categoria").HtmlAttributes(new { style = "width:1px ;font-size:12px;" });
-          columns.Bound(p => p.MarcaProducto.Descripcion).Title("Marca").HtmlAttributes(new { style = "width:1px ;font-size:12px;" });
-          columns.Bound(p => p.TerceroProducto.NombreCompleto).Title("Proveedor").HtmlAttributes(new { style = "width:1px ;font-size:12px;" });
+
+            <img src="@Url.Action("getImg", "Producto", new {id = @item.Id })" alt="Person Image" width="60" height="60" />
+
+        </text>).Filterable(false).Sortable(false);
+          columns.Bound(p => p.CategoriaProducto.Descripcion).Title("Categoria").HtmlAttributes(new { style = "font-size:12px;" });
+          columns.Bound(p => p.MarcaProducto.Descripcion).Title("Marca").HtmlAttributes(new { style = "font-size:12px;" });
+          columns.Bound(p => p.TerceroProducto.NombreCompleto).Title("Proveedor").HtmlAttributes(new { style = "font-size:12px;" });
 
           columns.Template(@<text>
-            @Html.ActionLink("Modificar", "Edit", new { id = @item.Id }, new { @class = "k-button", style= "font-size:10px;" })
+            @Html.ActionLink(" ", "Edit", new { id = @item.Id }, new { style = "background: url('" + Url.Content("~/Images/note48.png") + "')no-repeat center right; display: inline-block; height: 18px;width:18px;" })
             ||
-            @Html.ActionLink("Detalles", "Details", new { id = @item.Id }, new { @class = "k-button", style = "font-size:10px;" })
+            @Html.ActionLink(" ", "Details", new { id = @item.Id }, new { style = "background: url('" + Url.Content("~/Images/details.png") + "')no-repeat center right; display:inline-block;  height: 18px; width:18px;" })
             ||
-            @Html.ActionLink("Eliminar", "Delete", new { id = @item.Id }, new { @class = "k-button", style = "font-size:10px;" })
-        </text>).Title("Acciones");
+            @Html.ActionLink(" ", "Delete", new { id = @item.Id }, new { style = "background: url('" + Url.Content("~/Images/delete.png") + "')no-repeat center right; display:inline-block;  height: 18px;width:18px;" })
+        </text>).Title("Acciones" );
       })
-      .Pageable()
-      .Sortable()
-      .DataSource(p=> p.Server().PageSize(4))
-      .Filterable(f=> 
-              f.Operators(o=> o.ForString(s => s
-        .Clear()
-        .IsEqualTo("Es igual a")
-        .Contains("Contiene")
-        .StartsWith("Comienza con")
-        )
-        .ForNumber(s=>s
-        .Clear()
-        .IsEqualTo("Es igual a"))).Messages(a=>
-            a.And("Y")
-            .Cancel("Cancelar")
-            .Or("O")
-            .Clear("Limpiar")
-            .Filter("Filtrar")
-            .Info("Seleccione los valores a Filtrar")
-            )))
+                                      .Pageable()
+                                      .Sortable()
+                                      .Scrollable()
+                                                      .Resizable(r => r.Columns(true))
+                    
+                    .ColumnResizeHandleWidth(10)
+                                    .HtmlAttributes(new { style = "height: 450px; " })
+                                                      
+                                      .DataSource(p => p.Server().PageSize(4))
+                                      .Filterable(f =>
+                                              f.Operators(o => o.ForString(s => s
+                                        .Clear()
+                                        .IsEqualTo("Es igual a")
+                                        .Contains("Contiene")
+                                        .StartsWith("Comienza con")
+                                        )
+                                        .ForNumber(s => s
+                                        .Clear()
+                                        .IsEqualTo("Es igual a"))).Messages(a =>
+                                            a.And("Y")
+                                            .Cancel("Cancelar")
+                                            .Or("O")
+                                            .Clear("Limpiar")
+                                            .Filter("Filtrar")
+                                            .Info("Seleccione los valores a Filtrar")
+                                            )))
 
 
 

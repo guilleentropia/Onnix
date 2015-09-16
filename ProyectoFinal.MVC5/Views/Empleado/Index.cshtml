@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProyectoFinal.MVC5.ViewModels.EmpleadoViewModel>
 
 @{
-    
+
     if (Session["UserId"] == "sanjuan")
     {
 
@@ -40,9 +40,9 @@
     {
         Response.Redirect("~/Account/Login");
     }
-    
-    
-    
+
+
+
     ViewBag.Title = "Index";
 }
 
@@ -66,15 +66,19 @@
           columns.Bound(p => p.EmpresaEmpleado.Descripcion).Title("Empresa");
 
           columns.Template(@<text>
-            @Html.ActionLink("Modificar", "Edit", new { id = @item.Id }, new { @class = "k-button" })
+            @Html.ActionLink(" ", "Edit", new { id = @item.Id }, new { style = "background: url('" + Url.Content("~/Images/note48.png") + "')no-repeat center right; display: inline-block; height: 18px;width:18px;" })
             ||
-            @Html.ActionLink("Detalles", "Details", new { id = @item.Id }, new { @class = "k-button" })
+            @Html.ActionLink(" ", "Details", new { id = @item.Id }, new { style = "background: url('" + Url.Content("~/Images/details.png") + "')no-repeat center right; display:inline-block;  height: 18px; width:18px;" })
             ||
-            @Html.ActionLink("Eliminar", "Delete", new { id = @item.Id }, new { @class = "k-button" })
+            @Html.ActionLink(" ", "Delete", new { id = @item.Id }, new { style = "background: url('" + Url.Content("~/Images/delete.png") + "')no-repeat center right; display:inline-block;  height: 18px;width:18px;" })
         </text>).Title("Acciones");
       })
       .Pageable()
       .Sortable()
+      .Scrollable()
+                      .Resizable(r => r.Columns(true))
+                    
+                    .ColumnResizeHandleWidth(10)
 
 )
 

@@ -52,27 +52,31 @@
 </p>
 
 
-@(Html.Kendo().Grid(Model) 
+@(Html.Kendo().Grid(Model)
       .Name("Grid")
       .Columns(columns =>
       {
-          columns.Bound(p => p.Fecha).Width(50); 
-          columns.Bound(p => p.NumeroFactura); 
-          columns.Bound(p => p.TerceroFactura.NombreCompleto).Title("Tercero"); 
-          columns.Bound(p => p.UsuarioFactura.NombreUsuario).Title("Usuario"); 
+          columns.Bound(p => p.Fecha).Width(50);
+          columns.Bound(p => p.NumeroFactura);
+          columns.Bound(p => p.TerceroFactura.NombreCompleto).Title("Tercero");
+          columns.Bound(p => p.UsuarioFactura.NombreUsuario).Title("Usuario");
           columns.Bound(p => p.Total);
 
           columns.Template(@<text>
-                                                   @Html.ActionLink("Modificar", "Edit", new { id = @item.Id }, new { @class = "k-button" })
-                                                   ||
-                                                   @Html.ActionLink("Detalles", "Details", new { id = @item.Id }, new { @class = "k-button" })
-                                                   ||
-                                                   @Html.ActionLink("Eliminar", "Delete", new { id = @item.Id }, new { @class = "k-button" })
-                                                </text>).Title("Acciones");
+            @Html.ActionLink(" ", "Edit", new { id = @item.Id }, new { style = "background: url('" + Url.Content("~/Images/note48.png") + "')no-repeat center right; display: inline-block; height: 18px;width:18px;" })
+            ||
+            @Html.ActionLink(" ", "Details", new { id = @item.Id }, new { style = "background: url('" + Url.Content("~/Images/details.png") + "')no-repeat center right; display:inline-block;  height: 18px; width:18px;" })
+            ||
+            @Html.ActionLink(" ", "Delete", new { id = @item.Id }, new { style = "background: url('" + Url.Content("~/Images/delete.png") + "')no-repeat center right; display:inline-block;  height: 18px;width:18px;" })
+        </text>).Title("Acciones");
       })
       .Pageable()
       .Sortable()
-      
+      .Scrollable()
+                      .Resizable(r => r.Columns(true))
+
+                    .ColumnResizeHandleWidth(10)
+
 )
 
 
