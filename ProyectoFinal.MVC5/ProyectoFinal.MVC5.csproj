@@ -596,6 +596,8 @@
     <Content Include="Images\fondobusqueda.jpg" />
     <Content Include="Images\key.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\man180.png" />
+    <Content Include="Images\marker20.png" />
     <Content Include="Images\note48.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

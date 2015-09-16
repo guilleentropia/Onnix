@@ -45,7 +45,7 @@ input[type="checkbox"].input-validation-error {
 
 .carrito{
     
-    background: url(../Images/carrito.jpg) no-repeat top left;
+    background: url(../Images/marker20.png) no-repeat top left;
      display: block;
      width: 120px;
      height: 40px;
@@ -81,3 +81,6 @@ input[type="checkbox"].input-validation-error {
   text-decoration: none;
 }
 
+.submenu:hover{
+   display:block;
+}
