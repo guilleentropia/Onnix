@@ -78,5 +78,14 @@ namespace ProyectoFinal.MVC5.Controllers
         }
 
 
+        public ActionResult ReportViewer()
+        {
+
+
+            return View("Report");
+        }
+
+
+
     }
 }

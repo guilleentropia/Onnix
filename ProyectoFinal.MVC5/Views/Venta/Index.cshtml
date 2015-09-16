@@ -10,32 +10,31 @@
     var Fecha = dia + "/" + mes + "/" + anio + " " + hora + ":" + minutos;
     var usuario = Session["User"];
     var suma = 0.0;
-    
-    
 
-        }
 
-        <!DOCTYPE HTML>
 
-        <html>
-        <head>
-            <meta name="viewport" content="width=device-width" />
-            <title>Index</title>
-        </head>
-        <body>
+}
 
-            <fieldset>
-                @using (Ajax.BeginForm("Venta", "Venta",
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <fieldset>
+        @using (Ajax.BeginForm("Venta", "Venta",
                             new AjaxOptions { UpdateTargetId = "divInterestDeatils" }))
-                
-                {
-                    <div id="divInterestDeatils"></div>
-                <br />
-                <br />
-                <div class="form-group">
-                    @Html.Label("Clientes", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" ,id="cli"})
-                    <div class="col-md-10">
-                        @(Html.Kendo().DropDownList()
+        {
+            <div id="divInterestDeatils"></div>
+            <br />
+            <br />
+            <div class="form-group">
+                @Html.Label("Clientes", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px", id = "cli" })
+                <div class="col-md-10">
+                    @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { style = "width:400px" })
                 .Name("Clientes")
                 .DataTextField("NombreCompleto")
@@ -50,26 +49,26 @@
                   .ServerFiltering(true);
                 })
                  .SelectedIndex(0)
-                        )
-                        
+                    )
 
 
 
-                        @Html.Label("Usuario  : ")
-                        
-                        @Html.TextBox("nombreuser", usuario, new { disabled = "disabled" } )
 
-                        @Html.TextBox("fechahoy", Fecha, new { disabled="disabled",  style = "float:right" })
-                        @Html.Label("Fecha  : ", new { style = "float:right;" })
-                    </div>
+                    @Html.Label("Usuario  : ")
+
+                    @Html.TextBox("nombreuser", usuario, new { disabled = "disabled" })
+
+                    @Html.TextBox("fechahoy", Fecha, new { disabled = "disabled", style = "float:right" })
+                    @Html.Label("Fecha  : ", new { style = "float:right;" })
                 </div>
-                <br />
-                <br />
-                <div class="form-group">
-                    @Html.Label("Pago", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" })
+            </div>
+            <br />
+            <br />
+            <div class="form-group">
+                @Html.Label("Pago", htmlAttributes: new { @class = "control-label col-md-2", style = "width:80px" })
 
-                    <div class="col-md-10">
-                        @(Html.Kendo().DropDownList()
+                <div class="col-md-10">
+                    @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { style = "width:400px" })
                 .Name("FormaPago")
                 .DataTextField("Descripcion")
@@ -84,31 +83,31 @@
                   .ServerFiltering(true);
                 })
                  .SelectedIndex(0)
-                        )
-                    </div>
-
-
-
-
+                    )
                 </div>
-                <br />
-                <br />
-
-                <br />
-                <br />
-                <table id="tabla">
-                    <tr>
 
 
-                        <th>Codigo</th>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th> Cantidad</th>
-                        <th>Subtotal</th>
 
 
-                    </tr>
-                    @if (ViewBag.Productos != null)
+            </div>
+            <br />
+            <br />
+
+            <br />
+            <br />
+            <table id="tabla">
+                <tr>
+
+
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th> Cantidad</th>
+                    <th>Subtotal</th>
+
+
+                </tr>
+                @if (ViewBag.Productos != null)
                 {
 
                     foreach (var p in ViewBag.Productos)
@@ -122,28 +121,28 @@
                             <td>@p.Cantidad</td>
                             <td>@p.SubTotal</td>
                             @{  suma = suma + p.SubTotal;
-                                Productos = p;}
+                              Productos = p;}
                         </tr>
                     }
                 }
-                    <tfoot>
-                        <tr>
-                            <th colspan="4" style="text-align:right;">Total :</th>
-                            <td id="total" name="total">@suma</td>
-                        </tr>
-                    </tfoot>
-                </table>
+                <tfoot>
+                    <tr>
+                        <th colspan="4" style="text-align:right;">Total :</th>
+                        <td id="total" name="total">@suma</td>
+                    </tr>
+                </tfoot>
+            </table>
 
-                    <input type="hidden" value=@suma name="total"/>
-                    <input type="hidden" value=@usuario name="nombreuser" />
-                     <input type="hidden" value=@Fecha name="fechahoy" />
-                    <input type="hidden" value=@Productos name="detalle"/>
+            <input type="hidden" value=@suma name="total" />
+            <input type="hidden" value=@usuario name="nombreuser" />
+            <input type="hidden" value=@Fecha name="fechahoy" />
+            <input type="hidden" value=@Productos name="detalle" />
 
-  
-                <input type="submit" value="guardar" />
-      
 
-}
-                </fieldset>
-        </body>
-    </html>
+            <input type="submit" value="guardar" />
+
+
+        }
+    </fieldset>
+</body>
+</html>
