@@ -1,4 +1,4 @@
-﻿<link rel="stylesheet" type="text/css" href="~/Content/TableStyle.css">
+﻿<link rel="stylesheet" type="text/css" href="~/Content/DataGrid.css">
 @using ProyectoFinal.MVC5.ViewModels
 @using PagedList;
 @using PagedList.Mvc;
@@ -80,12 +80,12 @@
 
     
 
-    <div id="tabla" style="position:relative; float:right; top:-20px; right:30px; width:840px; height: 500px; ">
-        
+    <div class="datagrid" id="tabla">
+
 
         <table id="table" style="width:880px">
             <tr onclick="nada">
-                <th style="width:10px">Sel</th>
+                <th style="width:10px" hidden>Sel</th>
 
                 <th id="codigo">Codigo</th>
                 <th>Marca</th>
@@ -97,25 +97,25 @@
 
             </tr>
 
-            @if (ViewBag.Productos != null) 
+            @if (ViewBag.Productos != null)
             {
-           
+
                 foreach (var p in ViewBag.Productos)
-            {
-                <tr>
-                    <td><input type='button' id='chk1' value="Agregar" /></td>
-                    <td onclick="Prueba(e)" hidden>@p.Id</td>
-                    <td>@p.Codigo</td>
-                    <td>@p.MarcaProducto.Descripcion</td>
-                    <td>@p.Descripcion</td>
-                    <td>@p.PrecioVenta</td>
-                    <td>@p.Talle</td>
-                    <td>@p.Stock</td>
-                    <td><img src="@Url.Action("getImg", "Producto", new {id = @p.Id })" alt="Person Image" width="80" height="80"  /></td>
-                </tr>
+                {
+                    <tr>
+                        <td hidden><input type='button' id='chk1' value="Agregar" /></td>
+                        <td onclick="Prueba(e)" hidden>@p.Id</td>
+                        <td>@p.Codigo</td>
+                        <td>@p.MarcaProducto.Descripcion</td>
+                        <td>@p.Descripcion</td>
+                        <td>@p.PrecioVenta</td>
+                        <td>@p.Talle</td>
+                        <td>@p.Stock</td>
+                        <td><img src="@Url.Action("getImg", "Producto", new {id = @p.Id })" alt="Person Image" width="60" height="60" /></td>
+                    </tr>
+                }
             }
-            }
-            
+
         </table>
         @if (ViewBag.Productos == null)
         {
@@ -123,7 +123,17 @@
                 alert('No hay productos para mostrar');
             </script>
         }
+        
+
+        @if (ViewBag.Productos != null)
+        {
+            <div style="position:absolute;right:500px;  ">
+                @Html.PagedListPager((IPagedList)ViewBag.Productos, page => Url.Action("Busqueda", new { page }))
+            </div>
+
+        }
     </div>
+
 </div>
 
 
@@ -261,9 +271,3 @@
 
 </script>
 
-@if (ViewBag.Productos != null) { 
-<div  style="position:absolute; right:500px; bottom:0px;">
-    @Html.PagedListPager((IPagedList)ViewBag.Productos, page => Url.Action("Busqueda", new { page }))
-</div>
-    
-}

@@ -54,6 +54,7 @@
       .Name("Grid")
       .Columns(columns =>
       {
+          
           columns.Bound(p => p.FacturaDetalleFactura.NumeroFactura).Title("Numero de Factura");
           columns.Bound(p => p.ProductoDetalleFactura.Descripcion).Title("Producto");
           columns.Bound(p => p.Cantidad);

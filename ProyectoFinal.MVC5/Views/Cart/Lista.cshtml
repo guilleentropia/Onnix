@@ -1,4 +1,4 @@
-﻿<link rel="stylesheet" type="text/css" href="~/Content/TableStyle.css">
+﻿<link rel="stylesheet" type="text/css" href="~/Content/DataGrid.css">
 
 @{
      ViewBag.Title = "Index";
@@ -9,63 +9,73 @@
 <br />
 <br />
 <br />
+<img src="~/Images/banner.jpg " style="position: fixed;  top: 20%;   left: 50%;   transform: translate(-50%, -50%);"  />
+<br />
+<br />
+<br />
+<br />
 
-<table id="tablita">
-    <tr>
-        
-        
-        <th>Codigo</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th> Imagen</th>
-        <th> Cantidad</th>
-        <th> Subtotal</th>
-        <th> Eliminar</th>
-    </tr>
-    @if(ViewBag.Lista!=null){
 
-    foreach (var p in ViewBag.Lista)
-    {
+<div class="datagrid" id="tabla" >
+    <table class="datagrid" id="tablita">
         <tr>
-            
-            <td hidden>@p.producto.Id</td>
-            <td>@p.producto.Codigo</td>
-            <td>@p.producto.Descripcion</td>
-            <td>@p.producto.PrecioVenta</td>
-            <td><img src="@Url.Action("getImg", "Producto", new {id = @p.producto.Id })" alt="Person Image" width="80" height="80" /></td>
-            <td>@p.Cantidad</td>
-            <td>@p.SubTotal</td>
-            <td><input type='button' id='chk1' onclick="Elegir()" value="Eliminar" /></td>
-           
+
+
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th> Imagen</th>
+            <th> Cantidad</th>
+            <th> Subtotal</th>
+            <th> Eliminar</th>
         </tr>
-    }}
+        @if (ViewBag.Lista != null)
+        {
 
-</table>
-<br />
-<br />
+            foreach (var p in ViewBag.Lista)
+            {
+                <tr>
 
-<div style="position:absolute;right:600px">
-    @Html.ActionLink("Regresar", "Busqueda", "Producto", null, new { @class = "boton" })
-    @Html.ActionLink("Realizar Venta", "Index", "Venta", null, new { @class = "boton" })
+                    <td hidden>@p.producto.Id</td>
+                    <td>@p.producto.Codigo</td>
+                    <td>@p.producto.Descripcion</td>
+                    <td>@p.producto.PrecioVenta</td>
+                    <td><img src="@Url.Action("getImg", "Producto", new {id = @p.producto.Id })" alt="Person Image" width="80" height="80" /></td>
+                    <td>@p.Cantidad</td>
+                    <td>@p.SubTotal</td>
+                    <td><input type='button' id='chk1' onclick="Elegir()" value="Eliminar" /></td>
+
+                </tr>
+            }
+        }
+
+    </table>
 </div>
+    <br />
+    <br />
+
+    <div style="position:absolute;right:600px">
+        @Html.ActionLink("Regresar", "Busqueda", "Producto", null, new { @class = "boton" })
+        @Html.ActionLink("Realizar Venta", "Index", "Venta", null, new { @class = "boton" })
+    </div>
 
 
-<script type="text/javascript">
-    $("#tablita tr").click(
-    function Elegir () {
+    <script type="text/javascript">
+        $("#tablita tr").click(
+        function Elegir() {
 
-        $("#tablita tr").addClass('selected').siblings().removeClass('selected')
+            $("#tablita tr").addClass('selected').siblings().removeClass('selected')
 
-        var id = $(this).find('td:first').html()
-       
-
-        
-        location.href = '/Cart/Delete?id=' + id 
-
-
-    })
+            var id = $(this).find('td:first').html()
 
 
 
-</script>
+            location.href = '/Cart/Delete?id=' + id
+
+
+        })
+
+
+
+    </script>
 

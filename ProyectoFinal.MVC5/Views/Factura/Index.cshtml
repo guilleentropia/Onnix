@@ -56,7 +56,7 @@
       .Name("Grid")
       .Columns(columns =>
       {
-          columns.Bound(p => p.Fecha).Width(50);
+          columns.Bound(p => p.Fecha)
           columns.Bound(p => p.NumeroFactura);
           columns.Bound(p => p.TerceroFactura.NombreCompleto).Title("Tercero");
           columns.Bound(p => p.UsuarioFactura.NombreUsuario).Title("Usuario");

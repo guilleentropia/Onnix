@@ -22,8 +22,8 @@ namespace ProyectoFinal.MVC5.ViewModels
 
 
         [Required(ErrorMessage = "El campo Talle es obligatorio")]
-        [MaxLength(50, ErrorMessage = "Ha alcanzado el maximo de caracteres para el Talle")]
-        [MinLength(2, ErrorMessage = "Debe ingresar un valor valido, minimo 2 caracteres..."),
+        [MaxLength(10, ErrorMessage = "Ha alcanzado el maximo de caracteres para el Talle")]
+        [MinLength(1, ErrorMessage = "Debe ingresar un valor valido, minimo 1 caracter..."),
         Display(Name = "Talle")]
         public string Talle { get; set; }
 

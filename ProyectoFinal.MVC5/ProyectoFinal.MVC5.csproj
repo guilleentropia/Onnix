@@ -262,6 +262,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DataGrid.css" />
     <Content Include="Content\Js\jquery-ui.js" />
     <Content Include="Content\Js\jquery-ui.min.js" />
     <Content Include="Content\kendo\2015.2.805\Black\editor.png" />
@@ -588,6 +589,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\background.png" />
+    <Content Include="Images\banner.jpg" />
+    <Content Include="Images\banner2.gif" />
     <Content Include="Images\edit.png" />
     <Content Include="Images\cancel.png" />
     <Content Include="Images\delete.png" />
@@ -598,7 +601,9 @@
     <Content Include="Images\logo.png" />
     <Content Include="Images\man180.png" />
     <Content Include="Images\marker20.png" />
+    <Content Include="Images\mendoza.png" />
     <Content Include="Images\note48.png" />
+    <Content Include="Images\sanjuan.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\kendo\2015.2.805\fonts\DejaVu\DejaVuSans-Bold.ttf" />
