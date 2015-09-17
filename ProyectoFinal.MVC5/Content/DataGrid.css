@@ -10,3 +10,5 @@
 .datagrid table tr:nth-child(even) {background: #FFF }
 .datagrid table tr:nth-child(odd) {background: #CCC}
 .datagrid table tr:hover{background-color: #7da1c4}
+
+

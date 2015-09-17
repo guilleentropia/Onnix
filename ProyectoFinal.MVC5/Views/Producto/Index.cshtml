@@ -62,7 +62,7 @@
           columns.Bound(p => p.Codigo).Title("Codigo").HtmlAttributes(new { style = "font-size:12px;" });
           columns.Bound(p => p.Descripcion).Title("Producto").HtmlAttributes(new { style = "font-size:12px;" });
           
-          columns.Bound(p => p.PrecioVenta).Title("Venta").HtmlAttributes(new { style = "font-size:12px;" });
+          columns.Bound(p => p.PrecioVenta).Title("Precio").HtmlAttributes(new { style = "font-size:12px;" });
           columns.Bound(p => p.Talle).Title("Talle").HtmlAttributes(new { style = "font-size:12px;" });
           columns.Bound(p => p.Stock);
 
@@ -91,7 +91,7 @@
                     .ColumnResizeHandleWidth(10)
                                     .HtmlAttributes(new { style = "height: 450px; " })
                                                       
-                                      .DataSource(p => p.Server().PageSize(4))
+                                      .DataSource(p => p.Server().PageSize(5))
                                       .Filterable(f =>
                                               f.Operators(o => o.ForString(s => s
                                         .Clear()

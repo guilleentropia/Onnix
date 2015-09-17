@@ -588,6 +588,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\1624460.jpg" />
+    <Content Include="Images\grey.jpg" />
     <Content Include="Images\background.png" />
     <Content Include="Images\banner.jpg" />
     <Content Include="Images\banner2.gif" />
@@ -604,6 +606,7 @@
     <Content Include="Images\mendoza.png" />
     <Content Include="Images\note48.png" />
     <Content Include="Images\sanjuan.png" />
+    <Content Include="Images\venta.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\kendo\2015.2.805\fonts\DejaVu\DejaVuSans-Bold.ttf" />

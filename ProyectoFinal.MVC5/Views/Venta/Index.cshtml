@@ -1,6 +1,6 @@
 ﻿<link rel="stylesheet" type="text/css" href="~/Content/TableStyle.css">
 @{
-    Layout = "~/Views/Shared/_TableLayout.cshtml";
+ //   Layout = "~/Views/Shared/_TableLayout.cshtml";
     var Productos = ViewBag.Productos;
     var anio = DateTime.Now.Year;
     var mes = DateTime.Now.Month;
@@ -11,7 +11,44 @@
     var usuario = Session["User"];
     var suma = 0.0;
 
+    if (Session["UserId"] == "sanjuan")
+    {
 
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Layout = "~/Views/Shared/_SanJuanVendedor.cshtml";
+
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_SanJuanAdministrador.cshtml";
+
+        }
+    }
+
+    if (Session["UserId"] == "mendoza")
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Layout = "~/Views/Shared/_MendozaVendedor.cshtml";
+
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_MendozaAdministrador.cshtml";
+
+        }
+    }
+
+    if (Session["UserId"] == null && Session["UserPerfil"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
 
 }
 

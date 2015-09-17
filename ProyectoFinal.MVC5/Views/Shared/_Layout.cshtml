@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>ONNIX - Tucuman</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -38,23 +38,27 @@
                     <li>@Html.ActionLink("Terceros", "Index", "Tercero")</li>
                     <li>@Html.ActionLink("Transacciones", "Index", "Transaccion")</li>
                     <li>@Html.ActionLink("Facturas", "Index", "Factura")</li>
-                    <li>@Html.ActionLink("Tercero", "Index", "Tercero")</li>
-                    <li>@Html.ActionLink("Transaccion", "Index", "Transaccion")</li>
+                    
                     <li>@Html.ActionLink("Detalle de Factura", "Index", "DetalleFactura")</li>
                     <li>@Html.ActionLink("Detalle de Transaccion", "Index", "DetalleTransaccion")</li>
-                    
+                    <li>
+                        @{
+
+
+                            @Html.ActionLink("Logout", "Login", "Account", null, new { @class = "navbar-brand" })
+
+                        }
+                    </li>
 
                 </ul>
                
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" style="background-color:rgb(100, 122, 138)">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        
     </div>
 
     
