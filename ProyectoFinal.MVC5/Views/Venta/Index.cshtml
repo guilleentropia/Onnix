@@ -1,4 +1,4 @@
-﻿<link rel="stylesheet" type="text/css" href="~/Content/TableStyle.css">
+﻿
 @{
  //   Layout = "~/Views/Shared/_TableLayout.cshtml";
     var Productos = ViewBag.Productos;
@@ -132,7 +132,8 @@
 
             <br />
             <br />
-            <table id="tabla">
+            <div class="datagrid" id="tabla" style="margin-left:25%;width:50%">
+            <table>
                 <tr>
 
 
@@ -169,17 +170,19 @@
                     </tr>
                 </tfoot>
             </table>
-
+                </div>
             <input type="hidden" value=@suma name="total" />
             <input type="hidden" value=@usuario name="nombreuser" />
             <input type="hidden" value=@Fecha name="fechahoy" />
             <input type="hidden" value=@Productos name="detalle" />
-
-
-            <input type="submit" value="guardar" />
-
+            <br />
+            <br />
+    <div>
+        @Html.ActionLink("REGRESAR", "Carrito", "Cart", null, new { @class = "boton", style = " margin-left:35%; " })
+        <input type="submit" value="CONFIRMAR VENTA" class="boton" style="margin-left:0%; " />
+    </div>
 
         }
-    </fieldset>
+</fieldset>
 </body>
 </html>

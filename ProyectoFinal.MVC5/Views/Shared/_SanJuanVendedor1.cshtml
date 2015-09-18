@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/San Juan")
+    @Scripts.Render("~/bundles/modernizr")
+
+	<!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+	@Scripts.Render("~/bundles/jquery")
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.highcontrast.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.dataviz.highcontrast.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/San Juan/DataGrid.css")" rel="stylesheet" type="text/css" />
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/jquery.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/jszip.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/kendo.all.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/kendo.aspnetmvc.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    
+</head>
+<body style="background-color:#913D88;">
+    <div class=" navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Onnix San Juan", "SanJuan", "Home", null, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Ventas", "Busqueda", "Producto")</li>
+                <li>@Html.ActionLink("Productos", "Index", "Producto")</li>
+                <li>@Html.ActionLink("Marcas", "Index", "Marca")</li>
+                <li>
+                    @Html.ActionLink("Terceros", "Index", "Tercero")
+                    <ul>
+                        <li style="display:none"><a href="">Medicina Clinica</a></li>
+                    </ul>
+                </li>
+                <li>@Html.ActionLink("Transacciones", "Index", "Transaccion")</li>
+                <li>@Html.ActionLink("Facturas", "Index", "Factura")</li>
+
+
+                <li>@Html.ActionLink("Detalle Factura", "Index", "DetalleFactura")</li>
+                <li>@Html.ActionLink("Detalle Transaccion", "Index", "DetalleTransaccion")</li>
+                <li>
+                    @{
+
+
+                        @Html.ActionLink("Logout", "Login", "Account", null, new { @class = "navbar-brand" })
+
+                    }
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+    </div>
+    <div class="container body-content">
+        <img src="~/Images/venta3.png" style="padding-left:200px; padding-right:120px;  padding-top:10px;" />
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="text-align:center">&copy; @DateTime.Now.Year - Guillermo Rodriguez - Practica Supervisada</p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

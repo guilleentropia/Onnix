@@ -1,19 +1,50 @@
 ﻿<link rel="stylesheet" type="text/css" href="~/Content/DataGrid.css">
 
 @{
-     ViewBag.Title = "Index";
-     Layout = "~/Views/Shared/_TableLayout.cshtml";
+    if (Session["UserId"] == "sanjuan")
+    {
+
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Layout = "~/Views/Shared/_SanJuanVendedor1.cshtml";
+
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_SanJuanAdministrador.cshtml";
+
+        }
+    }
+
+    if (Session["UserId"] == "mendoza")
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Layout = "~/Views/Shared/_MendozaVendedor1.cshtml";
+
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_MendozaAdministrador.cshtml";
+
+        }
+    }
+
+    if (Session["UserId"] == null && Session["UserPerfil"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
      var Producto = ViewBag.Lista;
     
 }
 <br />
 <br />
-<br />
-<img src="~/Images/banner.jpg " style="position: fixed;  top: 20%;   left: 50%;   transform: translate(-50%, -50%);"  />
-<br />
-<br />
-<br />
-<br />
+
 
 
 <div class="datagrid" id="tabla" >
@@ -50,14 +81,17 @@
         }
 
     </table>
+   
+    
+    
 </div>
     <br />
     <br />
 
-    <div style="position:absolute;right:600px">
-        @Html.ActionLink("Regresar", "Busqueda", "Producto", null, new { @class = "boton" })
-        @Html.ActionLink("Realizar Venta", "Index", "Venta", null, new { @class = "boton" })
-    </div>
+    <div >
+    @Html.ActionLink("Regresar", "Busqueda", "Producto", null, new { @class = "boton", style="margin-bottom:20px; margin-left:40%;" })
+    @Html.ActionLink("Realizar Venta", "Index", "Venta", null, new { @class = "boton" })
+</div>
 
 
     <script type="text/javascript">

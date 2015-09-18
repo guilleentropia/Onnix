@@ -15,7 +15,7 @@
 
         if (Session["UserPerfil"] == "vendedor")
         {
-            Layout = "~/Views/Shared/_SanJuanVendedor.cshtml";
+            Layout = "~/Views/Shared/_SanJuanVendedor1.cshtml";
 
         }
 
@@ -32,7 +32,7 @@
 
         if (Session["UserPerfil"] == "vendedor")
         {
-            Layout = "~/Views/Shared/_MendozaVendedor.cshtml";
+            Layout = "~/Views/Shared/_MendozaVendedor1.cshtml";
 
         }
 
@@ -60,8 +60,8 @@
 
 </head>
 
-    <img src="~/Images/venta.png" style="padding-left:200px; padding-right:120px;  padding-top:10px;" />
-    <div style="position: absolute;right: 100px; top:80px; text-align:center; width:150px;background-color:#1BBC9B; border:inset; border-color:white">
+    
+    <div style="position: absolute;right: 100px; top:80px; text-align:center; width:150px;background-color:#242424; border:inset; border-color:white">
 
         @Html.ActionLink(" ", "Carrito", "Cart", null, new { style = "background: url('" + Url.Content("~/Images/man180.png") + "')no-repeat center right; display:inline-block;  height: 32px;width:32px;" })
     </div>

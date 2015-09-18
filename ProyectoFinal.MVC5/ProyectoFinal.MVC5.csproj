@@ -609,6 +609,7 @@
     <Content Include="Images\note48.png" />
     <Content Include="Images\sanjuan.png" />
     <Content Include="Images\venta.png" />
+    <Content Include="Images\venta3.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\kendo\2015.2.805\fonts\DejaVu\DejaVuSans-Bold.ttf" />
@@ -1026,6 +1027,8 @@
     <Content Include="Views\Cart\Lista.cshtml" />
     <Content Include="Views\Venta\Index.cshtml" />
     <Content Include="Views\Home\ReportViewer.cshtml" />
+    <Content Include="Views\Shared\_MendozaVendedor1.cshtml" />
+    <Content Include="Views\Shared\_SanJuanVendedor1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
