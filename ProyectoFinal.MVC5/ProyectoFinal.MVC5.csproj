@@ -591,6 +591,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\1624460.jpg" />
+    <Content Include="Images\animate.swf" />
     <Content Include="Images\grey.jpg" />
     <Content Include="Images\background.png" />
     <Content Include="Images\banner.jpg" />

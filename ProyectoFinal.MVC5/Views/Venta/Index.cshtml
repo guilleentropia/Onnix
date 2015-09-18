@@ -60,8 +60,17 @@
     <title>Index</title>
 </head>
 <body>
+    <br />
+    <br />
+    
+    <fieldset style="margin-left:2%">
 
-    <fieldset>
+        <div>
+
+            <embed src="@Url.Content( "~/Images/animate.swf" )" type="application/x-shockwave-flash" width="728" height="90" style="margin-left:18%;margin-top:2%"></embed>
+
+        </div>
+
         @using (Ajax.BeginForm("Venta", "Venta",
                             new AjaxOptions { UpdateTargetId = "divInterestDeatils" }))
         {
