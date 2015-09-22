@@ -53,15 +53,37 @@ namespace ProyectoFinal.MVC5.Controllers
                 string usuario = Request["nombreuser"].ToString();
             var fechahoy = Convert.ToDateTime(Request["fechahoy"].ToString());
             var total = Convert.ToDecimal(Request["total"].ToString());
-            var cliente = Convert.ToInt32(Request["Clientes"].ToString());
-            var formapago = Convert.ToInt32(Request["FormaPago"].ToString());
+            var cliente = 3;
+            var formapago = 1;
+            if (Request["Clientes"] != "")
+            {
+
+                cliente = Convert.ToInt32(Request["Clientes"].ToString());
+            }
+
+            if (Request["FormaPago"] != "")
+            {
+                formapago = Convert.ToInt32(Request["FormaPago"].ToString());
+            }
+             
 
             var usuer = _usuarioAppService.BuscarIdUsuarioporNombre(usuario);
             int idusuario = usuer.Id;
 
             //Factura
+            Factura facturaanterior = new Factura();
+            facturaanterior = _facturaAppService.UltimaFactura();
+
             Factura factura = new Factura();
-            factura.NumeroFactura = 456789;
+            if (facturaanterior != null)
+            {
+                factura.NumeroFactura = facturaanterior.NumeroFactura + 1;
+            }
+            else
+            {
+                factura.NumeroFactura = 1;
+            }
+            
             factura.Fecha = fechahoy;
             factura.Total = total;
             factura.UsuarioId = idusuario;
