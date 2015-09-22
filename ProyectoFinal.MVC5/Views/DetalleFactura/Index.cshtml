@@ -68,12 +68,23 @@
             @Html.ActionLink(" ", "Delete", new { id = @item.Id }, new { style = "background: url('" + Url.Content("~/Images/delete.png") + "')no-repeat center right; display:inline-block;  height: 18px;width:18px;" })
         </text>).Title("Acciones");
       })
-      .Pageable()
-      .Sortable()
-      .Scrollable()
-                      .Resizable(r => r.Columns(true))
+          .Pageable()
+          .Sortable()
+          .Scrollable()
+                          .Resizable(r => r.Columns(true))
 
-                    .ColumnResizeHandleWidth(10)
+                        .ColumnResizeHandleWidth(10).Filterable(f =>
+                                                  f.Operators(o => o.ForNumber(s => s
+                                            .Clear()
+                                                           .IsEqualTo("Es igual a"))).Messages(a =>
+                                                            a.And("Y")
+                                                                .Cancel("Cancelar").Or("O")
+                                                            .Clear("Limpiar")
+                                                            .Filter("Filtrar")
+                                                .Clear("Limpiar")
+                                                .Filter("Filtrar")
+                                                .Info("Seleccione los valores a Filtrar")
+                                                ))
 
 )
 
