@@ -47,6 +47,27 @@
     {
         Response.Redirect("~/Account/Login");
     }
+
+
+    var carritonumber = 0;
+
+    var lista = (List<Item>)Session["cart"];
+    
+    if (Session["cart"] == null )
+    {
+        carritonumber = 0;
+    }
+    else
+    {
+        foreach (var item in lista)
+        {
+            carritonumber = carritonumber + 1;
+        }
+        
+    }
+
+    
+    
     
   //  Layout="~/Views/Shared/_TableLayout.cshtml";
 }
@@ -64,6 +85,7 @@
     <div style="position: absolute;right: 100px; top:80px; text-align:center; width:150px;background-color:#242424; border:inset; border-color:white">
 
         @Html.ActionLink(" ", "Carrito", "Cart", null, new { style = "background: url('" + Url.Content("~/Images/man180.png") + "')no-repeat center right; display:inline-block;  height: 32px;width:32px;" })
+        <label id="carritonumber" style="color:white;" >@carritonumber</label>
     </div>
 
 <br />
@@ -182,9 +204,10 @@
 
 
     <script type="text/javascript">
+        var contar = 0;
             $("#table tr").click(
             function () {
-
+                
                 $("#table tr").addClass('selected').siblings().removeClass('selected');
 
                 var value = $(this).find('td:first').html();
@@ -207,6 +230,10 @@
                     }
 
                     else {
+                        var input = document.getElementById('carritonumber');
+                        
+                        // change it's content
+                    //    input.textContent = contar +4 ;
                         location.href = '/Cart/Buy?id=' + id
                     }
 
@@ -271,7 +298,7 @@
 
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
-        $('#tabla img').css({
+        var a = 0;        $('#tabla img').css({
             'cursor': 'pointer',
             'z-index': 100
         }).draggable({ 'revert': true });
