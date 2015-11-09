@@ -1,0 +1,58 @@
+﻿@{
+    
+    if (Session["UserId"] == "sanjuan")
+    {
+
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Layout = "~/Views/Shared/_SanJuanVendedor.cshtml";
+
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_SanJuanAdministrador.cshtml";
+
+        }
+    }
+
+    if (Session["UserId"] == "mendoza")
+    {
+       
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Layout = "~/Views/Shared/_MendozaVendedor.cshtml";
+
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_MendozaAdministrador.cshtml";
+
+        }
+    }
+
+    if (Session["UserId"] == null && Session["UserPerfil"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    
+    ViewBag.Title = "Onnix Sucursal Mendoza";
+}
+
+
+<body style="background-color:#51a17e">
+    
+    <br />
+    <br />
+    <br />
+    <img src="~/Images/mendoza.png" style="margin-left:15%; width:75%" />
+    <br />
+    <br />
+    <br />
+    <img src="~/Images/Mendoza3.png" style="margin-left:15%; width:75%" />
+</body>
+
+

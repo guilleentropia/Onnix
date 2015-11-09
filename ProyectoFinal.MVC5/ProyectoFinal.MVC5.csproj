@@ -607,8 +607,13 @@
     <Content Include="Images\man180.png" />
     <Content Include="Images\marker20.png" />
     <Content Include="Images\mendoza.png" />
+    <Content Include="Images\Mendoza2.png" />
+    <Content Include="Images\Mendoza3.png" />
     <Content Include="Images\note48.png" />
     <Content Include="Images\sanjuan.png" />
+    <Content Include="Images\SanJuan2.png" />
+    <Content Include="Images\SanJuan3.png" />
+    <Content Include="Images\SanJuan4.png" />
     <Content Include="Images\venta.png" />
     <Content Include="Images\venta3.png" />
     <Content Include="Scripts\bootstrap.js" />

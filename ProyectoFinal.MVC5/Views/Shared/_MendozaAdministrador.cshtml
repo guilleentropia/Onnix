@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+	<!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+	@Scripts.Render("~/bundles/jquery")
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.flat.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.2.805/kendo.dataviz.flat.min.css")" rel="stylesheet" type="text/css" />
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/jquery.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/jszip.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/kendo.all.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.2.805/kendo.aspnetmvc.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Onnix Mendoza", "Mendoza", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Categorias", "Index", "Categoria")</li>                    
+                    <li>@Html.ActionLink("Empleados", "Index", "Empleado")</li>
+                    <li>@Html.ActionLink("Formas de Pago", "Index", "FormaPago")</li>
+                    <li>@Html.ActionLink("Perfiles", "Index", "Perfil")</li>
+                    <li>@Html.ActionLink("Tipos de Tercero", "Index", "TipoTercero")</li>
+                    <li>@Html.ActionLink("Tipos de Transaccion", "Index", "TipoTransaccion")</li>
+                    <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                    
+                    <li>@{
+                        
+
+                        @Html.ActionLink("Logout", "Login", "Account", null, new { @class = "navbar-brand" })
+
+                    }</li>
+                </ul>
+               
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Guillermo Rodriguez - Practica Supervisada</p>
+        </footer>
+    </div>
+
+    
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

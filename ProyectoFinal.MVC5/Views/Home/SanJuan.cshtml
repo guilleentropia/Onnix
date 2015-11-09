@@ -1,0 +1,55 @@
+﻿@{
+    if (Session["UserId"] == "sanjuan")
+    {
+
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Layout = "~/Views/Shared/_SanJuanVendedor.cshtml";
+
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_SanJuanAdministrador.cshtml";
+
+        }
+    }
+
+    if (Session["UserId"] == "mendoza")
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+        if (Session["UserPerfil"] == "vendedor")
+        {
+            Layout = "~/Views/Shared/_MendozaVendedor.cshtml";
+
+        }
+
+        if (Session["UserPerfil"] == "Administrador")
+        {
+            Layout = "~/Views/Shared/_MendozaAdministrador.cshtml";
+
+        }
+    }
+
+    if (Session["UserId"] == null && Session["UserPerfil"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    
+    
+    ViewBag.Title = "Onnix Sucursal San Juan";
+}
+<body style="background-color:#D5314A; ">
+    <br />
+    <br />
+    <br />
+   <img src="~/Images/sanjuan.png" style="margin-left:15%; width:75%" />
+    <br />
+    <br />
+    <br />
+    <img src="~/Images/SanJuan3.png" style="margin-left:15%; width:75%;height:30%;" />
+
+
+</body>
