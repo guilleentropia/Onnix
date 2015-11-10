@@ -1,4 +1,5 @@
 ﻿using ProyectoFinal.Aplicacion;
+using ProyectoFinal.Aplicacion.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,13 +20,23 @@ namespace ProyectoFinal.Escritorio
         
         public readonly EmpresaAppService _empresaAppService;
 
+        private readonly ProductoAppService _productoAppservice;
+        private readonly CategoriaAppService _categoriaAppservice;
+        private readonly MarcaAppService _marcaAppservice;
+        private readonly TerceroAppService _terceroAppservice;
 
-
-        public Login(UsuarioAppService usuarioAppService,  EmpresaAppService empresaAppService)
+        public Login(UsuarioAppService usuarioAppService,  EmpresaAppService empresaAppService,
+            ProductoAppService productoAppservice, CategoriaAppService categoriaAppservice, MarcaAppService marcaAppservice,
+            TerceroAppService terceroAppservice)
         {
+            InitializeComponent();
             _usuarioAppService = usuarioAppService;
             _empresaAppService = empresaAppService;
-            InitializeComponent();
+            _productoAppservice = productoAppservice;
+            _categoriaAppservice = categoriaAppservice;
+            _marcaAppservice = marcaAppservice;
+            _terceroAppservice = terceroAppservice;
+           
         }
 
         //Mostrar mensaje de Confirmacion
@@ -56,36 +67,35 @@ namespace ProyectoFinal.Escritorio
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            string usuario = txtUsuario.Text;
-            string password = txtPassword.Text;
+            string usuario = this.txtUsuario.Text;
+            string password = this.txtPassword.Text;
+            int empresa = Convert.ToInt32(this.cmbEmpresa.SelectedValue);
 
-            var user = 1;// _usuarioAppService.BuscarUsuario(usuario, password, Convert.ToInt32(this.cmbEmpresa.ValueMember));
+            var user =  _usuarioAppService.BuscarUsuario(usuario, password, empresa );
 
             if (user != null)
             {
 
-                MensajeOk("Usuario encontrado");
 
-                CompositionRoot.Wire(new ProductoModule());
+                MensajeOk("Bienvenido!");
+                                
 
-
-                Application.EnableVisualStyles();
-
-               
-                Application.Run(CompositionRoot.Resolve<Productos>());
+                var a =  CompositionRoot.Resolve<Productos>();
+                a.ShowDialog();
                 
+                               
             }
             else
             {
 
-                MensajeError("Usuario encontrado");
+                MensajeError("Usuario no encontrado");
 
             }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void Login_Load(object sender, EventArgs e)

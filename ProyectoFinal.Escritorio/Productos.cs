@@ -35,19 +35,21 @@ namespace ProyectoFinal.Escritorio
            
         }
 
+
+        
        
         private void Mostrar()
         {
             var contenedor = _productoAppservice.ObtenerTodo().ToList();
 
-            DataGridViewRow row = new DataGridViewRow();
+            
 
             foreach(var item in contenedor){
-                row.CreateCells(dgvProductos);
-                row.Cells[0].Value = item.Id;
-                row.Cells[1].Value = item.Codigo;
-                dgvProductos.Rows.Add(row);
-            }
+                
+                dgvProductos.CurrentCell.Value = item.Id;
+                dgvProductos.CurrentCell.Value = item.Codigo;
+               
+            } 
             
             
             
@@ -56,9 +58,7 @@ namespace ProyectoFinal.Escritorio
         {
             this.Mostrar();
             this.OcultarColumnas();
-            this.LlenarComboCategoria();
-            this.LlenarComboMarca();
-            this.LlenarComboTercero();
+            
             this.Habilitar(false);
         }
 
@@ -329,6 +329,9 @@ namespace ProyectoFinal.Escritorio
             this.IsNuevo = true;
             this.IsModificar = false;
             this.Habilitar(true);
+            this.LlenarComboCategoria();
+            this.LlenarComboMarca();
+            this.LlenarComboTercero();
             this.Limpiar();
         }
 

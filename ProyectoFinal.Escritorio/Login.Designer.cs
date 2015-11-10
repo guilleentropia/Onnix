@@ -100,7 +100,6 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtUsuario.Location = new System.Drawing.Point(215, 148);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(157, 20);
