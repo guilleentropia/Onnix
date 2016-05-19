@@ -1,17 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1- Presentacion", "1- Presentacion", "{CD7598D1-0D49-4FF0-B649-B23104A44213}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2- Servicio", "2- Servicio", "{E1F9619B-E9FE-4B84-A41E-B0C60F2221FB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2- Aplicacion", "2- Aplicacion", "{B94ECC93-B8A8-409C-992D-AAA8EA5F58B9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3- Aplicacion", "3- Aplicacion", "{B94ECC93-B8A8-409C-992D-AAA8EA5F58B9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3- Dominio", "3- Dominio", "{5CD9577A-C3DB-43D9-8548-444BF3BA5400}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4- Dominio", "4- Dominio", "{5CD9577A-C3DB-43D9-8548-444BF3BA5400}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5- Infraestructura", "5- Infraestructura", "{5C87FBDE-CA9A-446F-BC14-1F621A5FAD1F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4- Infraestructura", "4- Infraestructura", "{5C87FBDE-CA9A-446F-BC14-1F621A5FAD1F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.1- Datos", "5.1- Datos", "{0201745B-4DD1-4450-8566-969186ACA9BD}"
 EndProject

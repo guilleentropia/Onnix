@@ -40,24 +40,33 @@ namespace ProyectoFinal.Escritorio
        
         private void Mostrar()
         {
+            dgvProductos.DataSource = null;
             var contenedor = _productoAppservice.ObtenerTodo().ToList();
-
             
-
-            foreach(var item in contenedor){
-                
-                dgvProductos.CurrentCell.Value = item.Id;
-                dgvProductos.CurrentCell.Value = item.Codigo;
-               
+           
+        
+            foreach(var item in contenedor)
+            {
+                dgvProductos.Rows.Add(new object[] { item.Id, item.Codigo, item.Descripcion,
+                item.PrecioCompra, item.PrecioVenta,item.Talle, item.Stock,item.Imagen,
+                item.CategoriaId, item.CategoriaProducto.Descripcion,item.MarcaId,
+                item.MarcaProducto.Descripcion,item.TerceroId, item.TerceroProducto.Apellido + " " + 
+                item.TerceroProducto.Nombre});
+                       
+            
             } 
             
-            
-            
+                    
         }
+
+
         private void Productos_Load(object sender, EventArgs e)
         {
             this.Mostrar();
-            this.OcultarColumnas();
+          this.OcultarColumnas();
+           LlenarComboCategoria();
+           LlenarComboMarca();
+           LlenarComboTercero();
             
             this.Habilitar(false);
         }
@@ -164,18 +173,27 @@ namespace ProyectoFinal.Escritorio
         {
             this.Limpiar();
             this.Habilitar(false);
+            this.vaciarcombos();
+        }
+
+        private void vaciarcombos()
+        {
+            this.combo_Categoria.DataSource = null;
+            this.combo_tercero.DataSource = null;
+            this.comboMarca.DataSource = null;
         }
 
         private void dgvProductos_DoubleClick(object sender, EventArgs e)
         {
+            
             this.txtId.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["Id"].Value);
             this.txtTalle.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["Talle"].Value);
             this.txtCodigo.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["Codigo"].Value);
             this.txtStock.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["Stock"].Value);
-            this.txtDescripcion.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["Descripcion"].Value);
-            this.combo_Categoria.DisplayMember = Convert.ToString(this.dgvProductos.CurrentRow.Cells["CategoriaProducto"].Value);
-            this.comboMarca.DisplayMember = Convert.ToString(this.dgvProductos.CurrentRow.Cells["MarcaProducto"].Value);
-            this.combo_tercero.DisplayMember = Convert.ToString(this.dgvProductos.CurrentRow.Cells["TerceroProducto"].Value);
+            this.txtDescripcion.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["Producto"].Value);
+            this.combo_Categoria.Text =   Convert.ToString(this.dgvProductos.CurrentRow.Cells["CategoriaProducto"].Value);
+            this.comboMarca.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["MarcaProducto"].Value);
+            this.combo_tercero.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["TerceroProducto"].Value);
 
 
             byte[] imagenbuffer = (byte[])this.dgvProductos.CurrentRow.Cells["Imagen"].Value;
@@ -186,8 +204,8 @@ namespace ProyectoFinal.Escritorio
             }
             
 
-            this.txtCompra.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["PrecioCompra"].Value);
-            this.txtVenta.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["PrecioVenta"].Value);
+            this.txtCompra.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["Compra"].Value);
+            this.txtVenta.Text = Convert.ToString(this.dgvProductos.CurrentRow.Cells["Venta"].Value);
 
             this.tabControl1.SelectedIndex = 1;
 
@@ -400,6 +418,7 @@ namespace ProyectoFinal.Escritorio
                 this.IsModificar = true;
                 this.Habilitar(true);
                 this.btnModificar.Enabled = false;
+                
             }
             else
             {
@@ -420,6 +439,24 @@ namespace ProyectoFinal.Escritorio
 
             }
         }
+
+        private void combo_Categoria_Click(object sender, EventArgs e)
+        {
+                        
+            LlenarComboCategoria();
+        }
+
+        private void comboMarca_Click(object sender, EventArgs e)
+        {
+            LlenarComboMarca();
+        }
+
+        private void combo_tercero_Click(object sender, EventArgs e)
+        {
+            LlenarComboTercero();
+        }
+
+       
 
       
 

@@ -33,6 +33,20 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Venta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Talle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CategoriaId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CategoriaProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MarcaId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MarcaProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TerceroId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TerceroProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnExaminar = new System.Windows.Forms.Button();
             this.txtId = new System.Windows.Forms.TextBox();
@@ -92,11 +106,111 @@
             // dgvProductos
             // 
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Codigo,
+            this.Producto,
+            this.Compra,
+            this.Venta,
+            this.Talle,
+            this.Stock,
+            this.Imagen,
+            this.CategoriaId,
+            this.CategoriaProducto,
+            this.MarcaId,
+            this.MarcaProducto,
+            this.TerceroId,
+            this.TerceroProducto});
             this.dgvProductos.Location = new System.Drawing.Point(6, 6);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.Size = new System.Drawing.Size(547, 338);
             this.dgvProductos.TabIndex = 0;
             this.dgvProductos.DoubleClick += new System.EventHandler(this.dgvProductos_DoubleClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // Codigo
+            // 
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Compra
+            // 
+            this.Compra.HeaderText = "Compra";
+            this.Compra.Name = "Compra";
+            this.Compra.ReadOnly = true;
+            // 
+            // Venta
+            // 
+            this.Venta.HeaderText = "Venta";
+            this.Venta.Name = "Venta";
+            this.Venta.ReadOnly = true;
+            // 
+            // Talle
+            // 
+            this.Talle.HeaderText = "Talle";
+            this.Talle.Name = "Talle";
+            this.Talle.ReadOnly = true;
+            // 
+            // Stock
+            // 
+            this.Stock.HeaderText = "Stock";
+            this.Stock.Name = "Stock";
+            this.Stock.ReadOnly = true;
+            // 
+            // Imagen
+            // 
+            this.Imagen.HeaderText = "Imagen";
+            this.Imagen.Name = "Imagen";
+            this.Imagen.ReadOnly = true;
+            // 
+            // CategoriaId
+            // 
+            this.CategoriaId.HeaderText = "CategoriaId";
+            this.CategoriaId.Name = "CategoriaId";
+            this.CategoriaId.ReadOnly = true;
+            // 
+            // CategoriaProducto
+            // 
+            this.CategoriaProducto.HeaderText = "CategoriaProducto";
+            this.CategoriaProducto.Name = "CategoriaProducto";
+            this.CategoriaProducto.ReadOnly = true;
+            this.CategoriaProducto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // MarcaId
+            // 
+            this.MarcaId.HeaderText = "MarcaId";
+            this.MarcaId.Name = "MarcaId";
+            this.MarcaId.ReadOnly = true;
+            // 
+            // MarcaProducto
+            // 
+            this.MarcaProducto.HeaderText = "MarcaProducto";
+            this.MarcaProducto.Name = "MarcaProducto";
+            this.MarcaProducto.ReadOnly = true;
+            // 
+            // TerceroId
+            // 
+            this.TerceroId.HeaderText = "TerceroId";
+            this.TerceroId.Name = "TerceroId";
+            this.TerceroId.ReadOnly = true;
+            // 
+            // TerceroProducto
+            // 
+            this.TerceroProducto.HeaderText = "TerceroProducto";
+            this.TerceroProducto.Name = "TerceroProducto";
+            this.TerceroProducto.ReadOnly = true;
             // 
             // tabPage2
             // 
@@ -278,6 +392,7 @@
             this.combo_tercero.Name = "combo_tercero";
             this.combo_tercero.Size = new System.Drawing.Size(302, 21);
             this.combo_tercero.TabIndex = 10;
+            this.combo_tercero.Click += new System.EventHandler(this.combo_tercero_Click);
             // 
             // lblTercero
             // 
@@ -295,6 +410,7 @@
             this.comboMarca.Name = "comboMarca";
             this.comboMarca.Size = new System.Drawing.Size(302, 21);
             this.comboMarca.TabIndex = 8;
+            this.comboMarca.Click += new System.EventHandler(this.comboMarca_Click);
             // 
             // lblMarca
             // 
@@ -312,6 +428,7 @@
             this.combo_Categoria.Name = "combo_Categoria";
             this.combo_Categoria.Size = new System.Drawing.Size(302, 21);
             this.combo_Categoria.TabIndex = 6;
+            this.combo_Categoria.Click += new System.EventHandler(this.combo_Categoria_Click);
             // 
             // lblCategoria
             // 
@@ -421,6 +538,20 @@
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Button btnExaminar;
         private System.Windows.Forms.ErrorProvider ErrorProvider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Compra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Venta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Talle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Imagen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CategoriaId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CategoriaProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MarcaId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MarcaProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TerceroId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TerceroProducto;
     }
 }
 
